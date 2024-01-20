@@ -1,0 +1,61 @@
+\documentclass{article}
+
+\usepackage{amsmath, amsthm, amssymb, thmtools}
+
+\declaretheorem[numberwithin = section]{theorem}
+\declaretheorem[sibling = theorem, style = definition]{definition}
+\declaretheorem[sibling = theorem]{lemma}
+\declaretheorem[sibling = theorem]{proposition}
+\declaretheorem[sibling = theorem]{remark}
+
+\usepackage{enumitem,xparse}
+\newlist{Claim}{description}{2}
+\setlist[Claim]{labelindent=2em,leftmargin=*}
+\newif\ifInsideClaim
+\newcounter{claim}[theorem]
+\newcounter{cclaim}[claim]
+\renewcommand\theclaim{\arabic{claim}}
+\renewcommand\thecclaim{\arabic{claim}.\arabic{cclaim}}
+\let\originalqedsymbol\qedsymbol
+\newenvironment{claim}{%
+  % disable qed symbol if there is no star
+  \let\qedsymbol\relax%
+  \ifInsideClaim% we have a nested environment
+    \refstepcounter{cclaim}%
+    \let\theclaimcounter\thecclaim%
+  \else%
+    \refstepcounter{claim}%
+    \let\theclaimcounter\theclaim%
+    \InsideClaimtrue%
+  \fi%
+  \Claim\item[\textbf{Claim \theclaimcounter:}]%
+}{\endClaim\InsideClaimfalse\let\qedsymbol\originalqedsymbol}
+
+\begin{document}
+
+\begin{proposition}
+   A  proposition.
+\end{proposition}
+\begin{proof}
+  Start the proof.
+    \begin{claim}
+        first claim
+        \begin{proof}
+            proof of first claim
+        \end{proof}
+        \begin{claim}
+            first subclaim
+            \begin{proof}
+                proof of first subclaim
+            \end{proof}
+        \end{claim}
+    \end{claim}
+    \begin{claim}
+      Second claim
+      \begin{proof}
+        Proof of second claim
+      \end{proof}
+    \end{claim}
+\end{proof}
+
+\end{document}
