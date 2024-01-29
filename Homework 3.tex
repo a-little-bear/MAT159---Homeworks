@@ -1,0 +1,302 @@
+\documentclass[reqno]{alittlebear}
+\def\filenum{3}
+
+\begin{document}
+
+\begin{exercise}{}{}
+    \begin{note}
+        The objective of this exercise is to completely solve integrals of the tyle \[\int\sin^\alpha x\cos^\beta x\D x,\quad x\in\left(0,\frac{\pi}{2}\right),\alpha,\beta\in\mathbb{Z}.\]
+    \end{note}
+
+    \begin{question}{}{q1}
+        As a warm-up, compute the following integrals (2.-9.) from the above family. In each case, indicate what is the value of $\alpha$ and $\beta$ as well.\\
+
+        Example.
+        \begin{enumerate}
+            \begin{mathnote}
+                \item[1.] Since $1=\sin^0x\cos^0x$, we have $\alpha=0,\beta=0$. And, \[\int 1\D x = x + C\numberthis.\]
+            \end{mathnote}
+        \end{enumerate}
+        \qbreak
+        \begin{enumerate}
+        \begin{mathnote}
+                \item[2.]  Since $\cos x = \sin ^0 x\cos^1 x$, we have $\alpha=0,\beta=1$, and \[\int\cos x\D x = \sin x + C.\numberthis\]
+                \item[3.] Since $\frac{1}{\cos x} = \sin ^0 x \cos ^{-1} x$, we have $\alpha=0,\beta=-1$. From Homework 2 Question 11 Claim 2, we have proven that \begin{align*}
+                    \int \frac{1}{\cos x}\D x &= -\ln\abs{\csc\bra{\frac{\pi}{2}-x}-\cot\bra{\frac{\pi}{2}-x}}+C\\
+                &=\ln\abs{\frac{1}{\frac{1}{\cos x}-\frac{\sin x}{\cos x}}} + C\\
+                &=\ln\abs{\frac{\cos x}{1-\sin x}\cd\frac{1+\sin x}{1+\sin x}} + C\\
+                &=\ln\abs{\frac{\cos x(1+\sin x)}{1-\sin^2 x}} + C\\
+                &=\ln\abs{\frac{\cos x(1+\sin x)}{\cos^2 x}} + C\\
+                &=\ln\abs{\frac{1+\sin x}{\cos x}} + C\\
+                &=\ln\abs{\sec x + \tan x} + C.\numberthis\label{eq3}
+                \end{align*}
+            \end{mathnote}
+            \begin{mathnote}
+                \item[4.] Since $\sin x=\sin^{1}x\cos^{0}x$, we have $\alpha=1,\beta=0$. And, \[\int\sin x\D x = -\cos x + C.\numberthis\]
+                \item[5.] Since $\sin x\cos x=\sin^{1}x\cos^{1}x$, we have $\alpha=1,\beta=1$. And, \begin{align*}
+                    \int \sin x \cos x \D x &= -\int \cos x \D\bra{\cos x}\\
+                &= -\frac{1}{2}\cos^2 x + C.\numberthis
+                \end{align*}
+                \item[6.] Since $\frac{\sin x}{\cos x}=\sin^{1}x\cos^{-1}x$, we have $\alpha=1,\beta=-1$. And, \begin{align*}
+                    \int \frac{\sin x}{\cos x}\D x &= -\int \frac{1}{\cos x}\D\bra{\cos x}\\
+                &= -\ln\abs{\cos x} + C.\numberthis
+                \end{align*}
+                \item[7.] Since $\frac{1}{\sin x}=\sin^{-1}x\cos^{0}x$, we have $\alpha=-1,\beta=0$. From Homework 2 Question 11 Claim 1, we have proven that \[\int \frac1{\sin x}\D x = \ln\abs{\csc x-\cot x} + C. \numberthis\]
+                \item[8.] Since $\frac{\cos x}{\sin x}=\sin^{-1}x\cos^{1}x$, we have $\alpha=-1,\beta=1$. And,\begin{align*}
+                \int\frac{\cos x}{\sin x}\D x &= \int \frac{1}{\sin x}\D\bra{\sin x}\\
+                &= \ln\abs{\sin x} + C.\numberthis
+                \end{align*}
+                \item[9.] Since $\frac{1}{\sin x\cos x}=\sin^{-1}x\cos^{-1}x$, we have $\alpha=-1,\beta=-1$. And, \begin{align*}
+                    \int\frac{1}{\sin x\cos x}\D x &=\int \frac{1}{\frac12\sin 2x}\D x\\
+                &=\int\frac{2}{\sin 2x}\cd\frac12\D\bra{2x}\\
+                &=\int\frac{1}{\sin 2x}\D\bra{2x}\\
+                &=\ln\abs{\csc 2x-\cot 2x} + C.\numberthis
+                \end{align*}
+        \end{mathnote}
+    \end{enumerate}
+    \end{question}
+    \begin{question}{}{q2}
+        By taking the substitution $z=\sin^2x$, show that \[\int \sin ^\alpha x\cos^\beta x\D x=\frac12 J_{\frac{\beta-1}{2},\frac{\alpha-1}{2}},\] where \[J_{p,q}=\int(a+bz)^p z^q\D z, a,b\in\R, p,q\in\Q\] stands for a \textbf{binomial integral} (introduced in the previous homework).
+        \qbreak
+        \begin{mathnote}
+            \begin{center}
+                \begin{tikzpicture}[ang/.style={draw,angle eccentricity=1.5, angle radius=0.75cm}]
+                    \coordinate (A) at (0,0);
+                    \coordinate (B) at (4,0);
+                    \coordinate (C) at (4,3);
+                    
+                    \draw (A) -- node[below]{$\sqrt{1-z^2}$} (B) -- node[right]{$z$} (C) -- node[above left]{$1$} cycle
+                    pic ["$x$",ang]{angle=B--A--C};
+                \end{tikzpicture}
+            \end{center}
+
+            We first let $z=\sin x$, where $\D z = \cos x \D x$, then by Pathagorean Theorem we have \begin{align*}
+                \int \sin ^\alpha x\cos^\beta x\D x&=\int z^\alpha \bra{\sqrt{1-z^2}}^{\beta-1}\D z\\
+                &=\int z^\alpha \bra{1-z^2}^{\frac{\beta-1}{2}}\D z,\\
+                \alt{now let $u=z^2$ where $\D u=2z\D z$, then}
+                &=\frac12\int u^{\frac{\alpha-1}{2}}\bra{1-u}^{\frac{\beta-1}{2}}\D u\\&=\frac12\int u^{\frac{\alpha-1}{2}}\bra{1-u}^{\frac{\beta-1}{2}}\D u\\
+                &=\frac12\int \bra{1-u}^{\frac{\beta-1}{2}}u^{\frac{\alpha-1}{2}}\D u,\\
+                \alt{by letting $a=1$, $b=-1$, $p=\frac{\beta-1}{2}$, $q=\frac{\alpha-1}{2}$, we can see the integral becomes}
+                &=\frac12 J_{\frac{\beta-1}{2},\frac{\alpha-1}{2}},\\
+                \alt{which is precisely our desired result.}
+            \end{align*}
+        \end{mathnote}
+    \end{question}
+    \begin{question}{}{q3}
+        Prove that $\forall\alpha,\beta\in\Z, \int \sin^\alpha x\cos^\beta x\D x$ can be reduced into one of the 9 integrals in Question \ref{question:q1}.
+        \begin{hint}
+            You might want to recall the four iteration formula of binomial integrals, which you have proved by yourself in the previous homework. Alternately you can integrate by parts as well.
+        \end{hint}
+        \qbreak
+        \begin{proof}
+            The 4 recursive formula we have proven in Homework 2 are the followings:
+            \begin{enumerate}
+                \item If $p\neq -1$, then \[\begin{aligned}J_{p,q}=-\frac{(a+bz)^{p+1}z^{q+1}}{a(p+1)}+\frac{p+q+2}{a(p+1)}J_{p+1,q},\end{aligned}\]
+                \item If $q\neq -1$, then \[\begin{aligned}J_{p,q}=\frac{(a+bz)^{p+1}z^{q+1}}{a(q+1)}-b\frac{p+q+2}{a(q+1)}J_{p,q+1},\end{aligned}\]
+                \item If $p+q\neq-1$, then \[J_{p,q} =\frac{(a+bz)^{p}z^{q+1}}{p+q+1}+\frac{ap}{p+q+1}J_{p-1,q},\]  
+                \item If $p+q\neq-1$, then  \[J_{p,q} =\frac{(a+bz)^{p+1}z^{q}}{b(p+q+1)}-\frac{aq}{b(p+q+1)}J_{p,q-1}. \]
+            \end{enumerate}
+
+            Now, first we change $p,q$ to $\beta,\alpha$, let $p=\frac{\beta-1}{2}, q=\frac{\alpha-1}{2}$, then $p\neq-1\iff \beta\neq-1$, $q\neq-1\iff\alpha\neq-1$, and $p+1\neq-1\iff \alpha+\beta\neq0$. So, the equations become 
+            \begin{enumerate}
+                \item If $\beta\neq-1$, then \[J_{\frac{\beta-1}{2},\frac{\alpha-1}{2}} = -\frac{(a+bz)^{\frac{\beta-1}{2}+1}z^{\frac{\alpha-1}{2}+1}}{a(\frac{\beta-1}{2}+1)}+\frac{\frac{\beta-1}{2}+\frac{\alpha-1}{2}+2}{a(\frac{\beta-1}{2}+1)}J_{\frac{\beta-1}{2}+1,\frac{\alpha-1}{2}},\]
+                \item If $\alpha\neq-1$, then \[J_{\frac{\beta-1}{2},\frac{\alpha-1}{2}}=\frac{(a+bz)^{\frac{\beta-1}{2}+1}z^{\frac{\alpha-1}{2}+1}}{a(\frac{\alpha-1}{2}+1)}-b\frac{\frac{\beta-1}{2}+\frac{\alpha-1}{2}+2}{a(\frac{\alpha-1}{2}+1)}J_{\frac{\beta-1}{2},\frac{\alpha-1}{2}+1},\]
+                \item If $\alpha+\beta\neq0$, then \[J_{\frac{\beta-1}{2},\frac{\alpha-1}{2}}=\frac{(a+bz)^{\frac{\beta-1}{2}}z^{\frac{\alpha-1}{2}+1}}{\frac{\beta-1}{2}+\frac{\alpha-1}{2}+1}+\frac{a\frac{\beta-1}{2}}{\frac{\beta-1}{2}+\frac{\alpha-1}{2}+1}J_{\frac{\beta-1}{2}-1,\frac{\alpha-1}{2}},\]
+                \item If $\alpha+\beta\neq0$, then \[J_{\frac{\beta-1}{2},\frac{\alpha-1}{2}}=\frac{(a+bz)^{\frac{\beta-1}{2}+1}z^{\frac{\alpha-1}{2}}}{b\bra{\frac{\beta-1}{2}+\frac{\alpha-1}{2}+1}}-\frac{a\frac{\alpha-1}{2}}{b \bra{\frac{\beta-1}{2}+\frac{\alpha-1}{2}+1}}J_{\frac{\beta-1}{2},\frac{\alpha-1}{2}-1}.\]
+            \end{enumerate}
+
+            \newpage
+
+            Now, let $a=1, b=-1$, then the equations become
+
+            \begin{enumerate}
+                \item If $\beta\neq-1$, then \[J_{\frac{\beta-1}{2},\frac{\alpha-1}{2}} = -\frac{2(1-z)^{\frac{\beta-1}{2}+1}z^{\frac{\alpha-1}{2}+1}}{\beta+1}+\frac{\beta+\alpha+2}{\beta+1}J_{\frac{(\beta+2)-1}{2},\frac{\alpha-1}{2}},\numberthis\label{first}\]
+                \item If $\alpha\neq-1$, then \[J_{\frac{\beta-1}{2},\frac{\alpha-1}{2}}=\frac{2(1-z)^{\frac{\beta-1}{2}+1}z^{\frac{\alpha-1}{2}+1}}{\alpha+1}+\frac{\beta+\alpha+2}{\alpha+1}J_{\frac{\beta-1}{2},\frac{(\alpha+2)-1}{2}},\numberthis\label{second}\]
+                \item If $\alpha+\beta\neq0$, then \[J_{\frac{\beta-1}{2},\frac{\alpha-1}{2}}=\frac{2(1-z)^{\frac{\beta-1}{2}}z^{\frac{\alpha-1}{2}+1}}{\beta+\alpha}+\frac{\beta-1}{\beta+\alpha}J_{\frac{(\beta-2)-1}{2},\frac{\alpha-1}{2}},\numberthis\label{third}\]
+                \item If $\alpha+\beta\neq0$, then \[J_{\frac{\beta-1}{2},\frac{\alpha-1}{2}}=-\frac{2(1-z)^{\frac{\beta-1}{2}+1}z^{\frac{\alpha-1}{2}}}{\beta+\alpha}+\frac{\alpha-1}{\beta+\alpha}J_{\frac{\beta-1}{2},\frac{(\alpha-2)-1}{2}}.\numberthis\label{fourth}\]
+            \end{enumerate}
+
+            With these 4 formulas, we can finally prove that $\forall\alpha,\beta\in\Z, \int \sin^\alpha x\cos^\beta x\D x$ can be reduced into one of the 9 integrals in Question \ref{question:q1}.
+
+            To this end, we consider 4 cases:
+
+            \begin{description}
+                \item[Case 1: $\beta<-1$] We apply \eqref{first}, that is, \begin{align*}
+                    \int\sin^\alpha x\cos^\beta x\D x&= J_{\frac{\beta-1}{2},\frac{\alpha-1}{2}}\\
+                    &=-\frac{2(1-z)^{\frac{\beta-1}{2}+1}z^{\frac{\alpha-1}{2}+1}}{\beta+1}+\frac{\beta+\alpha+2}{\beta+1}J_{\frac{(\beta+2)-1}{2},\frac{\alpha-1}{2}}\\
+                    &=-\frac{2(1-z)^{\frac{\beta-1}{2}+1}z^{\frac{\alpha-1}{2}+1}}{\beta+1}+\frac{\beta+\alpha+2}{\beta+1}\int\sin^\alpha x\cos^{\beta+2} x\D x.\\
+                \end{align*}
+                We repeat this until $\beta\in\{-1,0,1\}$. Since $\beta<-1\implies\beta+2<1$, and $\beta<\beta+2$, thus this process always terminate and is valid.
+                \item[Case 2: $\alpha<-1$]  We apply \eqref{second}, that is, \begin{align*}
+                    \int\sin^\alpha x\cos^\beta x\D x &= J_{\frac{\beta-1}{2},\frac{\alpha-1}{2}}\\
+                    &=\frac{2(1-z)^{\frac{\beta-1}{2}+1}z^{\frac{\alpha-1}{2}+1}}{\alpha+1}+\frac{\beta+\alpha+2}{\alpha+1}J_{\frac{\beta-1}{2},\frac{(\alpha+2)-1}{2}}\\
+                    &=\frac{2(1-z)^{\frac{\beta-1}{2}+1}z^{\frac{\alpha-1}{2}+1}}{\alpha+1}+\frac{\beta+\alpha+2}{\alpha+1}\int\sin^{\alpha+2} x\cos^{\beta} x\D x.\\
+                \end{align*}
+                Again, we repeat this until $\alpha\in\{-1,0,1\}$. Since $\alpha<-1\implies\alpha+2<1$, and $\alpha<\alpha+2$, thus this process always terminate and is valid.
+                \item[Case 3: $\beta>1$] Becasue of our Case 2, we may assume $\alpha\geq-1$. Thus, in this case we have $\alpha+\beta>0$, apply \eqref{third} and we have \begin{align*}
+                    \int\sin^\alpha x\cos^\beta x\D x &= J_{\frac{\beta-1}{2},\frac{\alpha-1}{2}}\\
+                    &=\frac{2(1-z)^{\frac{\beta-1}{2}}z^{\frac{\alpha-1}{2}+1}}{\beta+\alpha}+\frac{\beta-1}{\beta+\alpha}J_{\frac{(\beta-2)-1}{2},\frac{\alpha-1}{2}}\\
+                    &=\frac{2(1-z)^{\frac{\beta-1}{2}}z^{\frac{\alpha-1}{2}+1}}{\beta+\alpha}+\frac{\beta-1}{\beta+\alpha}\int\sin^\alpha x\cos^{\beta-2} x\D x.\\
+                \end{align*}
+                Again, we repeat this until $\beta\in\{-1,0,1\}$. Since $\beta>1\implies\beta-2>-1$, and $\beta>\beta-2$, thus this process always terminate and is valid.
+                \item[Case 4: $\alpha>1$] Becasue of our Case 1, we may assume $\beta\geq-1$. Thus, in this case we have $\alpha+\beta>0$, apply \eqref{fourth} and we have \begin{align*}
+                    \int\sin^\alpha x\cos^\beta x\D x &= J_{\frac{\beta-1}{2},\frac{\alpha-1}{2}}\\
+                    &=-\frac{2(1-z)^{\frac{\beta-1}{2}+1}z^{\frac{\alpha-1}{2}}}{\beta+\alpha}+\frac{\alpha-1}{\beta+\alpha}J_{\frac{\beta-1}{2},\frac{(\alpha-2)-1}{2}}\\
+                    &=-\frac{2(1-z)^{\frac{\beta-1}{2}+1}z^{\frac{\alpha-1}{2}}}{\beta+\alpha}+\frac{\alpha-1}{\beta+\alpha}\int\sin^{\alpha-2} x\cos^{\beta} x\D x.\\
+                \end{align*}
+                Again, we repeat this until $\alpha\in\{-1,0,1\}$. Since $\alpha>1\implies\alpha-2>-1$, and $\alpha>\alpha-2$, thus this process always terminate and is valid.
+            \end{description}
+
+            Now, for all $\alpha,\beta\in\Z$, by the resurcive formulas, we can always reduce the integral into $\int \sin^\alpha x\cos^\beta x\D x$ where $\alpha,\beta\in\{-1,0,1\}$, where all $3\times3=9$ possible cases are covered by our Question \ref{question:q1}. Therefore, we have shown that $\forall\alpha,\beta\in\Z, \int \sin^\alpha x\cos^\beta x\D x$ can be reduced into one of the 9 integrals in Question \ref{question:q1}, as needed, this completes our proof.
+
+        \end{proof}
+    \end{question}
+    \begin{question}{}{q4}
+        From there, conclude that $\sin^\alpha x\cos ^\beta x$ is integrable in finite terms $\forall \alpha,\beta\in\Z.$
+        \qbreak
+        \begin{mathnote}
+            This conclusion directly comes from our proof of Question \ref{question:q3}. First, the 9 base cases can be integrated in finite terms, as shown in Question \ref{question:q1}. Then, by the recursive formulas in Question \ref{question:q3}, we can always reduce the integral into one of the 9 base cases, combining with the intermediate terms, we have the integral is integrable in finite terms $\forall \alpha,\beta\in\Z.$
+            
+            \hfill
+        \end{mathnote}
+    \end{question}
+\end{exercise}
+\newpage
+\resetcounter{question}
+\begin{exercise}{}{}
+    \begin{note}
+        This exercise aims at demonstrating that various approaches can be used to ocmpute the same integral. More precisely, compute the indefinite integral \[\int \frac{\D x}{\sqrt{a^2+x^2}}, a>0.\]
+    \end{note}
+    \begin{question}{}{e2q1}
+        Using trigonometric substitution $x=a\tan t,  -\frac\pi2<t<\frac\pi2$.
+        \qbreak
+        \begin{mathnote}
+            Let $x=a\tan t$, then isolate $t$ we have $t=\arctan\bra{\frac{x}{a}}$ and $\D t=\frac1a\cd\frac{1}{1+\bra{\frac{x^2}{a^2}}}\D x=\frac{a}{x^2+a^2}\D x$. 
+            \begin{center}
+                \begin{tikzpicture}[ang/.style={draw,angle eccentricity=1.5, angle radius=0.75cm}]
+                    \coordinate (A) at (0,0);
+                    \coordinate (B) at (2,0);
+                    \coordinate (C) at (2,1.5);
+                    
+                    \draw (A) -- node[below]{$a$} (B) -- node[right]{$x$} (C) -- node[above left]{$\sqrt{x^2+a^2}$} cycle
+                    pic ["$t$",ang]{angle=B--A--C};
+                \end{tikzpicture}
+            \end{center}Now, we substitute $t$ into $x$ and we have \begin{align*}
+                \int\frac{\D x}{\sqrt{a^2+x^2}} &= \int \frac{1}{\sqrt{a^2+a^2\tan^2 t}}\cd\frac{x^2+a^2}{a}\D t\\
+                &=\int \frac{1}{|a|}\frac{1}{\sqrt{1+\tan^2 t}}\frac{a^2\tan^2t+a^2}{a}\D t\\
+                &=\int\frac{\tan^2 t + 1}{\sqrt{\tan^2 t + 1}}\D t\\
+                &=\int\frac{\sec^2 t}{\sqrt{\sec^2 t}}\D t,\\
+            \alt{since $t\in\bra{-\frac\pi2,\frac\pi2}$, this gives $\sec t>0$, thus }
+            &= \int \sec t\D t\\
+            &= \int \frac{1}{\cos t}\D t,\\
+            \alt{from \eqref{eq3} we have}
+            &= \ln\abs{\sec t + \tan t}+C\\
+            &= \ln\abs{\frac{\sqrt{x^2+a^2}}{a}+\frac{x}{a}} + C\\
+            &= \ln\abs{\sqrt{x^2+a^2}+x} - \ln\abs{a} + C\\
+            &= \ln\abs{x+\sqrt{x^2+a^2}} + C.\\
+            \end{align*}
+        \end{mathnote}
+    \end{question}
+    \begin{question}{}{e2q2}
+        Using hyperbolic substitution $x=a\sinh t, t\in\R$.
+        \qbreak
+        \begin{mathnote}
+            Let $x=a\sinh t$, then $\D x=a\cosh t\D t$ and $t=\operatorname{arcsinh}\bra{\frac{x}{a}}$, substitute into the integral we have \begin{align*}
+                \int \frac{1}{\sqrt{a^2+x^2}}\D x &= \int \frac{1}{\sqrt{a^2+a^2\sinh^2 t}}\cd a\cosh t\D t\\
+                &=\int \frac{a}{|a|}\frac{\cosh t}{\sqrt{1+\sinh t}} \D t\\
+                &=\int \frac{\cosh t}{\sqrt{\cosh^2 t}} \D t\\
+                &=\int \frac{\cosh t}{\cosh t} \D t\\
+                &=\int 1\D t\\
+                &=t+C\\ 
+                &=\operatorname{arcsinh}\bra{\frac{x}{a}}+C\\
+                &=\ln\abs{\frac{x}{a}+\sqrt{\frac{x^2}{a^2}+1}}+C\\
+                &=\ln\abs{\frac{x+\sqrt{x^2+a^2}}{a}}+C\\
+                &=\ln\abs{x+\sqrt{x^2+a^2}}-\ln\abs{a}+C\\
+                &=\ln\abs{x+\sqrt{x^2+a^2}}+C.\\
+            \end{align*}
+        \end{mathnote}
+    \end{question}
+    \begin{question}{}{e2q3}
+        Using typer I Euler substitution $\sqrt{x^2+a^2}=x+t$.
+        \qbreak
+        \begin{mathnote}
+            Let $\sqrt{x^2+a^2}=x+t$, square both sides we have $x^2+a^2=(x+t)^2=x^2+2xt+t^2$, cancel $x^2$ the equation becomes $2xt=a^2-t^2$, divide both sides we get $x=\frac{a^2-t^2}{2t}$, then differentiate both sides, the equation now changes to $\D x = \frac{-4t^2\D t - 2(a^2-t^2)\D t}{4t^2}=-\frac{a^2+t^2}{2t^2}\D t$. Substitute everything back into the integral we have \begin{align*}
+                \int \frac{\D x}{\sqrt{a^2+x^2}} &= -\int \frac{1}{\frac{a^2-t^2}{2t}+t}\cd\frac{a^2+t^2}{2t^2}\D t\\
+                &=-\int \frac{2t}{a^2-t^2+2t^2}\cd\frac{a^2+t^2}{2t^2}\D t\\
+                &=-\int \frac{a^2+t^2}{a^2+t^2}\frac{1}{t}\D t\\
+                &=-\ln\abs{t}+C\\
+                &=-\ln\abs{\sqrt{x^2+a^2}-x}+C\\
+                &=\ln\abs{\frac1{\sqrt{x^2+a^2}-x}\cd\frac{\sqrt{x^2+a^2}+x}{\sqrt{x^2+a^2}+x}}+C\\
+                &=\ln\abs{\frac{\sqrt{x^2+a^2}+x}{\sqrt{x^2+a^2}-x^2}}+C\\
+                &=\ln\abs{\frac{\sqrt{x^2+a^2}+x}{a^2}}+C\\
+                &=\ln\abs{x+\sqrt{x^2+a^2}}-\ln\abs{a}+C\\
+                &=\ln\abs{x+\sqrt{x^2+a^2}}+C.\\
+            \end{align*}
+        \end{mathnote}
+    \end{question}
+
+    \begin{question}{}{e2q4}
+        Using type II Euler substitution $\sqrt{x^2+a^2}=xt+a$.
+        \qbreak
+        \begin{claim}{}{cl1}
+            \[\int\frac{1}{1-x^2}\D x=\frac12\ln\abs{\frac{1+x}{1-x}}\D x.\]
+            \begin{proof}[Proof of Claim \ref{claim:cl1}]
+                We will use our claim from Homework 2:
+                \[\int \frac{1}{\sin x}\D x = \ln\abs{\csc x - \cot x} + C.\]
+
+                First, let $x=\cos t$ where $\D x=-\sin t\D t$. Then, substitute $t$ into our integral we get \begin{align*}
+                    \int \frac{1}{1-x^2}\D x &= -\int\frac{1}{1-\cos ^2 t}\cd\sin t\D t\\
+                    &= -\int\frac{\sin t}{\sin ^2 t}\D t\\
+                    &= -\int\frac{1}{\sin t}\D t\\
+                    &= -\ln\abs{\csc t - \cot t} + C.\\
+                    \alt{Now, consider the Pythagorean Theorem and the triangle,}
+                    &\begin{tikzpicture}[ang/.style={draw,angle eccentricity=1.5, angle radius=0.75cm}]\coordinate (A) at (0,0);\coordinate (B) at (2,0);\coordinate (C) at (2,1.5);\draw (A) -- node[below]{$1$} (B) -- node[right]{$\sqrt{1-x^2}$} (C) -- node[above left]{$x$} cycle pic ["$t$",ang]{angle=B--A--C}; \end{tikzpicture}
+                    \alt{this gives}
+                    &= -\ln\abs{\frac{1}{\sqrt{1-x^2}} - \frac{x}{\sqrt{1-x^2}}} + C\\
+                    &= \ln\abs{\frac{\sqrt{1-x^2}}{1-x}} + C\\
+                    &= \ln\abs{\bra{\frac{1-x^2}{(1-x)^2}}^{\frac12}} + C\\
+                    &= \frac12\ln\abs{\frac{(1-x)(1+x)}{(1-x)^2}} + C\\
+                    &= \frac12\ln\abs{\frac{1+x}{1-x}} + C.
+                \end{align*}
+                
+            \end{proof}
+        \end{claim}
+        \begin{mathnote}
+            \begin{align*}
+                \alt{Let $t=\frac{\sqrt{x^2+a^2}-a}{x}$, then}
+                \sqrt{x^2+a^2}&=xt+a,\\
+                \alt{square both sides,}
+                x^2+a^2&=x^2t^2+2xta+a^2,\\
+                \alt{cancel $a^2$ and divide by $x$,}
+                x&=xt^2+2at,\\
+                \alt{isolate $x$ we get}
+                x&=\frac{2at}{1-t^2}\\
+                \D x&=2a\frac{1-t^2-t(-2t)}{(1-t^2)^2}\D t\\
+                &=2a\frac{1+t^2}{(1-t^2)^2}\D t.\\
+                \alt{Substitute $t$ into the integral,}
+                \int \frac{\D x}{\sqrt{a^2+x^2}}&=\int \frac{1}{\bra{\frac{2at}{1-t^2}}t+a}\cd\frac{2a(1+t^2)}{(1-t^2)^2}\D t\\
+                &=\int\frac{1-t^2}{2at^2+a(1-t^2)}\cd\frac{2a(1+t^2)}{(1-t^2)^2}\D t\\
+                &=\int\frac{2(1+t^2)}{2t^2+1-t^2}\cd\frac{1}{1-t^2}\D t\\
+                &=2\int\frac{1+t^2}{1+t^2}\cd\frac{1}{1-t^2}\D t\\
+                &=2\int\frac{1}{1-t^2}\D t,\\
+                \alt{by Claim \ref{claim:cl1} we have}
+                &=\ln\abs{\frac{1+t}{1-t}}+C,\\
+                \alt{now substitute $x$ back into the integral,}
+                &=\ln\abs{\frac{1+\frac{\sqrt{x^2+a^2}-a}{x}}{1-\frac{\sqrt{x^2+a^2}-a}{x}}}+C\\
+                &=\ln\abs{\frac{x+\sqrt{x^2+a^2}-a}{x-\sqrt{x^2+a^2}-a}}+C\\
+                &=\ln\abs{\frac{(x-a)+\sqrt{x^2+a^2}}{(x-a)-\sqrt{x^2+a^2}}\cd\frac{(x-a)+\sqrt{x^2+a^2}}{(x-a)+\sqrt{x^2+a^2}}}+C\\
+                &=\ln\abs{\frac{\bra{(x-a)+\sqrt{x^2+a^2}}^2}{(x-a)^2-x^2-a^2}}+C\\
+                &=\ln\abs{\frac{\bra{(x-a)+\sqrt{x^2+a^2}}^2}{x^2-2ax+a^2-x^2-a^2}}+C\\
+                &=\ln\abs{\frac{\bra{(x-a)+\sqrt{x^2+a^2}}^2}{-2ax}}+C\\
+                &=\ln\abs{\frac{x^2+x^2+x\sqrt{x^2+a^2}+x\sqrt{x^2+a^2}}{2ax}\right.+\\
+                &\quad\quad\quad\left.\frac{-ax+ax+a^2-a^2-a\sqrt{x^2+a^2}+a\sqrt{x^2+a^2}}{2ax}}+C\\
+                &=\ln\abs{\frac{2x^2+2x\sqrt{x^2+a^2}}{2ax}}+C\\
+                &=\ln\abs{\frac{x+\sqrt{x^2+a^2}}{a}}+C\\
+                &=\ln\abs{x+\sqrt{x^2+a^2}}-\ln\abs{a}+C\\
+                &=\ln\abs{x+\sqrt{x^2+a^2}}+C.\\
+            \end{align*}
+        \end{mathnote}
+    \end{question}
+\end{exercise}
+
+\end{document}

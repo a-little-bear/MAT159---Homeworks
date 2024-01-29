@@ -1,156 +1,128 @@
-\documentclass{homework}
-\author{Joseph Siu}
-\class{MAT159 - Analysis II}
-\date{\today}
-\title{Homework 1}
+\documentclass{alittlebear}
+\def\filenum{1}
+\pagestyle{style}
 
-\newcommand{\Set}[1]{\{#1\}}
-\newcommand{\T}[1]{\text{#1}}
-\newcommand{\Al}[3]{#1 &=#2 &\text{#3}&&\\}
+\begin{document}
 
-% Symbols
-\newcommand*{\eg}{\leavevmode\unskip , e. g., \ignorespaces} % for example
-\newcommand*{\ie}{\leavevmode\unskip, i. e., \ignorespaces} % that is
-\newcommand{\nil}{\varnothing}
-\AtBeginDocument{\def\O{\cal{O}}} % Big Oh
-\AtBeginDocument{\def\C{\bb{C}}} % Complex
-\newcommand{\R}{\bb{R}} % Reals
-\newcommand{\Q}{\bb{Q}} % Rationals
-\newcommand{\Z}{\bb{Z}} % Integers
-\newcommand{\N}{\bb{N}} % Naturals
-\renewcommand{\P}{\bb{P}} % Primes
-\newcommand{\Pset}[1]{\mathcal{P}(#1)} %power set
-\newcommand{\Relate}[2]{#1\mathcal{R}#2} %relation
-\newcommand{\relate}{\mathcal{R}}
-\newcommand{\F}{\bb{F}} 
-\newcommand{\GF}[1][2]{\bb{F}_{#1}} 
-\newcommand{\modulo}[1][n]{\Z/#1\Z} 
-\newcommand{\ra}{\rightarrow}
-\newcommand{\Ra}{\Rightarrow}
-\newcommand{\?}{\stackrel{?}{=}}
-\newcommand{\is}{\equiv}
-\newcommand{\al}{\alpha}
-\newcommand{\ep}{\varepsilon}
-\renewcommand{\phi}{\varphi}
-\newcommand{\p}{\partial}
-\newcommand{\injective}{\hookrightarrow}
-\newcommand{\surjective}{\twoheadrightarrow}
-\newcommand{\bijective}{\hookrightarrow\mathrel{\mspace{-15mu}}\rightarrow}
-\newcommand{\derivative}[2][x]{\frac{\D #2}{\D #1}}
-\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
-\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
-\newcommand{\near}[1]{\left\lfloor#1\right\rceil}
-\newcommand{\arr}[1]{\left\langle#1\right\rangle}
-\newcommand{\paren}[1]{\left(#1\right)} %pair / ()
-\newcommand{\brk}[1]{\left[#1\right]} %[]
-\newcommand{\abs}[1]{\left|#1\right|}
-\newcommand{\curl}[1]{\left\{#1\right\}} %set {}
-\newcommand{\func}[3]{#1: #2 \rightarrow #3}
+\begin{exercise}{}{}
+    \begin{note}
+        This exercise aims at computing the following indefinite integral
 
+        $$J_{n}=\int \frac{1}{\left(x^{2}+a^{2}\right)^{n}}\D x, n \in \mathbb{N}$$
+    \end{note}
 
-\theoremstyle{definition}
-\newtheorem*{claim}{Claim}
-\newtheorem{definition}{Definition}
-\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}{Lemma}
+    \begin{question}{}{}
+        Compute $J_{1}$.
+        \tcblower
 
-\begin{document} \maketitle
+        \begin{mathnote}
+            \begin{align*}
+                J_1&=\int \frac{\D x}{x^2+a^2}\\
+                &=\int \frac1{a^2}\cdot\frac{\D x}{(\frac{x}a)^2+1}\\
+                &=\frac1a \int \frac{\D (\frac{x}a)}{(\frac{x}a)^2+1}\\
+                &=\frac1a\arctan(\frac{x}a)+C
+            \end{align*}
+        \end{mathnote}
+    \end{question}
 
-\section*{EXERCISE 1}
-This exercise aims at computing the following indefinite integral
+    \begin{question}{}{}
+        Compute $J_{2}$.
+        \begin{hint}
+            Consider the substitution $x=\tan t$.
+        \end{hint}
+        \tcblower
+        \begin{mathnote}
+            \begin{align*}
+                J_2 &=\int \frac{\D x}{(x^2+a^2)^2}\\
+                \text{Substitute } x&=\tan t\\
+                \D x&=\sec^2 t \cdot \D t\\
+                J_2&=\int \frac{\sec^2 t}{(\tan^2 t + a^2)^2}\D t\\
+                \D (\frac{1}{\tan^2 t + a^2}) &= -\frac{2\tan t\sec^2 t}{(\tan^2 t + a^2)^2}\D t\\
+                J_2&=-\int \frac{1}{2\tan t}\D (\frac{1}{\tan^2 t + a^2})\\
+                &=-\int \frac{1}{2x}\D (\frac{1}{x^2+a^2})\\
+                \text{By integration by parts, we have }&\\
+                J_2&=-\frac{1}{2x(x^2+a^2)}+\int \frac{1}{x^2+a^2}\D (\frac{1}{2x})\\
+                &=-\frac{1}{2x(x^2+a^2)}+\frac{1}{2}\int \frac{1}{x^2+a^2}\D (\frac{1}{x})\\
+                &=-\frac{1}{2x(x^2+a^2)}-\frac{1}{2}\int \frac{1}{x^2+a^2}\frac{1}{x^2}\D x\\
+                \text{By partial fractions, we have}\\
+                J_2&=-\frac{1}{2x(x^2+a^2)}-\frac{1}{2}\int -\frac{1}{a^2(x^2+a^2)}+\frac{1}{a^2x^2}\D x\\
+                &=-\frac{1}{2x(x^2+a^2)}+\frac{1}{2}\int \frac{1}{a^2(x^2+a^2)}\D x -\frac{1}{2}\int\frac{1}{a^2x^2}\D x\\
+                &=-\frac{1}{2x(x^2+a^2)}+\frac{1}{2a^2}\int \frac{1}{x^2+a^2}\D x -\frac{1}{2a^2}\int\frac{1}{x^2}\D x\\
+                &=-\frac{1}{2x(x^2+a^2)}+\frac{1}{2a^3}\arctan(\frac{x}a) +\frac{1}{2a^2 x} + C\\
+                &=\frac{x^2+a^2-a^2}{2xa^2(x^2+a^2)}+\frac{1}{2a^3}\arctan(\frac{x}a) + C\\
+                &=\frac{x}{2a^2(x^2+a^2)}+\frac{1}{2a^3}\arctan(\frac{x}a) + C\\
+            \end{align*}
+        \end{mathnote}
+    \end{question}
 
-$$J_{n}=\int \frac{1}{\left(x^{2}+a^{2}\right)^{n}}\D x, n \in \mathbb{N}$$
+    \begin{question}{}{}
+        Prove that $\forall n \in \mathbb{N}$, $$
+        J_{n}=\frac{x}{\left(x^{2}+a^{2}\right)^{n}}+2 n \int \frac{x^{2}}{\left(x^{2}+a^{2}\right)^{n+1}} d x
+        $$
 
-\question Compute $J_{1}$.
+        \begin{hint}
+            Consider integration by parts.
+        \end{hint}
 
-\begin{align*}
-    J_1&=\int \frac{\D x}{x^2+a^2}\\
-    &=\int \frac1{a^2}\cdot\frac{\D x}{(\frac{x}a)^2+1}\\
-    &=\frac1a \int \frac{\D (\frac{x}a)}{(\frac{x}a)^2+1}\\
-    &=\frac1a\arctan(\frac{x}a)+C
-\end{align*}
-\newpage
+        \begin{proof}{}{}
+            Pick an arbitrary $n\in\N$, we have that
+            \begin{align*}
+            \D (\frac{1}{(x^2+a^2)^{n}}) &= -\frac{2nx}{(x^2+a^2)^{n+1}}\D x\\
+                \frac{x}{(x^2+a^2)^{n}}+2n\int \frac{x^2}{(x^2+a^2)^{n+1}}\D x &= \frac{x}{(x^2+a^2)^{n}}+2n\int -\frac{x}{2n}\D (\frac{1}{(x^2+a^2)^{n}})\\
+                &=\frac{x}{(x^2+a^2)^{n}}-\int x\D (\frac{1}{(x^2+a^2)^{n}})\\
+                \text{By integration by parts, }\\
+                \frac{x}{(x^2+a^2)^{n}}-\int x\D (\frac{1}{(x^2+a^2)^{n}}) &= \frac{x}{(x^2+a^2)^{n}} - \frac{x}{(x^2+a^2)^{n}} + \int \frac{1}{(x^2+a^2)^{n}}\D x\\
+                &= \int \frac{1}{(x^2+a^2)^{n}}\D x\\
+                &= J_n
+            \end{align*}
+            Thus we have shown for any $n\in\N$ the equality holds, completing our proof.
+        \end{proof}
+    \end{question}
 
-\question Compute $J_{2}$. (Hint: Consider the substitution $x=\tan t$.)
+    \begin{question}{}{}
+        Based on the previous sub-question, establish the recursive relation:
 
-\begin{align*}
-    J_2 &=\int \frac{\D x}{(x^2+a^2)^2}\\
-    \text{Substitute } x&=\tan t\\
-    \D x&=\sec^2 t \cdot \D t\\
-    J_2&=\int \frac{\sec^2 t}{(\tan^2 t + a^2)^2}\D t\\
-    \D (\frac{1}{\tan^2 t + a^2}) &= -\frac{2\tan t\sec^2 t}{(\tan^2 t + a^2)}\D t\\
-    J_2&=-\int \frac{1}{2\tan t}\D (\frac{1}{\tan^2 t + a^2})\\
-    &=-\int \frac{1}{2x}\D (\frac{1}{x^2+a^2})\\
-    \text{By integration by parts, we have }&\\
-    J_2&=-\frac{1}{2x(x^2+a^2)}+\int \frac{1}{x^2+a^2}\D (\frac{1}{2x})\\
-    &=-\frac{1}{2x(x^2+a^2)}+\frac{1}{2}\int \frac{1}{x^2+a^2}\D (\frac{1}{x})\\
-    &=-\frac{1}{2x(x^2+a^2)}-\frac{1}{2}\int \frac{1}{x^2+a^2}\frac{1}{x^2}\D x\\
-    \text{By partial fractions, we have}\\
-    J_2&=-\frac{1}{2x(x^2+a^2)}-\frac{1}{2}\int -\frac{1}{a^2(x^2+a^2)}+\frac{1}{a^2x^2}\D x\\
-    &=-\frac{1}{2x(x^2+a^2)}+\frac{1}{2}\int \frac{1}{a^2(x^2+a^2)}\D x -\frac{1}{2}\int\frac{1}{a^2x^2}\D x\\
-    &=-\frac{1}{2x(x^2+a^2)}+\frac{1}{2a^2}\int \frac{1}{x^2+a^2}\D x -\frac{1}{2a^2}\int\frac{1}{x^2}\D x\\
-    &=-\frac{1}{2x(x^2+a^2)}+\frac{1}{2a^3}\arctan(\frac{x}a) +\frac{1}{2a^2 x} + C\\
-    &=\frac{x^2+a^2-a^2}{2xa^2(x^2+a^2)}+\frac{1}{2a^3}\arctan(\frac{x}a) + C\\
-    &=\frac{x}{2a^2(x^2+a^2)}+\frac{1}{2a^3}\arctan(\frac{x}a) + C\\
-\end{align*}
-\newpage
-\question Prove that $\forall n \in \mathbb{N}$,
+        $$
+        J_{n+1}=\frac{2 n-1}{2 n} \frac{1}{a^{2}} J_{n}+\frac{1}{2 n a^{2}} \frac{x}{\left(x^{2}+a^{2}\right)^{n}}
+        $$
 
-$$
-J_{n}=\frac{x}{\left(x^{2}+a^{2}\right)^{n}}+2 n \int \frac{x^{2}}{\left(x^{2}+a^{2}\right)^{n+1}} d x
-$$
+        From there, conclude that $J_{n}$ is an integral of finite terms (i.e., it is an elementary function) 
 
-(Hint: Consider integration by parts.)
+        \tcblower
 
-\begin{proof}
-    Pick an arbitrary $n\in\N$, we have that
-    \begin{align*}
-    \D (\frac{1}{(x^2+a^2)^{n}}) &= -\frac{2nx}{(x^2+a^2)^{n+1}}\D x\\
-        \frac{x}{(x^2+a^2)^{n}}+2n\int \frac{x^2}{(x^2+a^2)^{n+1}}\D x &= \frac{x}{(x^2+a^2)^{n}}+2n\int -\frac{x}{2n}\D (\frac{1}{(x^2+a^2)^{n}})\\
-        &=\frac{x}{(x^2+a^2)^{n}}-\int x\D (\frac{1}{(x^2+a^2)^{n}})\\
-        \text{By integration by parts, }\\
-        \frac{x}{(x^2+a^2)^{n}}-\int x\D (\frac{1}{(x^2+a^2)^{n}}) &= \frac{x}{(x^2+a^2)^{n}} - \frac{x}{(x^2+a^2)^{n}} + \int \frac{1}{(x^2+a^2)^{n}}\D x\\
-        &= \int \frac{1}{(x^2+a^2)^{n}}\D x\\
-        &= J_n
-    \end{align*}
-    Thus we have shown for any $n\in\N$ the equality holds, completing our proof.
-\end{proof}
+        \begin{mathnote}
+            \begin{align*}
+                J_{n+1}&=\int \frac{1}{(x^2+a^2)^{n+1}}\D x\\
+                &= \frac1{a^2}\int \frac{(x^2+a^2)-x^2}{(x^2+a^2)^{n+1}}\D x\\
+                &=\frac1{a^2}\int\frac1{(x^2+a^2)^n}\D x - \frac1{a^2}\int\frac{x^2}{(x^2+a^2)^{n+1}}\D x\\
+                &=\frac1{a^2}J_n - \frac1{a^2}\int -\frac{x}{2n}\D (\frac{1}{(x^2+a^2)^n})\\
+                &=\frac1{a^2}J_n + \frac1{2na^2}\int x\D (\frac{1}{(x^2+a^2)^n})\\
+                &=\frac1{a^2}J_n + \frac{1}{2na^2}\left[\frac{x}{(x^2+a^2)^n}-\int\frac1{(x^2+a^2)^n}\D x \right]\\
+                &=\frac1{a^2}J_n + \frac1{2na^2}\frac{x}{(x^2+a^2)^n}-\frac{1}{2na^2}J_n\\
+                &=J_n[\frac{1}{a^2}-\frac{1}{2na^2}]+\frac{1}{2na^2}\frac{x}{(x^2+a^2)^n}\\
+                &=(1-\frac1{2n})\frac1{a^2}J_n + \frac1{2na^2}\frac{x}{(x^2+a^2)^n}\\
+                &=\frac{2n-1}{2n}\frac1{a^2}J_n + \frac1{2na^2}\frac{x}{(x^2+a^2)^n}
+            \end{align*}
 
-\newpage
+            as needed.
+        \end{mathnote}
 
-\question Based on the previous sub-question, establish the recursive relation:
+    \end{question}
 
-$$
-J_{n+1}=\frac{2 n-1}{2 n} \frac{1}{a^{2}} J_{n}+\frac{1}{2 n a^{2}} \frac{x}{\left(x^{2}+a^{2}\right)^{n}}
-$$
+    \begin{question}{}{}
+        Compute $J_{3}$.
+        \tcblower
+        \begin{mathnote}
+            By Q4's formula, combining with our result of $J_2$, we have that
 
-From there, conclude that $J_{n}$ is an integral of finite terms (i.e., it is an elementary function) 
-
-\begin{align*}
-    J_{n+1}&=\int \frac{1}{(x^2+a^2)^{n+1}}\D x\\
-    &= \frac1{a^2}\int \frac{(x^2+a^2)-x^2}{(x^2+a^2)^{n+1}}\D x\\
-    &=\frac1{a^2}\int\frac1{(x^2+a^2)^n}\D x - \frac1{a^2}\int\frac{x^2}{(x^2+a^2)^{n+1}}\D x\\
-    &=\frac1{a^2}J_n - \frac1{a^2}\int -\frac{x}{2n}\D (\frac{1}{(x^2+a^2)^n})\\
-    &=\frac1{a^2}J_n + \frac1{2na^2}\int x\D (\frac{1}{(x^2+a^2)^n})\\
-    &=\frac1{a^2}J_n + \frac{1}{2na^2}\left[\frac{x}{(x^2+a^2)^n}-\int\frac1{(x^2+a^2)^n}\D x \right]\\
-    &=\frac1{a^2}J_n + \frac1{2na^2}\frac{x}{(x^2+a^2)^n}-\frac{1}{2na^2}J_n\\
-    &=J_n[\frac{1}{a^2}-\frac{1}{2na^2}]+\frac{1}{2na^2}\frac{x}{(x^2+a^2)^n}\\
-    &=(1-\frac1{2n})\frac1{a^2}J_n + \frac1{2na^2}\frac{x}{(x^2+a^2)^n}\\
-    &=\frac{2n-1}{2n}\frac1{a^2}J_n + \frac1{2na^2}\frac{x}{(x^2+a^2)^n}
-\end{align*}
-
-as needed.
-
-\newpage
-\question Compute $J_{3}$.
-
-By Q4's formula, combining with our result of $J_2$, we have that
-
-\begin{align*}
-    J_3&=\frac{4-1}{4}\frac{1}{a^2}J_2+\frac{1}{4a^2}\frac{x}{(x^2+a^2)^2}\\
-    &=\frac{4-1}{4}\frac{1}{a^2}[\frac{x}{2a^2(x^2+a^2)}+\frac{1}{2a^3}\arctan(\frac{x}a) + C]+\frac{1}{4a^2}\frac{x}{(x^2+a^2)^2}\\
-    &=\frac{3}{4a^2}\frac{x}{2a^2(x^2+a^2)}+\frac{3}{4a^2}\frac{1}{2a^3}\arctan(\frac{x}a)+\frac{1}{4a^2}\frac{x}{(x^2+a^2)^2} + C\\
-    &=\frac{1}{4a^2}\left[\frac{3}{2a^3}\arctan(\frac{x}a)+\frac{3x}{2a^2(x^2+a^2)}+\frac{x}{(x^2+a^2)^2}\right] + C\\
-\end{align*}
+            \begin{align*}
+                J_3&=\frac{4-1}{4}\frac{1}{a^2}J_2+\frac{1}{4a^2}\frac{x}{(x^2+a^2)^2}\\
+                &=\frac{4-1}{4}\frac{1}{a^2}[\frac{x}{2a^2(x^2+a^2)}+\frac{1}{2a^3}\arctan(\frac{x}a) + C]+\frac{1}{4a^2}\frac{x}{(x^2+a^2)^2}\\
+                &=\frac{3}{4a^2}\frac{x}{2a^2(x^2+a^2)}+\frac{3}{4a^2}\frac{1}{2a^3}\arctan(\frac{x}a)+\frac{1}{4a^2}\frac{x}{(x^2+a^2)^2} + C\\
+                &=\frac{1}{4a^2}\left[\frac{3}{2a^3}\arctan(\frac{x}a)+\frac{3x}{2a^2(x^2+a^2)}+\frac{x}{(x^2+a^2)^2}\right] + C\\
+            \end{align*}
+        \end{mathnote}
+    \end{question}
+\end{exercise}
 
 \end{document}

@@ -1,0 +1,316 @@
+\documentclass[reqno]{alittlebear}
+\def\filenum{2}
+
+
+
+\begin{document} %\maketitle
+
+\begin{exercise}{}{}
+    \begin{note}
+        \quad Recall that we have already explained in lecture that all rational function of a single variable can be integrated in finite terms. Starting from there, we introduce integrals of the form, known as the \textbf{binomial integrals}:
+        \[\begin{aligned}J_{p,q}=\int(a+bz)^pz^q\D z,a,b\in\mathbb{R},p,q\in\mathbb{Q}. \end{aligned} \numberthis \label{eq1}\]
+    
+    
+        This exercise aims at studying the rationalization of the binomial integral, as well as some of its applications.
+    \end{note}
+\begin{question}{}{q1}
+    Assume that $p\in\Z$, rationalise the integrand.
+    \qbreak
+    \begin{mathnote}
+        Since $q\in\Q$, this implies there exists $m\in\Z, n\in\N$ such that $q=\frac{m}{n}$. Then, $J_{p,q}$ can be written as \[\begin{aligned}J_{p,q}=\int(a+bz)^pz^{\frac{m}{n}}\D z.\end{aligned}\] Let $z=x^n$, then $\D z=n\cd x^{n-1}\D x$. Replace $z$ with $x$ we have \[\begin{aligned}J_{p,q}=\int(a+b\cd x^n)^p \cd (x^n)^{\frac{m}{n}}\cd n\cd x^{n-1}\D x.\end{aligned}\] Simplify it and we get \[\begin{aligned}J_{p,q}=n\int(a+b\cd x^n)^p \cd x^{m+n-1}\D x.\end{aligned}\] Now, by binomial theorem we can see the integrand is rationalised, as needed.
+    \end{mathnote}
+\end{question}
+\newpage
+\begin{question}{}{q2}
+    Assume that $q\in\Z$, rationalise the integrand.
+    \qbreak
+    \begin{mathnote}
+        Since $p\in\Q$, this implies there exists $m\in\Z, n\in\N$ such that $p=\frac{m}{n}$. Then, $J_{p,q}$ can be written as \[\begin{aligned}J_{p,q}=\int(a+bz)^{\frac{m}{n}}z^q\D z.\end{aligned}\] If $b=0$ then the integrant is trivially rational, thus we consider the case when $b\neq0$. Let $x^n=a+bz$, then $z=\frac{x^n-a}{b}$ and $n\cd x^{n-1}\D x=b\D z$. Replace $z$ with $x$ we have \[\begin{aligned}J_{p,q}=\int \bra{x^n}^{\frac{m}{n}}\cd\bra{\frac{x^n-a}{b}}^q\cd\frac{n\cd x^{n-1}}{b}\D x.\end{aligned}\] Simplify it and we get \[\begin{aligned}J_{p,q}=\frac{n}{b^{q+1}}\int x^{m+n-1}\cd\bra{x^n-a}^q\D x.\end{aligned}\] Now, by binomial theorem we can see the integrand is rationalised, as needed.
+    \end{mathnote}
+\end{question}
+\newpage
+\begin{question}{}{q3}
+    Assume that $p+q\in\Z$, rationalise the integrand.
+    \qbreak
+    \begin{hint}
+        Write the integrand as \[\int\left(\frac{a+bz}z\right)^pz^{p+q}\D z.\]
+    \end{hint}
+    \begin{mathnote}
+        If $p\in\Z$ then this case is rationalised by Question \ref{question:q1}. Thus we focus on the case when $p\in\Q\setminus\Z$, that is, $p=\frac{m}{n}$ for some $m\in\Z, n\in\N$. First, we change the equation to \[\begin{aligned}J_{p,q}=\int \bra{\frac{a+bz}{z}}^p\cd z^{p+q}\D z.\end{aligned}\] Now, let $x^n=\frac{a+bz}{z}=\frac{a}z+b$, then $z=\frac{a}{x^n-b}$ and $n\cd x^{n-1}\D x=-\frac{a}{z^2}\D z$. Now replace $z$ with $x$ we have \begin{align*}
+            J_{p,q}&=\int \bra{x^n}^{\frac{m}{n}}\cd \bra{\frac{a}{x^n-b}}^{p+q}\cd\bra{\frac{n\cd x^{n-1}\cd z^2}{-a}}\D x\\
+            &=\int x^m \cd \frac{a^{p+q}}{(x^n-b)^{p+q}}\cd\bra{\frac{n\cd x^{n-1}\cd \frac{a^2}{(x^n-b)^2}}{-a}}\D x\\
+            &=n\int x^m \cd \frac{a^{p+q}}{(x^n-b)^{p+q}}\cd \bra{-\frac{ax^{n-1}}{(x^n-b)^2}}\D x\\
+            &=-n\cd a^{p+q+1}\int x^m \cd \frac{1}{(x^n-b)^{p+q}}\cd\bra{x^{n-1}\cd \frac{1}{(x^n-b)^2}}\D x\\
+            &=-n\cd a^{p+q+1}\int x^{m+n-1} \cd \frac{1}{(x^n-b)^{p+q+2}}\D x\\
+            &=-n\cd a^{p+q+1}\int x^{m+n-1} \cd (x^n-b)^{-2-p-q} \D x\\
+        \end{align*}
+        Now, we can see that the integrand is rationalised, as needed.
+    \end{mathnote}
+    \begin{remark}
+        So far we have shown an interesting conclusion: if either $p,$ or $q$, or $p+q$ is an integer, then the function can be integrated in finite terms.
+    \end{remark}
+\end{question}
+\newpage
+\begin{question}{}{q4}
+    Prove that \begin{itemize}
+        \item If $p\neq -1$, then \[\begin{aligned}J_{p,q}=-\frac{(a+bz)^{p+1}z^{q+1}}{a(p+1)}+\frac{p+q+2}{a(p+1)}J_{p+1,q}\end{aligned}\]
+        \item If $q\neq -1$, then \[\begin{aligned}J_{p,q}=\frac{(a+bz)^{p+1}z^{q+1}}{a(q+1)}-b\frac{p+q+2}{a(q+1)}J_{p,q+1}\end{aligned}\]
+    \end{itemize}
+    \qbreak
+    \begin{proof}
+        \hfill
+        \begin{enumerate}
+            \item When $p\neq -1$, using integration by parts we have
+            \begin{align*}
+                J_{p,q}&=\int \bra{a+bz}^p\cd z^q\D z\\
+                &=\int \bra{\frac{a+bz}{z}}^p\cd z^{p+q}\D z\\
+                &=\int \bra{\frac{a}{z}+b}^p\cd z^{p+q}\D z\\
+                &=\int z^{p+q}\cd\bra{-\frac{z^2}{a}}\D \bra{\frac{\bra{\frac{a}{z}+b}^{p+1}}{p+1}}\\
+                &=-\frac1{a(p+1)}\int z^{p+q+2}\cd\D \bra{\frac{a}{z}+b}^{p+1}\\
+                &=-\frac{\frac{(a+bz)^{p+1}}{z^{p+1}}\cd z^{p+q+2}}{a(p+1)}+\frac1{a(p+1)}\int \bra{\frac{a}{z}+b}^{p+1}\D \bra{z^{p+q+2}} \\
+                &=-\frac{(a+bz)^{p+1}\cd z^{q+1}}{a(p+1)}+\frac{p+q+2}{a(p+1)}\int \frac{(a+bz)^{p+1}}{z^{p+1}}\cd z^{p+q+1}\D z\\
+                &=-\frac{(a+bz)^{p+1}\cd z^{q+1}}{a(p+1)}+\frac{p+q+2}{a(p+1)}\int (a+bz)^{p+1}\cd z^q\D z\\
+                &=-\frac{(a+bz)^{p+1}\cd z^{q+1}}{a(p+1)}+\frac{p+q+2}{a(p+1)}J_{p+1,q} \numberthis \label{eq2}
+            \end{align*}
+
+            \newpage
+            \item When $q\neq -1$, we first consider the integral form of $J_{p+1,q}$ in \eqref{eq1}, then substitute our result into \eqref{eq2}, and the ending result is the desired formula.
+            
+            \noindent
+            To this end, consider \(J_{p+1,q}=\int (a+bz)^{p+1}\cd z^q\D z\), using integration by parts we have
+            \begin{align*}
+                J_{p+1,q}&=\int (a+bz)^{p+1}\cd z^q\D z\\
+                &=\int (a+bz)^{p+1}\D\bra{\frac{z^{q+1}}{q+1}}\\
+                &=\frac1{q+1}(a+bz)^{p+1}\cd z^{q+1}-\frac1{q+1}\int z^{q+1}\D (a+bz)^{p+1}\\
+                &=\frac1{q+1}(a+bz)^{p+1}\cd z^{q+1}-\frac{b(p+1)}{q+1}\int (a+bz)^{p}\cd z^{q+1}\D z\\
+                &=\frac1{q+1}(a+bz)^{p+1}\cd z^{q+1}-\frac{b(p+1)}{q+1} J_{p,q+1}\numberthis \label{eq3}\\
+            \end{align*}
+            Now, we substitute \eqref{eq3} back to \eqref{eq2}, then the equation becomes 
+            \begin{align*}
+                J_{p,q}&=-\frac{(a+bz)^{p+1}\cd z^{q+1}}{a(p+1)}+\frac{p+q+2}{a(p+1)}J_{p+1,q}\\
+                &=-\frac{(a+bz)^{p+1}\cd z^{q+1}}{a(p+1)}+\frac{p+q+2}{a(p+1)}\bra{\frac1{q+1}(a+bz)^{p+1}\cd z^{q+1}-\frac{b(p+1)}{q+1} J_{p,q+1}}\\
+                &=-\frac{(a+bz)^{p+1}\cd z^{q+1}}{a(p+1)}+\frac1a\sqrbra{1+\frac{q+1}{p+1}}\cd\bra{\frac1{q+1}(a+bz)^{p+1}\cd z^{q+1}-\frac{b(p+1)}{q+1} J_{p,q+1}}\\
+                &\begin{multlined}
+                    =-\frac{(a+bz)^{p+1}\cd z^{q+1}}{a(p+1)}+\frac1a\sqrbra{\frac{z^{q+1}}{q+1}\cd(a+bz)^{p+1}-\frac{b(p+1)}{q+1}J_{p,q+1}}\\
+                    +\frac{q+1}{a(p+1)}\sqrbra{\frac{z^{q+1}}{q+1}(a+bz)^{p+1}-\frac{b(p+1)}{q+1}J_{p,q+1}}
+                \end{multlined}\\
+                &\begin{multlined}
+                    =-\frac{(a+bz)^{p+1} z^{q+1}}{a(p+1)}+\frac1{a(q+1)}(a+bz)^{p+1}z^{q+1}-\frac{b(p+1)}{a(q+1)}J_{p,q+1}\\
+                    +\frac{(a+bz)^{p+1}z^{q+1}}{a(p+1)}-\frac{b}{a}J_{p,q+1}
+                \end{multlined}\\
+                &=\frac{(a+bz)^{p+1}z^{q+1}}{a(q+1)}-\frac{b(p+1+q+1)}{a(q+1)}J_{p,q+1}\\
+                &=\frac{(a+bz)^{p+1}z^{q+1}}{a(q+1)}-b\frac{p+q+2}{a(q+1)}J_{p,q+1}
+            \end{align*}
+            which is precisely the equation required, as needed.
+
+        \end{enumerate}
+    \end{proof}
+\end{question}
+\newpage
+\begin{question}{}{q5}
+    Based on the previous question, prove that if $p+q\neq -1$, then \[\begin{aligned}
+        &J_{p,q} =\frac{(a+bz)^{p}z^{q+1}}{p+q+1}+\frac{ap}{p+q+1}J_{p-1,q}  \\
+        &J_{p,q} =\frac{(a+bz)^{p+1}z^{q}}{b(p+q+1)}-\frac{aq}{b(p+q+1)}J_{p,q-1} 
+    \end{aligned}\]
+    \qbreak
+    \begin{proof}
+        We first show the first equation. Consider \eqref{eq1}, we will use integration by parts to show the desired equation. That is, \begin{align*}
+            J_{p,q}&=\int (a+bz)^p z^q\D z\\
+            &=\int \bra{\frac{a+bz}{z}}^p z^{p+q}\D z\\
+            &=\int \bra{\frac{a+bz}{z}}^p \D\bra{\frac{z^{p+q+1}}{p+q+1}}\\
+            &=\frac{(a+bz)^p}{z^p}\cd\frac{z^{p+q+1}}{p+q+1}-\frac{1}{p+q+1}\int z^{p+q+1}\D \bra{\frac{a+bz}{z}}^p\\
+            &=\frac{(a+bz)^pz^{q+1}}{p+q+1}-\frac{1}{p+q+1}\int z^{p+q+1}\D \bra{\frac{a}{z}+b}^p\\
+            &=\frac{(a+bz)^pz^{q+1}}{p+q+1}-\frac{1}{p+q+1}\int z^{p+q+1} p \bra{\frac{a}z+b}^{p-1}\bra{-\frac{a}{z^2}}\D z\\
+            &=\frac{(a+bz)^pz^{q+1}}{p+q+1}+\frac{ap}{p+q+1}\int z^{p+q+1} \bra{\frac{a+bz}z}^{p-1}z^{-2} \D z\\
+            &=\frac{(a+bz)^pz^{q+1}}{p+q+1}+\frac{ap}{p+q+1}\int (a+bz)^{p-1} z^{p+q+1-p+1-2} \D z\\
+            &=\frac{(a+bz)^pz^{q+1}}{p+q+1}+\frac{ap}{p+q+1}\int (a+bz)^{p-1} z^{q} \D z\\
+            &=\frac{(a+bz)^pz^{q+1}}{p+q+1}+\frac{ap}{p+q+1}J_{p-1,q}\numberthis \label{eq4}\\
+        \end{align*}
+
+        \newpage
+        With \eqref{eq4} we can show the second equation. Similar to Question \ref{question:q4}, we first consider the integral form of $J_{p-1,q}$ in \eqref{eq1}, then substitute our result into \eqref{eq4}, and the ending result is the desired formula. \begin{align*}
+            J_{p-1,q}&=\int (a+bz)^{p-1} z^q\D z\\
+            &=\frac1{pb}\int z^q\D (a+bz)^p\\
+            &=\frac1{pb}(a+bz)^p z^q - \frac{q}{pb}\int (a+bz)^{p} z^{q-1} \D z\\
+            &=\frac1{pb}(a+bz)^p z^q - \frac{q}{pb}J_{p,q-1}\numberthis \label{eq5}\\
+        \end{align*}
+        Now, we substitute \eqref{eq5} back to \eqref{eq4}, then the equation becomes
+        \begin{align*}
+            J_{p,q}&=\frac{(a+bz)^pz^{q+1}}{p+q+1}+\frac{ap}{p+q+1}J_{p-1,q}\\
+            &=\frac{(a+bz)^pz^{q+1}}{p+q+1}+\frac{ap}{p+q+1}\bra{\frac1{pb}(a+bz)^p z^q - \frac{q}{pb}J_{p,q-1}}\\
+            &=\frac{(a+bz)^pz^{q+1}}{p+q+1}+\frac{a}{p+q+1}\bra{\frac1{b}(a+bz)^p z^q - \frac{q}{b}J_{p,q-1}}\\
+            &=\frac{(a+bz)^pz^{q+1}}{p+q+1}+\frac{a}{p+q+1}\frac{(a+bz)^p z^q}{b} - \frac{aq}{b(p+q+1)}J_{p,q-1}\\
+            &=\frac{bz(a+bz)^pz^{q}}{b(p+q+1)}+\frac{a(a+bz)^{p} z^q}{b(p+q+1)} - \frac{aq}{b(p+q+1)}J_{p,q-1}\\
+            &=\frac{(a+bz)^{p+1}z^{q}}{b(p+q+1)}-\frac{aq}{b(p+q+1)}J_{p,q-1}
+        \end{align*}
+        which is precisely the equation required, as needed.
+    \end{proof}
+\end{question}
+\begin{note}
+    Now with all the information obtained above, let's study an example to get some feelings. Define for $m\in \Z$ the integral \[H_m=\int\frac{x^m}{\sqrt{1-x^2}}\D x, \quad x>0.\]
+
+    In the sequel, we will first transform $H_m$ into a binomial integral. Since the binoimal integral can be computed by iteration, it in turn provides a recursive relation for $H_m,m\in\Z$. To conclude, we aim at completely (at least formally) solve the prolem of integrate $H_m$ in finite terms for any $m\in\Z$. 
+\end{note}
+\newpage
+\begin{question}{}{q6}
+    By introducing the substitution $z=x^2$, show that \[H_m=J_{-\frac{1}{2},\frac{m-1}{2}}.\]
+    \qbreak
+    \begin{proof}
+        Let $z=x^2$, then $\D z=2x\D x$. Replace $x$ with $z$ we have \[\begin{aligned}H_m=\int\frac{z^{\frac{m}{2}}}{\sqrt{1-z}}\cd\frac{\D z}{2\sqrt{z}}=\frac12\int\frac{z^{\frac{m-1}{2}}}{\sqrt{1-z}}\D z=\int\frac{z^{\frac{m-1}{2}}}{\sqrt{4-4z}}\D z=\int \bra{4-4z}^{-\frac12}\cd z^{\frac{m-1}{2}}\D z.\end{aligned}\] Let $a=4, b=-4, p=-\frac12, q=\frac{m-1}{2}$, then we have \[H_m=\int \bra{4-4z}^{-\frac12}\cd z^{\frac{m-1}{2}}\D z=J_{-\frac12,\frac{m-1}{2}}.\]
+    \end{proof}
+\end{question}
+\newpage
+\begin{question}{}{q7}
+    Prove that $\forall m>1$, \[H_m=-\frac{1}{m}x^{m-1}\sqrt{1-x^2}+\frac{m-1}{m}H_{m-2}\]
+    \qbreak
+    \begin{hint}
+        Perhaps use consequence in question 5.
+    \end{hint}
+    \begin{proof}
+        Assume $m>1.$ Let $a=4, b=-4, p=-\frac12, q=\frac{m-1}{2} $(note that here $p+q\neq-1$), $z=x^2$, then we have
+        \begin{align*}
+            H_{m}=J_{-\frac{1}{2},\frac{m-1}{2}}&=\frac{(a+bz)^{p+1}z^{q}}{b(p+q+1)}-\frac{aq}{b(p+q+1)}J_{-\frac12, \frac{(m-2)-1}{2}}\\
+            &=\frac{(4-4z)^{\frac12}z^{\frac{m-1}{2}}}{-4(\frac{m-1}{2}-\frac12+1)}-\frac{4\bra{\frac{m-1}{2}}}{-4(\frac{m-1}{2}-\frac12+1)}\int (4-4z)^{-\frac12}z^{\frac{(m-2)-1}{2}}\D z\\
+            &=\frac{2(1-x^2)^{\frac12}x^{m-1}}{-2(m-1-1+2)}-\frac{2(m-1)}{-2(m-1-1+2)}\int \frac12(1-x^2)^{-\frac12}x^{(m-2)-1}2x\D x\\
+            &=-\frac{(1-x^2)^{\frac12}x^{m-1}}{m}-\frac{m-1}{-m}\int (1-x^2)^{-\frac12}x^{m-2}\D x\\
+            &=-\frac{1}{m}x^{m-1}\sqrt{1-x^2}+\frac{m-1}{m}\int\frac{x^{m-2}}{\sqrt{1-x^2}}\D x\\
+            &=-\frac{1}{m}x^{m-1}\sqrt{1-x^2}+\frac{m-1}{m} H_{m-2}\\
+        \end{align*}
+        since we have chosen an arbitrary $m>1$, thus we have shown the equaiton holds for all $m>1$, as required. 
+    \end{proof}
+\end{question}
+\newpage
+\begin{question}{}{q8}
+    Compute $H_0,H_1$ explicitely.
+    \qbreak
+    \begin{mathnote}
+        \begin{align*}
+            H_0 &= \int \frac{1}{\sqrt{1-x^2}}\D x\\
+            &= \arcsin x + C\numberthis\label{eq6}\\
+        \end{align*}
+        Note that the equality follows by formula, which can be verified by taking the derivative of \eqref{eq6}.
+    \end{mathnote}
+    \begin{mathnote}
+        \begin{align*}
+            H_1&=\int\frac{x}{\sqrt{1-x^2}}\D x \\
+            &=\frac12\int \bra{1-x^2}^{-\frac12}\D \bra{x^2}\\
+            &=-\bra{1-x^2}^{\frac12}+C
+        \end{align*}
+    \end{mathnote}
+\end{question}
+\newpage
+\begin{question}{}{q9}
+    Based on the previous sub-question(s), conclude that $\forall m\in\Z_{\geq0}$, $H_m$ can be integrated in finite terms.
+    \qbreak
+    \begin{proof}
+        We show by strong induction. From Question \ref{question:q8}, we have shown $H_0, H_1$ can be integrated in finite terms. Let $H_0, H_1$ be the base cases. Assume $H_n$ holds when $n\in\{0, 1,\cdots,m\}$ for some $m\in\Z_{\geq0}$. Then, we want to show $H_{m+1}$ can also be integrated in finite terms. To this end, consider 2 cases.
+        
+        When $m+1\in\{0,1\}$, this is immediately covered by our base cases. 
+        
+        When $m+1\geq2$, by Question \ref{question:q7}, we have \[H_{m+1}=-\frac{1}{m+1}x^{m}\sqrt{1-x^2}+\frac{m}{m+1}H_{m-1},\] since $m>m-1\geq0$, this means by our inductive hypothesis $H_{m-1}$ can be integrated in finite terms, this gives $H_{m+1}$ can also be integrated in finite terms by our equation.
+
+        Therefore, by strong induction, we have shown $H_m$ can be integrated in finite terms for all $m\in\Z_{\geq0}$, as required.
+    \end{proof}
+\end{question}
+\newpage
+\begin{question}{}{q10}
+    Prove that $\forall m<-1$, \[\begin{aligned}H_m=\frac{x^{m+1}\sqrt{1-x^2}}{m+1}+\frac{2+m}{1+m}H_{m+2}\end{aligned}\]
+    \qbreak
+    \begin{hint}
+        Perhaps use consequence in question 4.
+    \end{hint}
+    \begin{proof}
+        Choose any $m<-1$, fix $a=4, b=-4, p=-\frac12, q=\frac{m-1}{2},$ let $z=x^2$ where $\D z=2x\D x$, then, by formula from Question \ref{question:q4} and Question \ref{question:q6} we have
+        \begin{align*}
+            H_m=J_{-\frac12, \frac{m-1}{2}}&=\frac{(a+bz)^{\frac12}z^{\frac{m+1}{2}}}{a(q+1)}-b\frac{p+q+2}{a(q+1)}J_{-\frac12,\frac{m+1}{2}}\\
+            &=\frac{(4-4z)^{\frac12}z^{\frac{m+1}{2}}}{4(\frac{m-1}{2}+1)}-(-4)\frac{-\frac12+\frac{m-1}{2}+2}{4(\frac{m-1}{2}+1)}\int (4-4z)^{-\frac12}z^{\frac{m+1}{2}}\D z\\
+            &=\frac{2(1-x^2)^{\frac12}x^{m+1}}{2(m+1)}+2\frac{-1+m-1+4}{2m-2+4}\int \frac12 (1-x^2)^{-\frac12}x^{m+1} 2x\D x\\
+            &=\frac{x^{m+1}\sqrt{1-x^2}}{m+1}+\frac{2+m}{1+m}\int \frac{x^{m+2}}{\sqrt{1-x^2}}\D x\\
+            &=\frac{x^{m+1}\sqrt{1-x^2}}{m+1}+\frac{2+m}{1+m} H_{m+2}\\
+        \end{align*}
+        which is precisely the equation required, as needed.
+    \end{proof}
+\end{question}
+\newpage
+\begin{question}{}{q11}
+    Compute $H_{-1}, H_{-2}$ explicitely.
+    \qbreak
+    \begin{claim}{}{claim1}
+        \[\int \frac{1}{\sin x}\D x = \ln\abs{\csc x - \cot x} + C\]
+        \qbreak
+        \begin{proof}[Proof of Claim \ref{claim:claim1}]
+            \begin{align*}
+                \int\frac{1}{\sin x}\D x &= \int \frac{-\cos x + 1}{\sin x (-\cos x + 1)}\D x\\
+                &=\int \frac{-\frac{\cos x}{\sin^2 x} + \frac{1}{\sin^2 x}}{\frac{1}{\sin x}-\frac{\cos x}{\sin x}}\D x\\
+                &=\int \frac{-\csc x\cot x + \csc^2 x}{\csc x - \cot x}\D x\\
+                &=\int \frac{1}{\csc x-\cot x}\D\bra{\csc x - \cot x}\\
+                &=\ln\abs{\csc x - \cot x} + C
+            \end{align*}
+        \end{proof}
+    \end{claim}
+    \begin{claim}{}{claim2}
+        \[\int\frac{1}{\sqrt{x^2-1}}\D x = \ln\abs{x+\sqrt{x^2-1}}+C\]
+        \qbreak
+        \begin{proof}[Proof of Claim \ref{claim:claim2}]
+            Let $x=\sec u$, then $\D x=\sec u\tan u\D u$, thus we have \begin{align*}
+                \int\frac{1}{\sqrt{x^2-1}}\D x &= \int \frac{1}{\sqrt{\sec^2 u-1}}\sec u \tan u\D u \\
+                &=\int \sec u \D u\numberthis\label{eq7}\\
+                &=\int \frac{1}{\cos u}\D u\\
+                &=-\int \frac{1}{\sin \bra{\frac{\pi}{2}-u}}\D \bra{\frac{\pi}{2}-u}\\
+                &=-\ln\abs{\csc \bra{\frac{\pi}{2}-u} - \cot \bra{\frac{\pi}{2}-u}} + C\\
+                &=\ln\abs{\frac{1}{x-\sqrt{x^2-1}}}+C \text{\quad By Pythagorean Theorem}\\
+                &=\ln\abs{\frac{1}{x-\sqrt{x^2-1}}\cd\frac{x+\sqrt{x^2-1}}{x+\sqrt{x^2-1}}}+C\\
+                &=\ln\abs{x+\sqrt{x^2-1}}+C
+            \end{align*}
+            If we assume $x\in(-\infty,-1)\cup(1,\infty)$, then $u=\operatorname{arcsec} x\in(0,\pi)\setminus\{\frac{\pi}{2}\}$. Hence, consider 2 cases.
+
+            When $u\in (0,\pi/2)$, we have $\tan u>0$, thus our step \eqref{eq7} is valid. When $u\in (\pi/2,\pi)$, despite $\tan u<0$, in this case $x\in(-\infty,-1)$, becasue the funciton $\frac{1}{\sqrt{x^2-1}}$ is even, the integral of this case is same as the first case, hence we are allowed to change our $\frac{\tan u}{\abs{\tan u}}$ into 1.
+
+
+        \end{proof}
+    \end{claim}
+
+    
+    \begin{mathnote}
+        \begin{align*}
+            H_{-1}&=\int \frac{x^{-1}}{\sqrt{1-x^2}}\D x\\
+            &=\int \frac{1}{x\sqrt{1-x^2}}\D x\\
+            &=\int \frac{1}{x^2\sqrt{\frac1{x^2}-1}}\D x\\
+            &=-\int \frac{1}{\sqrt{\bra{\frac1x}^2-1}}\D\bra{\frac1x}\\
+            &=-\ln\abs{\frac1x+\sqrt{\bra{\frac1x}^2-1}}+C
+        \end{align*}
+    \end{mathnote}
+    \begin{mathnote}
+        Using the substitution $x=\sin u$, and the pothagorean theorem, we have
+        \begin{align*} 
+            H_{-2}&=\int \frac{x^{-2}}{\sqrt{1-x^2}}\D x\\
+            &=\int \frac{1}{\sin^2 u \cos u}\cos u \D u\\
+            &=\int \csc ^2 u \D u\\
+            &=-\cot u + C\\
+            &=-\frac{\sqrt{1-x^2}}{x}+C
+        \end{align*}
+        
+    \end{mathnote}
+
+\end{question}
+
+
+\begin{question}{}{q12}
+    Based on the previous sub-question(s), conclude that $\forall m\in\Z_{<0}$, $H_m$ can be integrated in finite terms.
+    \qbreak
+    \begin{proof}
+        We perform a variation of strong induction on $\Z_{<0}$. That is, first let $H_{-1}, H_{-2}$ be the base cases which are proven in Question \ref{question:q11} that they can be integrated in finite terms. Now assume the statement holds for all $H_n$ where $n\in\{m,m+1,\cdots,-2,-1\}$ for some $m\in\Z_{<0}$. Then, we want to show $H_{m-1}$ can also be integrated in finite terms. To this end, consider 2 cases.
+
+        When $m-1\in\{-2,-1\}$, this is immediately covered by our base cases. 
+        
+        When $m-1\leq-3$, by Question \ref{question:q10}, we have \[H_{m-1}=\frac{x^{m}\sqrt{1-x^2}}{m}+\frac{1+m}{m}H_{m+1},\] since $m<m+1\leq-1$, this means by our inductive hypothesis $H_{m+1}$ can be integrated in finite terms, this gives $H_{m-1}$ can also be integrated in finite terms by our equation.
+
+        Therefore, by strong induction, we have shown $H_m$ can be integrated in finite terms for all $m\in\Z_{<0}$, as required.
+    \end{proof}
+\end{question}
+\begin{note}
+    \textbf{Conclusion:} We have shown that for any $m\in\Z$, $H_m$ can be integrated in finite terms. 
+\end{note}
+\end{exercise}
+
+\end{document}
