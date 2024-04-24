@@ -1,0 +1,175 @@
+\documentclass[12pt, cyan, night, 0.5in]{alittlebear}
+
+\def\course{MAT159: Analysis II}
+\def\headername{Homework 6}
+\def\name{Joseph Siu}
+% \def\email{}
+% \def\info{}
+% \def\logo{}
+
+\extractfootnote{theorem}
+
+\begin{document} 
+
+\coverpage[clsfiles/stars]
+
+\section{Exercise 1}
+
+\newn{
+    I, Joseph Siu, affirm that this assignment represents entirely my own efforts. I confirm that:
+    \begin{itemize}
+        \item I have not copied any portion of this work.
+        \item I have not allowed someone else in this course to copy this work.
+        \item This is the final version of my assignment and not a draft.
+        \item I understand the consequences of violating the University's academic integrity policies as outlined in the \textit{Code of Behavior on Academic Matters}.
+    \end{itemize}
+}
+
+\newn{
+    In this week's lecture, we have briefly discussed the first mean value theorem of Riemann integral. The objective of this exercise is to prove the second mean value theorem, which is stated as a theorem below:
+}
+\newt[Bonnet Formula\footnote{Note that when people talk about Bonnet formula, it is usually referred to the famous Gauss-Bonnet formula in differential geometry. A very concise and self-contained treatment can be found in Manfredo P. Carmo's little book ``Differential forms and applications''.}]{1}{
+    Suppose that $f,g\in\frak{R}[a,b]$, $g$ is non-decreasing on $[a,b]$, \ie, \[\forall a\leq x\leq y\leq b, g(x)\leq g(y).\] Then there exists $\xi\in[a,b]$ \st \[\int_a^b f(x)\cd g(x)\D x=g(a)\int_a^\xi f(x)\D x + g(b)\int^b_\xi f(x)\D x.\]
+}
+
+\newq{1}{
+    Prove the following identity, known as the Abel's lemma: 
+    \[\forall a_i,b_i\in\R, 1\leq i\leq n, \sum_{i=1}^n a_i b_i = A_n b_n + \sum_{i=1}^{n-1} A_i(b_i-b_{i+1}),\] where $A_k=\ds\sum_{i=1}^k a_i$, and by convention $A_0=b_{n+1}=0$.
+}
+
+\newp{[Proof of Question \ref{question:q1}]
+    We will prove this lemma by induction.
+
+    For the base case, we can see $\sum_{i=1}^1 a_ib_i=a_ib_i=A_1b_1+0=A_1b_1+\sum_{i=1}^0 A_i(b_i-b_{i+1})$.
+
+    Now assume the equality holds when $n=k$ for some $k\in\N$, we want to show that it holds when $n=k+1$.
+
+    Since we assumed the equality holds when $n=k$, consider the case when $n=k+1$, then we have \begin{align*}
+        \sum_{i=1}^{k+1} a_ib_i &= \sum_{i=1}^k a_ib_i + a_{k+1}b_{k+1} \\
+        &= A_k b_k + \sum_{i=1}^{k-1} A_i(b_i-b_{i+1}) + a_{k+1}b_{k+1} \\
+        &= A_k b_k + \sum_{i=1}^k A_i(b_i-b_{i+1}) - A_k(b_k-b_{k+1}) + a_{k+1}b_{k+1} \\
+        &= A_kb_{k+1} + a_{k+1}b_{k+1} + \sum_{i=1}^k A_i(b_i-b_{i+1}) \\
+        &= A_{k+1}b_{k+1} + \sum_{i=1}^k A_i(b_i-b_{i+1}).
+    \end{align*}
+
+    Hence, since the case when $n=k+1$ holds, by induction, the equality holds for all $n\in\N$.
+}
+
+\newq{2}{
+    Following the notation in the previous sub-question. Assume furthermore that 
+    \begin{itemize}
+        \item There exists real numbers $m\leq M$ \st $m\leq A_k\leq M$ for any $k=1,2,\ldots,n,$ and 
+        \item $b_k\geq 0, b_k\geq b_{k+1}$, for any $k=1,2,\ldots,n$.
+    \end{itemize}
+
+    Prove that \[mb_1\leq \sum_{k=1}^n a_k b_k \leq M b_1.\]
+}
+
+\newp{[Proof of Question \ref{question:q2}]
+    We will prove this inequality by induction.
+
+    For the base case, we can see $m\leq A_1\leq M$, hence $mb_1\leq A_1b_1\leq Mb_1$ since $b_1\geq0$.
+    
+    Now assume the inequality holds when $n=k$ for some $k\in\N$, we want to show that it holds when $n=k+1$.
+
+    Based on the equality from the previous question, we can see that \begin{align*}
+        \sum_{i=1}^{k+1} a_ib_i &= A_{k+1}b_{k+1} + \sum_{i=1}^k A_i(b_i-b_{i+1}) \\
+        &\geq A_{k+1}b_{k+1} + \sum_{i=1}^k m(b_i-b_{i+1}) \\
+        &= A_{k+1}b_{k+1} + m(b_1-b_{k+1}) \\
+        &\geq mb_{k+1} + m(b_1-b_{k+1}) \\
+        &\geq mb_1.
+    \end{align*}
+
+    Similarly, we can see that \begin{align*}
+        \sum_{i=1}^{k+1} a_ib_i &= A_{k+1}b_{k+1} + \sum_{i=1}^k A_i(b_i-b_{i+1}) \\
+        &\leq A_{k+1}b_{k+1} + \sum_{i=1}^k M(b_i-b_{i+1}) \\
+        &= A_{k+1}b_{k+1} + M(b_1-b_{k+1}) \\
+        &\leq Mb_{k+1} + M(b_1-b_{k+1}) \\
+        &\leq Mb_1.
+    \end{align*}
+
+    Hence, since we have shown that \(mb_1\leq \sum_{k=1}^n a_k b_k \leq M b_1\) for $n=k+1$, by induction, the inequality holds for all $n\in\N$.
+}
+
+\newq{3}{
+    Let $f,g\in\frak{R}[a,b]$, $g\geq0$ and is non-increasing on $[a,b]$. Prove that $\exists \eta\in[a,b]$\st \[\int_a^b f(x)\cd g(x)\D x = g(a)\int_a^\eta f(x)\D x.\]
+    \qbreak
+    \newh{
+        Let $F(x)=\int_a^x f(x)\D x$ and $\Ga\in\Omega[a,b]$ be a partition of $[a,b]$, denote by $\Ga: a=x_0<x_1<\cdots<x_{n-1}<x_n=b$. Now let \[a_i=F(x_i)-F(x_{i-1}), \quad b_i=g(x_{i-1})\] and apply consequence from the previous sub-question.
+    }
+}
+
+\newp{[Proof of Question \ref{question:q3}]
+
+    Since $f\in\frak{R}[a,b]$, by definition $$\forall \ep>0.\exists \de>0.\forall (\Ga,\et)\in\Om^*[a,b].\norm{\Ga}<\de\implies \abs{\int_a^b f(t)\D t-\sum_{i=1}^n f(\et_i)\De \et_i}<\ep.$$
+    
+    Fix $\ep>0$, let $\de>0$ be such $\de$, let $(\Ga,\et)\in\Om^*[a,b]$ be arbitrary such that $\norm{\Ga}<\de$. Let $n$ be the number of partitions of $\Ga$.
+
+    Since $f\in\frak{R}[a,b]$, by lecture this implies $f$ is bounded on $[a,b]$, so we can we let $$m=\inf\curbra{\ds\sum_{i=1}^k f(\et_i)\De \et_i\mid k\in\{0,1,2,\ldots,n\}},$$ and $$M=\sup\curbra{\ds\sum_{i=1}^k f(\et_i)\De \et_i\mid k\in\{0,1,2,\ldots,n\}},$$ then we have $m\leq \ds\sum_{i=1}^k f(\et_i)\De \et_i\leq M$ for any $k\in\{1,2,\ldots,n\}$.
+
+    For $k\in\{1,2,\ldots,n + 1\}$, let $a_k=f(\et_{k-1})\De \et_{k-1}$ and $b_k=g(\et_{k-1})$. By Question 2 since $g\geq0$ and is non-increasing on $[a,b]$, and $m\leq \ds\sum_{i=1}^k f(\et_{i-1})\De \et_{i-1}\leq M$. These imply that $$mg(a)\leq\ds\sum_{k=1}^{n+1} f(\et_{k-1})\De \et_{k-1} g(\et_{k-1})\leq Mg(a),$$ which is equivalent to $$mg(a)\leq\ds\sum_{k=0}^{n} f(\et_{k}) g(\et_{k})\De \et_{k}\leq Mg(a).$$
+
+    Let $F(x)=\int_a^x f(t)\D t$. Now, if we let $\norm{\Ga}\to0$, that is, take the limit of $\norm{\Ga}$ at all sides of the inequality to 0, then we have \[g(a)\inf_{x\in[a,b]} F(x)\leq\int_a^b f(t)g(t)\D t\leq g(a)\sup_{x\in[a,b]} F(x).\]
+
+    \begin{proofcases}
+        \case $g(a)=0$. 
+        \indenv{
+            Then since $g$ is non-increasing and $g\geq0$, we can see that $g(t)=0$ for all $t\in[a,b]$, hence $0=\int_a^b f(t)g(t)\D t$ and $0\leq \int_a^b f(t)g(t)\D t\leq 0$, the inequality holds if we choose any $\eta\in[a,b]$, for example, $\eta=a$.
+
+            In Case 1 we have shown the existence of $\et$.
+        }
+        \case $g(a)\neq0$.
+        \indenv{
+            Since $g\geq 0$ and is non-increasing, this implies $g(a)>0$. Hence, by dividing the whole inequality by $g(a)$ (which is allowed), we get \[\inf_{x\in[a,b]} F(x)\leq\frac{\int_a^b f(t)g(t)\D t}{g(a)}\leq\sup_{x\in[a,b]} F(x).\] By lecture, we have that $F$ is continuous, and since $[a,b]$ is compact, this implies $F([a,b])$ is also compact thus $\inf_{x\in[a,b]} F(x)$ and $\sup_{x\in[a,b]} F(x)$ are both achievable, say $F(\et_1)=\inf_{x\in[a,b]} F(x)$ and $F(\et_2)=\sup_{x\in[a,b]} F(x)$ for some $\et_1,\et_2\in[a,b]$, w.l.o.g. we assume $\et_1\leq\et_2$. Hence, by intermediate value theorem, we have that there exists $\eta\in[\et_1,\et_2]\subseteq[a,b]$ such that $F(\et)=\frac{\int_a^b f(t)g(t)\D t}{g(a)}$, equivalently this shows that there exists $\eta\in[a,b]$ such that $$\int_a^b f(t)g(t)\D t=g(a)\int_a^\eta f(t)\D t.$$ 
+
+            In Case 2 we have shown the existence of $\et$.
+            
+        }
+
+    \end{proofcases}
+
+    Since for both cases we have constructed such $\eta$, this completes our proof.
+
+
+
+    % Let $F(x)=\int_a^x f(t)\D t$ (both $x,t\in[a,b]$) and $\Ga\in\Omega[a,b]$ be a partition of $[a,b]$, denote by $\Ga: a=x_0<x_1<\cdots<x_{n-1}<x_n=b$. Now let \[a_i=F(x_i)-F(x_{i-1}), \quad b_i=g(x_{i-1}).\]
+
+    % We can see that $A_k=F(x_k)-F(x_0)=F(x_k)$, and $b_k=g(x_{k-1})\geq0$ and $b_k\geq b_{k+1}$, now we have 
+    % \begin{align*}
+    %     \int_a^b f(t)\cd g(t)\D t &= \sum_{i=1}^n a_i b_i, \\
+    %     \alt{let $m=\min\{F(x_i)\mid 1\leq i\leq n\}$ and $M=\max\{F(x_i)\mid 1\leq i\leq n\}$, then we have $m\leq A_k\leq M$ for any $k=1,2,\ldots,n$, by Question \ref{question:q2}:}
+    %     mb_1\leq \sum_{k=1}^n a_k b_k &\leq M b_1, \\
+    %     \min\{F(x_i)\mid 1\leq i\leq n\}\cd g(a) &\leq \int_a^b f(t)\cd g(t)\D t \leq \max\{F(x_i)\mid 1\leq i\leq n\}\cd g(a).\\
+    %     \alt{\begin{proofcases}
+    %         \case If $g(a)=0$. Then since $g$ is non-increasing and $g\geq0$, we can see that $g(t)=0$ for all $t\in[a,b]$, hence $\int_a^b f(t)\cd g(t)\D t=0=g(a)\int_a^\eta f(t)\D t$ for any $\eta\in[a,b]$.
+    %         \case If $g(a)\neq0$, that is, when $g(a)>0$. Then, we have:
+    %     \end{proofcases}}
+    %     \min\{F(x_i)\mid 1\leq i\leq n\} &\leq \frac{\int_a^b f(t)\cd g(t)\D t}{g(a)} \leq \max\{F(x_i)\mid 1\leq i\leq n\}.\\
+    %     \alt{Now, since by lecture $F$ is continuous, by intermediate value theorem we have that}
+    %     \exists \eta\in[a,b] \st \frac{\int_a^b f(t)\cd g(t)\D t}{g(a)}&=F(\eta), \\
+    %     \alt{equivalently this shows}
+    %     \exists \eta\in[a,b] \st \int_a^b f(t)\cd g(t)\D t&=g(a)\int_a^\eta f(t)\D t.\\
+    %     \alt{Since we have constructed such $\eta$ in both cases, this completes our proof.}
+    % \end{align*}
+}
+
+\newq{4}{
+    Based on the previous sub-question, prove the second mean value theorem (\ie the Bonnet formula). 
+}
+
+\newp{[Proof of Question \ref{question:q4}]
+
+    Suppose that $f,g\in\frak{R}[a,b]$, $g$ is non-decreasing on $[a,b]$, \ie, \[\forall a\leq x\leq y\leq b, g(x)\leq g(y).\] 
+
+    Let $h(x)=g(b)-g(x)$, then $h\geq0$ and $h$ is non-increasing on $[a,b]$. By Question \ref{question:q3}, we have there exists $\xi\in[a,b]$ such that
+
+    \begin{align*}
+        \int_a^b f(x)\cd g(x)\D x&=- \int_a^b (g(b)-g(x))f(x)\D x + g(b) \int_a^b f(x)\D x\\
+        &= - (g(b)-g(a))\int_a^\xi f(x)\D x + g(b)\int^b_a f(x)\D x, \\
+        \alt{By lecture we have}
+        &= g(a)\int_a^\xi f(x)\D x + g(b)\int^b_\xi f(x)\D x.
+        \alt{This completes our proof.}
+    \end{align*}
+}
+
+\end{document} 

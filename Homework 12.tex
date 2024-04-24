@@ -1,0 +1,207 @@
+\documentclass[11pt, cyan, night, 0.5in]{LatexTemplate/hw}
+
+\def\course{MAT159: Analysis II}
+\def\headername{Homework 12}
+\def\name{Joseph Siu}
+\def\logo{\clsfiles/qunwang}
+
+\usepackage{dsfont}
+
+
+\begin{document}
+
+\coverpage[\clsfiles/sao]
+
+In this week's lecture, we have discussed the expansion of smooth functions by Taylor series. In this exercise, we deal with some extremely pathetic situations, to demonstrate the problems one might encounter in this process. This also suggests the importance of the following procedure:
+\begin{enumerate}
+    \item Find the formal power series;
+    \item Find the radius of convergence;
+    \item Show that the remainder goes to 0.
+\end{enumerate}
+Should not be ignored/skipped.
+
+\newr{
+    Part of the computation involved in the homework might also need improper integral, which will be introduced on 08 April.
+}
+
+\section*{Exercise 1}
+
+\newq{1e1}{
+    Consider the function $f:\R\to\R$:\[f(x)=\mathds{1}_{\{x\ne0\}}e^{-\frac{1}{x^2}}.\] Prove that the function is infinitely differentiable at all points in $\R$.
+}
+
+\newp{
+    Here $f(x)$ is equivalent to the piece-wise function $f(x)=\begin{cases}
+        e^{-\frac{1}{x^2}} & x\ne0\\
+        0 & x=0
+    \end{cases}$. 
+
+    We will prove the cases $x\ne 0$ and $x=0$ separately.
+
+    First consider $x\ne0$, then for any $n\in\N\cup\{0\}$, we can claim that $f^{(n)}(x)$ is in the form of $P(x)e^{-\frac{1}{x^2}}$ where $P(x)$ is a rational function that is only undefined at $x=0$. Indeed, we can prove this by induction. 
+
+    Define the predicate $P(n)=``$for $x\ne0$, $f^{(n)}(x)$ is in the form of $P(x)e^{-\frac{1}{x^2}}$ where $P(x)$ is a rational function that is only undefined at $x=0$$"$.''
+
+    Here $f^{(0)}(x)=f(x)$ for all $x$.
+
+    Base Cases:
+    \indenv{
+        \begin{proofcases}
+            \case $n=0$: then $P(0)$ is true since 1 is a rational function.
+            \case $n=1$: then $f'(x)=\frac{2}{x^3}e^{-\frac{1}{x^2}}$ which is in the form of $P(x)e^{-\frac{1}{x^2}}$ where $P(x)=\frac{2}{x^3}$, and $P(x)$ is undefined at $x=0$.
+        \end{proofcases}
+    }
+
+    For the base cases, $P(0)$ and $P(1)$ are true.
+
+    Inductive Step:
+    \indenv{
+        Let $n\in\N$ be arbitrary;
+        \indenv{
+            Assume $P(n)$ holds.
+
+            Then $f^{(n)}(x)=P(x)e^{-\frac{1}{x^2}}$ for all $x\ne0$, and $P(x)$ is a rational function that is only undefined at $x=0$.
+
+            Then $f^{(n+1)}(x)=\bra{P(x)e^{-\frac{1}{x^2}}}'=P'(x)e^{-\frac{1}{x^2}}+2\frac{P(x)}{x^3}e^{-\frac{1}{x^2}}=\bra{P'(x)+2\frac{P(x)}{x^3}}e^{-\frac{1}{x^2}}=\bra{\frac{x^2 P'(x) + 2 P(x)}{x^2}}e^{-\frac{1}{x^2}}$.
+
+            We can see $\bra{\frac{x^2 P'(x) + 2 P(x)}{x^2}}$ is also a rational function since $P'(x)$ and $P(x)$ are rational. Moreover it is also undefined only at $x=0$ since $P(x)$ is undefined at $x=0$ which also implies $P'(x)$ is undefined at $x=0$ by quotient rule.
+
+            Therefore $P(n+1)$ holds.
+        }
+    }
+
+    By induction, $P(n)$ holds for all $n\in\N\cup\{0\}$.
+
+    Hence, since the derivative of $f^{(n)}$ exists for all $n\in\N\cup\{0\}$, we conclude it is infinitely differentiable at all points in $\R\setminus\{0\}$.
+
+    Finally, let's consider the case when $x=0$.
+
+    It suffices to show that the both sides limits are equal to 0 for all $n\in\N\cup\{0\}$.
+
+    First, as we have proven that $f^{(n)}(x)=P(x)e^{-\frac{1}{x^2}}$ for $x\ne0$, consider $\lim_{x\to0}\frac{f^{(n)}(x) - f^{(n)}(0)}{x}=\lim_{x\to0}\frac{P(x)e^{-\frac{1}{x^2}}}{x}=\lim_{x\to0}\frac{P(x)}{xe^{\frac{1}{x^2}}}=\lim_{y\to\infty}\frac{yP(\frac{1}{y})}{e^{y^2}}=0$ as $e^{y^2}\ge e^y$ for large $y$ and exponential grows faster than polynomial / rational.
+
+    Therefore, as the both sides limits and $f^{(n)}(0)$ are all 0 for all $n\in\N\cup\{0\}$, we conclude that $f$ is infinitely differentiable at $x=0$.
+
+    Combining the 2 cases we have proven, we conclude that $f$ is infinitely differentiable at all points in $\R$.
+}
+
+\newq{2e1}{
+    Find the formal Taylor series of $f$ centered at $0$.
+}
+
+\newm{
+    Since $f^{(n)}(0)=0$ for all $n\in\N\cup\{0\}$, the Taylor series of $f$ centered at 0 is constant series 0.
+
+    More explicitely, $\sum_{n=0}^{\infty}\frac{f^{(n)}(0)}{n!}x^n=0=\sum_{n=0}^{\infty}\frac{0}{n!}x^n=0$.
+}
+
+\newq{3e1}{
+    On which point(s) does the Taylor series converge to $f$? Explain your answer.
+}
+
+\newm{
+    The only point where the Taylor series converges to $f$ is $x=0$.
+
+    First when $x=0$ we can see both $f(0)=0$ and the series is 0.
+
+    When $x\ne 0$, then $e^{-\frac{1}{x^2}}>0$, which also not equal to 0.
+}
+
+\np
+\section*{Exercise 2}
+
+\newq{1e2}{
+    Compute the following improper integral: \[\int_0^{\infty}e^{-t}t^n\D t, n\in\N.\]
+}
+
+\newm{
+    By definition, $\int_0^{\infty}e^{-t}t^n\D t=\lim_{a\to\infty}\int_0^a e^{-t}t^n\D t$.
+
+    Let's first consider the case when $n=3$, then we generalize for all $n$.
+
+    To compute $\lim_{a\to\infty}\int_0^a e^{-t}t^3\D t$, first observe that $\DD{}{t}-e^{-t}\bra{t^3+3t^2+6t+6}=e^{-t}\bra{t^3+3t^2+6t+6} - e^{-t}\bra{3t^2+6t+6}=e^{-t}t^3$ which is our integrand.
+
+    And $\lim_{a\to\infty}\int_0^a e^{-t}t^3\D t=\lim_{a\to\infty}\sqrbra{-e^{-t}\bra{t^3+3t^2+6t+6}}\bigg|_0^a=\lim_{a\to\infty}\bra{e^{-a}\bra{a^3+3a^2+6a+6}} + 6=6$ since exponentials grows faster than polynomials.
+
+    Here observe 6 is actually representing $3!$.
+
+    Now with these observations, we can generalize for all $n$.
+
+    Consider the finite summation $\sum_{k=0}^n \frac{n!}{k!} t^k$ where $0!:=1$.
+
+    Then we can see that $\DD{}{t}-e^{-t}\bra{\sum_{k=0}^n \frac{n!}{k!} x^k}=e^{-t}\bra{\sum_{k=0}^n \frac{n!}{k!} x^k} - e^{-t}\bra{\sum_{k=1}^n \frac{n!}{(k-1)!} x^{k-1}}=e^{-t}\bra{\sum_{k=0}^n \frac{n!}{k!} x^k - \sum_{k=0}^{n-1} \frac{n!}{k!} x^{k}}=e^{-t}x^n$ which is precisely our integrand.
+
+    So, $\int_0^\infty e^{-t}t^n\D t = \lim_{a\to\infty}\sqrbra{-e^{-t}\bra{\sum_{k=0}^n \frac{n!}{k!} x^k}}\bigg|_0^a=\lim_{a\to\infty}-\frac{\sum_{k=0}^n \frac{n!}{k!} x^k}{e^t} + n! = n!$ as polynomial grows slower than exponential.
+}
+
+\newq{2e2}{
+    Define a function $f:\R\to\R$: \[f(x)=\int_0^{\infty}e^{-t}\cos\bra{n^2tx}\D t\] Prove that the function is infinitely differentiable at all points in $\R$.
+}
+
+\newp{
+    Ramanujan went into my dream so I found out that $\frac{e^{-t}\bra{xn^2\sin(xn^2t)-\cos(xn^2t)}}{x^2n^4+1}$ is the anti-derivative of $e^{-t}\cos(n^2xt)$, where we treat $n$ and $x$ as constants with respect to $t$.
+
+    Indeed, differentiate this fraction and we have \begin{align*}
+        &\DD{}{t}\frac{e^{-t}\bra{xn^2\sin(xn^2t)-\cos(xn^2t)}}{x^2n^4+1} \\
+        &= \frac{-e^{-t}\bra{xn^2\sin(xn^2t)-\cos(xn^2t)}(x^2n^4+1)+e^{-t}\bra{x^2n^4\cos(xn^2t)+xn^2\sin(xn^2t)}(x^2n^4+1)}{(x^2n^4+1)^2}\\
+        &=\frac{-e^{-t}\bra{xn^2\sin(xn^2t)-\cos(xn^2t)}+e^{-t}\bra{x^2n^4\cos(xn^2t)+xn^2\sin(xn^2t)}}{x^2n^4+1}\\
+        &=\frac{e^{-t}\bra{x^2n^4\cos(xn^2t)+xn^2\sin(xn^2t)-xn^2\sin(xn^2t)+\cos(xn^2t)}}{x^2n^4+1}\\
+        &=\frac{e^{-t}\bra{x^2n^4\cos(xn^2t)+\cos(xn^2t)}}{x^2n^4+1}\\
+        &=\frac{e^{-t}\bra{(x^2n^4+1)\cos(xn^2t)}}{x^2n^4+1}\\
+        &=e^{-t}\cos(xn^2t)
+    \end{align*}
+
+    Apparently this anti-derivative is not needed.
+
+    Let's solve the integral by integration by parts:
+
+    \begin{align*}
+        & \int_0^\infty e^{-t}\cos(n^2tx)\D t \\
+        &=\int_0^\infty \cos(n^2tx)\D -e^{-t}\\
+        &=-e^{-t}\cos(n^2tx)\bigg|_0^\infty + \int_0^\infty e^{-t}n^2x(-\sin(n^2tx))\D t\\
+        &=1 - n^2x\int_0^\infty e^{-t} \sin(n^2tx)\D t\\
+        &=1  - n^2x\int_0^\infty \sin(n^2tx)\D -e^{-t}\\
+        &=1 - n^2\bra{-e^{-t}\sin(n^2tx)\bigg|_0^\infty + \int_0^|infty e^{-t}\cos(n^2tx)n^2x\D t}\\
+        &= 1 - n^4 x^2\int_0^\infty e^{-t}\cos(n^2tx)\D t\\
+        \int_0^\infty e^{-t}\cos(n^2tx)\D t &= \frac{1}{x^2n^4+1}
+    \end{align*}
+
+    So we have that $f(x)=\frac{1}{x^2n^4+1}$, then by quotient rule the derivative always exists for all $n\in\N$ and $x\in\R$ for $f^{(n)}(x)$. Here $x^2n^4+1\ge1$ and the denomonator of $f^{(n)}(x)$ will always be a power of $x^2n^4+1$ so it is well defined for all $n\in\N$ and $x\in\R$.
+
+}
+
+\newq{3e2}{
+    Find the formal Taylor series of $f$ centered at $0$.
+}
+
+\newm{
+    Since $f$ is infinitely differentiable, and $f(x)=\frac{1}{x^2n^4+1}$, we have the taylor series centered at 0 as: \[f(x)=\sum_{n=0}^\infty\frac{f^{(n)}(0)}{n!}x^n\]
+
+    Let $f(x)=\frac{1}{x^2i^4+1}$, by repeated substitution we can see that 
+
+    \fig{img/2024-04-12-18-24-08.png}
+
+    And,
+
+    \fig{img/2024-04-12-18-24-32.png}
+
+    So we have \[f(x)=\sum_{\substack{n=0\\\T{$n$ is even}}}^\infty\frac{(-1)^{n/2}\cd n!\cd i^{2n}}{n!}x^{n}\]
+
+    which gives \[f(x)=\sum_{\substack{n=0\\\T{$n$ is even}}}^\infty (-1)^{n/2} i^{2n} x^{n}\]
+
+    This is equivalent to \[f(x)=\sum_{n=0}^\infty (-1)^n i^{4n} x^{2n}\]
+
+    Or we can simply plug into the maclaurin series of $\frac{1}{1-x}$ to get our $f$, that is, since $\frac{1}{1-x}=\sum_{n=0}^\infty x^n$, we have $f(x)=\frac{1}{x^2i^4+1}=\sum_{n=0}^\infty\bra{-x^2i^4}^n=\sum_{n=0}^\infty (-1)^n i^{4n} x^{2n}$, which is precisely our above formula.
+}
+
+\newq{4e2}{
+    Find the radius of convergence of the formal Taylor series centered at 0.
+}
+
+\newm{
+    The radius of convergence $R=\lim_{n\to\infty}\frac{(-1)^{\frac{n}{2}}i^{2n}}{(-1)^{\frac{n}{2}+1}i^{2n+2}}=-\lim_{n\to\infty}\frac{1}{i^{2}}$, thus $R=\frac{1}{i^{2}}$, and so the series converge only on $(-\frac{1}{i^{2}}, \frac{1}{i^{2}})$.
+
+    Note that when $i=0$, the radius of convergence is $\infty$, this can be checked by plug in $i=0$ into the very beginning definite integral.
+}
+
+\end{document}

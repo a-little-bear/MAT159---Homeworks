@@ -1,0 +1,147 @@
+\documentclass[11pt, cyan, night, 0.5in]{LatexTemplate/hw}
+
+
+\def\course{MAT159: Analysis II}
+\def\headername{Homework 10}
+\def\name{Joseph Siu}
+\def\logo{\clsfiles/qunwang}
+
+\usepackage{dsfont}
+
+
+\begin{document}
+
+\coverpage[\clsfiles/sao]
+
+\section*{Exercise 1}
+
+In this week's lecture, we have discussed the three concepts of convergences. Let $\{f_n\}_{n\in\N}$ be a sequence of real-valued functions definedon $D\subseteq \R$, and $f: D\subseteq \R\to\R$.
+
+\newd[Quasi Uniform Convergence]{1}{
+    We say that $f_n$ converges to $f$ quasi- uniformly on $D$, if \begin{itemize}
+        \item $f_n$ converges to $f$ point-wisely, and,
+        \item $\forall \ep>0, \forall N_0\in\N$, there exists 
+        \begin{itemize}
+            \item a countable open cover $\bigcup_{i\in\N}(a_i,b_i)\supseteq D$, and 
+            \item a sub-sequence of indices $\{n_i\}_{i\in\N}, \forall i\in\N, n_i>N_0$,
+        \end{itemize}
+        such that \[\forall x\in(a_i,b_i)\cap D, \quad |f(x)-f_{n_i}(x)|<\ep.\]
+    \end{itemize}
+}
+
+\newq{1e1}{
+    Consider the function sequence $f_n, f:\sqrbra{-\frac{\pi}{2}, \frac{\pi}{2}}\to\R$ given by $f_n(x)=\cos^n x$ and $f(x)=\mathds{1}_{\{x=0\}}$. Prove that $f_n\to f$ point-wisely on $\sqrbra{-\frac{\pi}{2},\frac{\pi}{2}}$ but the convergence is not quasi-uniform.
+}
+
+\newp{
+    For $x\in\sqrbra{-\frac{\pi}{2},\frac{\pi}{2}}\setminus\{0\}$, we have $\cos^x<1$ thus $\lim_{n\to\infty}\cos^n(x)=0$. For $x=0$, since $\cos0=1$, thus $\lim_{n\to\infty}\cos^n(0)=1$. Since the limit of $f_n$ is precisely the indicator function $\mathds{1}_{\{x=0\}}$, we conclude that $f_n\to f$ point-wisely on $\sqrbra{-\frac{\pi}{2},\frac{\pi}{2}}$.
+
+    Howover, for $0<\ep<1$ and arbitrary $n\in\N$, since $f_n$ is continuous and achieves $0$ and $1$, by intermediate value theorem we can always choose $x'\in\sqrbra{-\frac{\pi}{2},\frac{\pi}{2}}\setminus\{0\}$ such that $f_n(x')\in(\ep, 1)$ and so $f_n(x')>\ep$. Combining with the fact that $f(x')=0$, we have $|f(x')-f_n(x')|>\ep$. Thus, the convergence is not quasi-uniform.
+}
+
+\newq{2e1}{
+    Consider the function sequence $f_n, f:(0,1)\to\R$ given by $f_n(x)=\frac{nx}{1+n^2x^2}$ and $f(x)=0$. Prove that $f_n$ converges to $f$ quasi-uniformly on $(0,1)$ but the convergence is not uniform.
+}
+
+\newl{1}{
+    The sequence of functions $\{f_n\}_{n\in\N}$ converges on interval $D$ uniformly if and only if \[\lim_{n\to\infty}\curbra{\sup_{x\in D} r_n(x)}=0,\] where $r_n(x)=|f_n(x)-f(x)|$ for $n\in\N$, for all $x\in D$.
+}
+
+\newp{[Proof of Lemma 1]\hfill
+
+    For the forward direction, assume that $f_n\rightrightarrows f$ on $D$. Then by definition for any $\ep>0$, there exists $N_0\in\N$ such that for all $x\in D$ and $n>N_0$, we have $|f_n(x)-f(x)|<\ep$. Thus, $\sup_{x\in D}r_n(x)<\ep$ for all $n>N_0$, which shows that $\lim_{n\to\infty}\curbra{\sup_{x\in D} r_n(x)}=0$.
+
+    For the reverse direction, assume that $\lim_{n\to\infty}\curbra{\sup_{x\in D} r_n(x)}=0$. Then by definition of limit, for any $\ep>0$, there exists $N_0\in\N$ such that for all $n>N_0$, we have $\sup_{x\in D}r_n(x)<\ep$. Thus by definition of supremum we have $|f_n(x)-f(x)|<\ep$ for all $x\in D$ and $n>N_0$, which shows that $f_n\rightrightarrows f$ on $D$.
+}
+
+\newp{[Proof of Question 2]
+    We first show it is uniform convergent on $(\al, 1)$ for all $\al>0$.
+
+    First clearly it is point-wise convergent since $\lim_{n\to\infty}\frac{nx}{1+n^2x^2}=0$ for all $x\in(0,1)$.
+    
+    So consider the derivatie of $f_n(x)$:
+    \begin{align*}
+        f_n'(x) &= \frac{2n(1-n^2x^2)}{(1+n^2x^2)^2},\\
+        \alt{by archimedean property, choose $N_0\in\N$ such that $\frac{1}{N_0}<\al$, then $x\ge\al>\frac{1}{N_0}$, so we have $x=\frac1{N_0}+\be$ for some $\be>0$, then,}
+        n^2x^2&=n^2\cd\bra{\frac1{N_0}+\be}^2\\
+        &=\frac{n^2}{N_0^2}+\frac{2n^2\be}{N_0}+n^2\be^2\\
+        \alt{when $n>N_0$, we have}
+        &>1\\
+        \alt{so since the denominator of $f_n'(x)$ is positive and $2n$ is positive, this implies}
+        f_n'(x) &= \frac{2n(1-n^2x^2)}{(1+n^2x^2)^2}\\
+        &< 0
+    \end{align*}
+
+    Hence, by choosing such $N_0$, then for all $n>N_0$, we have $f_n(x)$ is decreasing on $(\al, 1)$, and so the supremum of $f_n(x)$ on $(\al, 1)$ is at $x=\al$, namely $\sup_{x\in(\al, 1)}|f_n(x)-0|=f_n(\al)$, since $x=\al$ is point-wisely converging to 0, we conclude that $\lim_{n\to\infty}\sup_{x\in(\al, 1)}|f_n(x)-0|=0$, by Lemma 1, we have $f_n\rightrightarrows 0$ on $(\al, 1)$.
+
+    Therefore, for each element in the open cover $\bigcup_{i\in\N}(\frac{1}{i+1}, 1)$, we can find $N_i\in\N$ such that $f_n\rightrightarrows 0$ on $(\frac{1}{i+1}, 1)$, and so the convergence is quasi-uniform.
+
+    Lastly, it is not uniform convergence on $(0,1)$ since $f_n(\frac{1}{n})=1$ for all $n\in\N$, which gives the supremum of $r_n$ is 1 for all $n\in\N$ thus not converging to 0, by Lemma 1 it is not uniform convergence on $(0,1)$.
+}
+
+\newq{3e1}{
+    Prove that if $f_n$ converges to $f$ uniformly on $D$, then it converges to $f$ quasi-uniformly on $D$.
+}
+
+\newp{
+    Assume $f_n\rightrightarrows f$ on $D$. Then by Lemma 1, $\lim_{n\to\infty} \curbra{\sup_{x\in D}r_n(x)}=0$, which implies there exists $N_0\in\N$ such that for all $n>N_0$, for all $x\in D$, we have $|f_n(x)-f(x)|<\sup_{x'\in D}|f_n(x')-f(x')|<\ep$. Thus, for arbitrary $N_0'\in\N$, by choosing the open cover $\R$ and the sub-sequence $\{n_i\}_{i\in\N}, n_i>\max\{N_0, N_0'\}$, we have the convergence is quasi-uniform.
+}
+
+\newr{
+    So far, we have seen that the quasi-uniform convergence is midway between point-wise convergence and the uniform convergence.
+    \begin{itemize}
+        \item It is stronger than the point-wise convergence; (according to the definition and Q1)
+        \item It is weaker than the uniform convergence. (according to Q2 and Q3)
+    \end{itemize}
+}
+
+\newq{4e1}{
+    Let $D$ be an interval (open or closed or clopen) and the continuous function sequence $f_n$ converges to $f$ point-wisely on $D$. Prove that $f$ is continuous on $D$ if and only if $f_n$ converges to quasi-uniformly.
+}
+
+\newp{
+    We first show the backward implication. Let $\ep>0$ be arbitrary, assume it is quasi-uniformly convergence, then let $x\in D$ be arbitrary, and let $x\in(a,b)$ be the element of the open cover that covers $x$, and fix $n_i$ such that $|f(x)-f_{n_i}(x)|<\frac{\ep}{4}$. Now, since $f_{n_{i}}$ is continuous, let $(a',b')$ be an open neighbor of $x$ such that $\sup_{x',y'\in(a',b')}|f_{n_i}(x')-f_{n_i}(y')|<\frac{\ep}{4}$. Then, consider the intersection $(a,b)\cap(a',b')$, by triangle inequality, we have for all $x',y'\in(a,b)\cap(a',b')$: $|f(x')-f(y')|\le|f(x')-f_{n_i}(x')|+|f_{n_i}(x')-f_{n_i}(y')|+|f_{n_i}(y')-f(y')|<\frac{\ep}{4}+\frac{\ep}{4}+\frac{\ep}{4}<\ep$. By definition this shows $f$ is continuous at $x$, since $x$ is arbitrary, we conclude $f$ is continuous on $D$.
+
+    Now for the forward implication, assume $f$ is continuous on $D$ and $f_n$ is continuous for all $n\in\N$ and is point-wisely converging to $f$. 
+
+    Let $x\in D$ be arbitrary, since $D$ is an interval, it is $F_\si$, thus $D=\bigcup_{i\in\N}[a_i,b_i]$ for some $a_i,b_i\in\R$ (we may extend finite such intervals to countably infinite). Let $i\in\N$ be arbitrary, let $x\in[a_i,b_i]$ be arbitrary, since $f$ and $f_n$ are both continuous at $x$, let $\ep>0$ be arbitrary, then since $f_n\to f$ at $x$, fix $N_0\in\N$ such that for all $n>N_0$, we have $|f(x)-f_n(x)|<\frac{\ep}{4}$. Since $f$ is continuous, for some open neighborhood $(\al,\be)$ of $x$, we have $|f(x)-f(y)|<\frac{\ep}{4}$ for all $y\in(\al,\be)$. Moreover, since $f_{N_0}$ is continuous, for some open neighborhood $(\al',\be')$ of $x$, we have $|f_{N_0}(x)-f_{N_0}(y)|<\frac{\ep}{4}$. Finally, combining all these we get, for all $y\in(\al,\be)\cap(\al',\be')$, we have $|f(y)-f_{N_0}(y)|<|f(y)-f(x)|+|f(x)-f_{N_0}(x)|+|f_{N_0}(x)-f_{N_0}(y)|<\ep$, let $(\al,\be)\cap(\al',\be')$ be the open set that covers $x$, we do this for all $x\in[a_i,b_i]$, then by borel lebesgue there exists a finite subcover of $[a_i,b_i]$, moreover since there are countably such $[a_i,b_i]$, we have constructed a countable cover of $D$ that satisfies the quasi-uniform convergence condition. Thus, as $f_n$ converges to $f$ point-wisely, we conclude it is quasi-uniformly convergent.
+
+    Therefore, as both directions have shown, we conclude that $f$ is continuous on $D$ if and only if $f_n$ converges to quasi-uniformly.
+}
+
+\newr{
+    As a result, briefly speaking the quasi-uniform convergence characterises the scenarios in which limit of continuous function sequence remains continuous.
+}
+
+\np
+\section*{Exercise 2}
+\tcbcnt{question}{0}
+
+We have already seen that point-wise convergence of continuous function sequence $f_n\to f$ does not ensures the continuity of $f$. However, it turns out that $f$ is not that far from being a continuous funciton. In this exercise, we will explore to what extend $f$ is still a ``good'' function, concerning the continuity.
+
+From now till the end of this exercise, we assume that $f_n, f:D\to\R$, and $f_n$ converges to $f$ point-wisely.
+
+\newq{1e2}{
+    For $i,j\in\N, i\ne j,$ define $E_{ij}=\{x\in D\mid |f_i(x)-f_j(x)|<\ep\}$. Prove that \[D=\bigcup_{i,j\in\N, i\ne j}E_{ij}.\]
+}
+
+\newp{
+    By definition of $E_{ij}$ clearly $\bigcup_{i,j\in\N, i\ne j}E_{ij}\subseteq D$, now we show $D\subseteq \bigcup_{i,j\in\N, i\ne j}E_{ij}$ which we can then conclude $D=\bigcup_{i,j\in\N, i\ne j}E_{ij}$ by set equality.
+
+    To this end, let $x\in D$ be arbitrary, then since $f_n\to f$ point-wisely, for any $\frac{\ep}{2}>0$, there exists $N_0\in\N$ such that for all $n>N_0$, we have $|f_n(x)-f(x)|<\frac{\ep}{2}$. Then by triangle inequality $|f_n(x)-f_{n+1}(x)|\le|f(x)-f_{n+1}(x)|+|f_n(x)-f(x)|<\frac{\ep}{2}+\frac{\ep}{2}=\ep$. Thus, we have $x\in E_{n,n+1}$ for all $n>N_0$, which implies $x\in\bigcup_{i,j\in\N, i\ne j}E_{ij}$, and so $D\subseteq \bigcup_{i,j\in\N, i\ne j}E_{ij}$. This completes our proof. 
+}
+
+\newq{2e2}{
+    Prove that for any $i,j\in\N$, $i\ne j$, the set \[D_f \cap E_{ij}\] does not have any interior point. (recall that $D_f=\{x\mid V_f(x)>\ep\}$)
+}
+
+\newr{
+    It follows that by considering the countable union \[D_f=\bigcup_{i,j\in\N}(D_f\cap E_{ij})\] one concludes that $D_f$ has indeed no interior. Be careful, although it is very clear that finite unions of sets without interior still has no interiors, the case for countable union is not trivial and depends on the completeness of the underlying space (in our case, $\R$). Interested students can turn to the Baire category theorem for more information.
+}
+
+\newr{
+    Interested readers can refer to Osgood's original paper: \tit{Non-Uniform Convergence and the Integration of  Series Term by Term} - you will also find detailed analysis of the functions $f(x)=\frac{nx}{1+n^2x^2}$ as well as $f(x)=nxe^{-n^2x^2}$ therein, which we covered in our lectures as well. Altough many terminologies differ from those of nowadays, the analysis is still well done and many interesting exmaples are provided as well.
+}
+
+
+\end{document}

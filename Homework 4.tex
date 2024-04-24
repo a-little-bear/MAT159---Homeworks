@@ -1,0 +1,132 @@
+\documentclass[12pt]{alittlebear}
+
+\def\name{Joseph Siu}
+\def\course{MAT159: Analysis II}
+\def\headername{Homework }
+\def\headernum{4}
+
+\begin{document} 
+
+\newl{l1}{
+    Lebesgue Integrability implies Riemann Integrability.
+
+    \newp{[Proof of Lemma \ref{lemma:l1}]\hfill
+        
+        Fix $\ep>0$, let $D:=\{x\in[a,b]\mid \T{ $f$ is discontinuous at $x$}\}$, let $E:=\{x\in[a,b]\mid V_f(x)\geq \ep\}$. Then, we have $E\subseteq D$. Since $f$ is continuous almost everywhere, we have $D$ is a null set, thus $E$ is also a null set.
+
+        Since $E$ is closed (the complement is open) and bounded, it is compact, thus there exists a finite subcover of $E$: $I=\{I_1,\ldots,I_n\}$. By definition of null set we are able to let $I_i$ be sufficiently small such that $\sum_{i=1}^n V_f(I_i)|I_i|<\frac{\ep}{4}$ because of our $|I_i|$ here.
+
+        Now, the set $A=[a,b]\setminus \cup_{i=1}^n I_i$ is also compact since it is bounded and $I$ is an open cover. Thus, there also exists a finite subcover of $A$: $J=\{J_1,\ldots,J_m\}$. Since for all $a\in A$, by our construction of $E$ we have $V_f(a)<\ep$, thus by choosing smaller $\ep$ we may assume $\sum_{i=1}^m V_f(J_i)\abs{J_i}<\frac{\ep}{4}$.
+
+        Since $[a,b]$ is covered by the union of $I$ and $J$, we have when the norm of the arbitrary marked partition $(P,\eta)$ is sufficiently small, then 
+        \begin{align*}
+            \sum_{i=0}^{n-1}V_f([x_i,x_{i+1}])\Delta x_i&\leq\sum_{i=1}^n V_f(I_i)\abs{I_i}+\sum_{i=1}^m V_f(J_i)\abs{J_i}\\
+            &<\frac{\ep}{4}+\frac{\ep}{4}\\
+            &=\frac{\ep}{2}\\
+            &<\ep.
+        \end{align*}
+
+        Thus, since $\ep$ is arbitrary, we have shown the Riemann integrability of $f$.
+    }
+}
+
+\newpage
+
+\newe{e1}{
+    Determine if each of the function is Riemann integrable on the given interval on $[0,1]$. Prove your statement.
+
+    \newq{q1}{
+        \[D(x)=\begin{cases}
+            1 & x\in\Q,\\
+            0 & x\notin\Q.
+        \end{cases}\]
+        \qbreak
+        \newcl{cl1}{
+            The Dirichlet function is not Riemann integrable.
+        }
+        \newp{
+            We want to show $$ \forall \al\in\R.\exists \ep >0.\forall \delta >0. \T{ s.t. }\exists (\Gamma, \eta ) \T{ of }[0,1]. \norm{\Gamma}<\delta\land \abs{\sigma(D, \Gamma, \eta)-\al}\geq\ep.$$
+            
+            To this end, let $\al\in\R$ be arbitrary. Fix $\ep=\frac14>0$, and let $\delta\in\R^+$ be arbitrary. 
+
+            Now, consider 2 different $\Gamma$:
+            \begin{enumerate}
+                \item For $\Gamma_1$, we choose all $\eta$ to be rational numbers;
+                \item For $\Gamma_2$, we choose all $\eta$ to be irrational numbers;
+            \end{enumerate}
+            Then, we can see that $\sigma(D,\Gamma_1,\eta)=1$ and $\sigma(D,\Gamma_2,\eta)=0$, for any $\al$, at least one of these 2 the differences is larger than $\ep$. Formally, if $\al\geq\frac12$, we use $\sigma(D,\Gamma_2,\eta)=0$, so the differences is always at least $\frac12$; if $\al<\frac12$, we use $\sigma(D,\Gamma_1,\eta)=1$, so the differences is always at least $\frac12$, and since $\frac12>\frac14=\ep$, we conclude the negation of Riemann integrable holds, this implies the Dirichlet function is not Riemann integrable, as needed.
+
+            Alternately, we can see the function is continuous nowhere, thus it is not Lebesgue Integrable (the discontinuity points do not form a null set), thus it is not Riemann Integrable.
+        }
+    }
+
+    \newpage
+    \newq{q2}{
+        \[T(x)=\begin{cases}
+            \frac1q, & x=\frac{p}{q}\in\Q, p\in\Z, q\in\N, (p,q)=1,
+            \\0, & x\notin\Q.
+        \end{cases}\]
+        \qbreak
+        \newcl{cl2}{
+            The Riemann-Thomae function is Riemann Integrable. 
+        }
+        \newp{
+            By MAT157 Homework, we have shown that the Riemann-Thomae function is discontinuous whenever $x\in\Q$ and continuous whenever $x\notin\Q$. Now we show that $T(x)$ is continuous almost everywhere on $[0,1]$ which implies that $T(x)$ is Riemann integrable on $[0,1]$.
+
+            To this end, we show $\Q\cap[0,1]$ is a null set.
+            
+            Since $\Q$ is countable, so is $\Q\cap[0,1]$ (since the intersection is infinite), thus we are able to list the elements of $\Q\cap[0,1]$ as $$\{x_1,x_2,\dots\}\subseteq\bigcup_{i=1}^\infty I_{\frac{\ep}{2^{i+3}}}(x_i).$$ By the geometric series formula, we have $$\sum_{i=1}^\infty\abs{I_{\frac{\ep}{2^{i+3}}}(x_i)}=\sum_{i=1}^\infty \ep\frac{1}{2^{i+2}}=\frac{\ep}{4}\sum_{i=1}^\infty \frac{1}{2^{i}}=\frac{\ep}{2}<\ep.$$
+
+            Hence, by definition this shows that $\Q\cap[0,1]$ is a null set, and since $T(x)$ is continuous almost everywhere on $[0,1]$, we conclude that $T(x)$ is Riemann integrable on $[0,1]$, which completes our proof.
+        }
+    }
+
+    \newpage
+    \newq{q3}{
+        \[H(x)=\begin{cases}
+            \frac1x-\sqrbra{\frac1x}, & x\neq0,\\
+            0, & x=0.
+        \end{cases}\]
+        \qbreak
+        \newcl{cl3}{
+            $H(x)$ is Riemann Integrable.
+        }
+        \newp{
+            The only discontinuous points of $H(x)$ on $[0,1]$ are $x=0$ or $x=\frac1n$ for $n\in\N$, thus we can see there are countably many discontinuous points, which implies that $H(x)$ is continuous almost everywhere on $[0,1]$ (except countably many points). Thus, we conclude $H(x)$ is Riemann integrable on $[0,1]$.
+        }
+    }
+
+    \newpage
+    \newq{q4}{
+        \[G(x)=\begin{cases}
+            \sgn\bra{\sin\frac{\pi}{x}}, & x\neq0,\\
+            0, & x=0.
+        \end{cases}\]
+        \qbreak
+        \newcl{cl4}{
+            $G(x)$ is Riemann Integrable.
+        }
+        \newp{
+            We can see the only values that $\sin(\frac{\pi}{x})$ changes sign are when $x=\frac{1}{n}$ for some $n\in\N$. Moreover, from MAT157 we have proven that $G(x)$ has second type of discontinuity at $x=0$. Thus, since $\{x\in[0,1]\mid x=\frac1n, n\in\N\}\cup\{0\}$ is a countable set, we have that $G(x)$ is continuous almost everywhere on $[0,1]$ (except countably many points), which implies that $G(x)$ is Riemann integrable on $[0,1]$.
+        }
+    }
+
+    \newpage
+    \newq{q5}{
+        \[K(x)=\begin{cases}
+            \sin\bra{\ln\frac1x}, & x\neq0,\\
+            0, & x=0.
+        \end{cases}\]
+        \qbreak
+        \newcl{cl5}{
+            $K(x)$ is Riemann integrable.
+        }
+        \newp{
+            Since $\ln\frac1x$ is continuous on $(0,1]$ but not  $x=0$, and $\sin(x)$ is continuous everywhere, we conclude that $K(x)$ is continuous almost everywhere on $[0,1]$ by MAT157 Homework (at most not continuous only at $x=0$ which is at most a null set). Thus, we conclude that $K(x)$ is Riemann integrable on $[0,1]$.
+
+            Speficially, for any $ x\in(0,1]$ we can always find a sufficiently small closed neighborhood of $x$ such that the function is continuous on the neighborhood, which implies the only possible discontinuity of $\sin(\ln(\frac1x))$ is at $x=0$, which is a null set.
+        }
+    }
+}
+
+\end{document}  

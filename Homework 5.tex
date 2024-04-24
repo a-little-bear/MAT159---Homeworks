@@ -1,0 +1,197 @@
+\documentclass[12pt, sepia, brown, 0.5in]{alittlebear}
+
+\def\name{Joseph Siu}
+\def\course{MAT159: Analysis II}
+\def\headername{Homework }
+\def\headernum{5}
+
+\usepackage{comment}
+
+\begin{document} 
+
+\newn{
+    I, Joseph Siu, affirm that this assignment represents entirely my own efforts. I confirm that:
+    \begin{itemize}
+        \item I have not copied any portion of this work.
+        \item I have not allowed someone else in this course to copy this work.
+        \item This is the final version of my assignment and not a draft.
+        \item I understand the consequences of violating the University's academic integrity policies as outlined in the \textit{Code of Behavior on Academic Matters}.
+    \end{itemize}
+}
+
+
+\newt{1}{
+    Recall that we have proved the following theorem in class:
+
+    Let $f:[a,b]\to\R$ be a bounded function. Then the following statements are equivalent:
+    \begin{enumerate}
+        \item $f\in\mathfrak{R}[a,b]$.
+        \item (Darboux Criterion) $\overline{I}(f)=\underline{I}(f)$.
+        \item $\forall \ep >0,\forall \delta >0, \exists \Gamma \in\Omega_{[a,b]}$ s.t. \[\sum_{\substack{0\leq k\leq n-1 \\ V_f(I_k)>\ep}}\abs{I_k}<\delta.\]
+        \item (Du Bois Raymond Criterion) $\forall \ep > 0, \forall\de>0,\exists n\in \N$ and $(a_1,b_1), (a_2,b_2),\ldots,(a_n,b_n),$ such that \[\bra{D_{f}(\ep,[a,b])\subseteq\bigcup_{1\leq k\leq n}(a_k,b_k)}\land\bra{\sum_{k=1}^{n}(b_k-a_k)<\de}.\]
+        \item (Lebesgue Criterion) $f$ is continuous almost everywhere on $[a,b]$.
+    \end{enumerate}
+}
+\begin{comment}
+    By definition of limit $\forall\xi>0,\exists\ga>0$ such that $0<|\de|<\ga\implies|V_f(I_\de(x))-\eta|<\xi$. By specializing $\xi=\ep$, and fix such $\ga$, we have $0<|\de|<\ga\implies ||V_f(I_\de(x))|-|\eta||<\ep$. Since for all $0<\delta'<\delta$ we have $I_\delta(x)\supseteq I_{\delta'}(x)$, which implies $V_f(I_\delta(x))\geq V_f(I_{\delta'}(x))$. Thus, this implies $\eta< V_f(I_\de(x))$. Thus, as all our $\eta, V_f(I_\de(x)),\ep$ are positive here, we get $V_f(I_\de(x))-\eta>\ep$ and $V_f(I_\de(x))>\ep+\eta$.
+
+    Now, fix an open neighborhood $I_\zeta(x)\subseteq[c,d]$ of $x$, redefine $\ga:=\min\{\ga, \frac{\zeta}2\}$, then we have $V_f([c,d])\geq V_f(I_\zeta(x))\geq V_f(I_\de(x))>\ep+\eta>\ep$ for all $0<\de<\ga\leq\zeta$, which completes our proof.
+\end{comment}
+
+
+
+\newq{1}{
+    Prove that $5\Ra4\Ra3\Ra2\Ra1\Ra5$. In each part, you should not use criterion other than the two involved in the statement.
+    \qbreak
+
+    \newl{1}{
+        Fix $\ep>0$. If $x\in D_f(\ep,[a,b])$, then $V_f([c,d])>\ep$ for any $[c,d]\subseteq[a,b]$ containing $x$. 
+
+        \qbreak
+
+        \newp{
+            If $x\in D_f(\ep,[a,b])$, by definition we have $V_f(x)>\ep$, that is, $\eta:=\lim_{\de\to0}V_f(I_\delta(x))>\ep$. Fix an open neighborhood $I_\zeta(x)\subseteq[c,d]$ of $x$. Since for all $0<\delta'<\delta$ we have $I_\delta(x)\supseteq I_{\delta'}(x)$, which implies $V_f(I_\delta(x))\geq V_f(I_{\delta'}(x))$. Thus, since all sequences of decreasing $\de$ are monotonely decreasing, we have that $\eta< V_f(I_\de(x))$ for all $\de>0$. Thus, $V_f(I_\zeta(x))\geq \eta >\ep$, this implies our proof.
+        }
+    }
+
+    \newl{4}{
+        If $\forall x\in [a,b], V_f(x)\leq\frac{\ep}{3}$, then for all positive epsilon there exists a finite partition $\Ga$ of $[a,b]$ such that $V_f(I_i)\leq\ep$ for all partitioned intervals $I_i$ of $\Ga$.
+
+        \qbreak
+
+        \newp{
+            $V_f(x)\leq\frac{\ep}{3}$ implies there exists an open neighborhood $I_\de(x)$ of $x$ such that $V_f(I_\de(x))\leq\frac{\ep}{3}$. Then, we can see $\{I_\de(x)\}_{x\in[a,b]}$ forms an open cover of $[a,b]$. Moreover, since $[a,b]$ is closed and bounded thus compact, by Borel-Lebesgue / Heine-Borel there exists a finite subcover $\{J_i\}_{1\leq i\leq n}$ of $\{I_\de(x)\}_{x\in[a,b]}$. Then, construct a partition $\Ga$ based on the endpoints of the intervals in the finite subcover $\{J_i\}_{1\leq i\leq n}$.
+
+            Now, for any partitioned interval $[\al,\be]$ of $\Ga$, we have $(\al,\be)\subseteq J_i$ for some $1\leq i\leq n$. Since $V_f(I_\de(\al))\leq\frac{\ep}{3}$, $V_f(J_i)\leq\frac{\ep}{3}$, and $V_f(I_\de(\be))\leq\frac{\ep}{3}$, we have $V_f([\al,\be])\leq \ds\sup_{x,y\in I_\de(\al)\cup J_i\cup I_\de(\be)}|f(x)-f(y)|\leq\frac{\ep}{3}+\frac{\ep}{3}+\frac{\ep}{3}=\ep$.
+
+            Since we have consturcted such finite partition $\Ga$ for arbitrary $\ep>0$, this completes our proof.
+        }
+    }
+}
+
+\newp{$(5\Ra4)$
+
+    Assume $f$ is continuous almost everywhere on $[a,b]$. By definition of almost everywhere, this implies the set of discontinuous points of $f$ forms a null set $D$.
+
+    By definition of continuity, we have $$\forall \ep>0, \exists \de>0, \forall x\in I_\de(x), |f(x)-f(x_0)|<\ep.$$ Fix $\ep = \frac{\xi}{4}$, then $V_f(I_\de(x))\leq\frac{\xi}{2}$. 
+
+    For continuous points $x$ in $[a,b]$, we construct the open neighborhood $I_\de(x)$ as above, let $I_x$ denote such open neighborhood of $x$. For discontinuous points $x'$ in $[a,b]$, since $x'\in D$ and $D$ forms a null set, by definition this implies \[\forall \de >0, \exists\{I_i\}_{i\in\N}, \bra{D\subseteq\bigcup_{i\in\N}I_i}\land\bra{\sum_{i=1}^\infty\abs{I_i}<\de}.\] Fix $\de=\frac{\xi}{4}$, then we have $\exists\{I_i\}_{i\in\N}, \bra{D\subseteq\bigcup_{i\in\N}I_i}\land\bra{\sum_{i=1}^\infty\abs{I_i}<\frac{\xi}{4}}$, fix such $\{I_i\}_{i\in\N}$. Now, let $I_{x'}$ be the open interval that covers $x'$. 
+    
+    So, since $[a,b]$ is closed and bounded that compact, and $\{I_x\}_{x\in [a,b]\setminus D}\cup\{I_{x'}\}_{x'\in D}$ forms a cover of $[a,b]$, hence by Borel-Lebesgue / Heine-Borel Theorem this implies a finite subcover $\{J_i\}_{1\leq i\leq N}$ of $\{I_x\}_{x\in [a,b]\setminus D}\cup\{I_{x'}\}_{x'\in D}$ where $N$ is the number of intervals in the finite subcover. 
+
+    Now, let $\Ga$ be the partition based on the endpoints of the intervals in the finite subcover $\{J_i\}_{1\leq i\leq N}$, consider 2 of the cases of the partitioned intervals $[\al,\be]$: 
+
+    \begin{proofcases}
+        \case $(\al,\be)\subseteq I_x$ for some $x\in [a,b]\setminus D$. 
+
+        \indenv{
+            In this case we have $V_f([\al,\be])\leq V_f(I_x)\leq\frac{\xi}{2}<\xi$. That is, $D_f(\xi,[a,b])\cap [\al,\be]=\nil$. We may ignore these intervals for proving Du Bois Raymond Criterion (4). 
+        }
+
+        \case $(\al,\be)\subseteq I_{x'}$ for some $x'\in D$.
+
+        \indenv{
+            In this case we have \[\bra{[\al,\be]\subseteq I_{x'}}\land\bra{|I_{x'}|<\frac{\xi}{4}}\implies (\beta-\al)<\frac{\xi}{4}.\] 
+                        
+            Let $M$ denote the number of all such $[\al,\be]$, since the cover $\{J_i\}_{1\leq i\leq N}$ is finite, this implies the partition of $\Ga$ is finite, thus $M$ also needs to be finite.
+
+            Let $[\al_i,\be_i]$ denote the $i^{\T{th}}$ such interval where $1\leq i\leq M$, this is allowed because of the order of the partition of $\Ga$.
+        }
+          
+    \end{proofcases}
+
+    Since there are only finitely many such $\al$ and $\be$ by our partition $\Ga$, let $N$ be the set containing all partitions of $\Ga$, \ie, containing $a,b$, and all $\al,\be$. Then, since $N$ is a collection of finitely many points, we can see $N$ is also a null set. Hence, by definition of null set, we have \[\forall \de >0, \exists\{I_i\}_{i\in\N}, \bra{N\subseteq\bigcup_{i\in\N}I_i}\land\bra{\sum_{i=1}^\infty\abs{I_i}<\de}.\] Fix $\de=\frac{\xi}{4}$, let $\{K_i\}_{i\in\N}$ be the open cover that covers $N$ and $\sum_{i=1}^\infty |K_i|<\frac{\xi}{4}$. Moreover, since $N$ is finite and closed thus bounded. By Borel-Lebesgue / Heine-Borel Theorem, we can find a finite subcover $\{K'_i\}_{1\leq i\leq P}$ of $\{K_i\}_{i\in\N}$ where $P$ is the number of intervals in the finite subcover.
+    
+    Now, combining the above 2 cases we have shown that \[\bra{D_f(\xi,[a,b])\subseteq\bra{\bigcup_{1\leq i\leq M}(\al_i,\be_i)}\bigcup\bra{\bigcup_{1\leq i\leq P}K'_i}}\land\bra{\sum_{i=1}^M(\be_i-\al_i)+\sum_{i=1}^P\abs{K'_i}<\frac{\xi}{4}+\frac{\xi}{4}<\xi}.\] 
+    
+    Hence, since our $\xi$ is arbitrary, for arbitrary $\ep,\de>0$ by letting $\xi:=\min\{\ep,\de\}, n:=M+P$, leting $(a_1,b_1),\ldots,(a_{n},b_{n})$ be the intervals that covers $D_f(\xi,[a,b])$, we have shown that \[\bra{D_f(\ep,[a,b])\subseteq D_f(\xi,[a,b])\subseteq \bigcup_{1\leq k\leq n}(a_k,b_k)}\land\bra{\sum_{k=1}^n(b_k-a_k)<\xi\leq\de}.\] Therefore, $\forall \ep >0, \forall\de>0,\exists n\in \N$ and $(a_1,b_1), (a_2,b_2),\ldots,(a_n,b_n),$ such that \[\bra{D_{f}(\ep,[a,b])\subseteq\bigcup_{1\leq k\leq n}(a_k,b_k)}\land\bra{\sum_{k=1}^{n}(b_k-a_k)<\de},\] this completes our proof. 
+}
+
+\newp{$(4\Ra3)$
+
+    Fix $\frac{\ep}{3}>0$, $\de>0$. By Criterion 4 there exist a natural number $n$ and a finite open cover $\{J_k\}_{1\leq k\leq n}$ such that $$\bra{D_f(\frac{\ep}{3},[a,b])\subseteq\bigcup_{1\leq k\leq n}J_k}\land\bra{\sum_{k=1}^n |J_k|<\de}.$$ 
+
+    Fix such $n\in\N$, then there exists $n_1\in\N$ and a finite open cover $\{J_k'\}_{1\leq k\leq n_1}$ such that $$\bra{D_f(\frac{\ep}{3},[a,b])\subseteq\bigcup_{1\leq k\leq n_1}J_k'}\land\bra{\sum_{k=1}^{n_1}|J_k'|<\frac{\de}{n}}.$$
+
+    Let $\Ga$ be the partition based on the endpoints of $\{J_k'\}_{1\leq k\leq n}$. Split the partitioned intervals $[\al,\be]$ into 2 parts:
+
+    \begin{proofcases}
+        \case $[\al,\be]\cap D_f(\frac{\ep}{3},[a,b])=\nil$.
+        \indenv{
+            By Lemma 2, this implies there exists a finite partition of $[\al,\be]$ such that for all partitioned interval $[\gamma,\zeta]$ we have $V_f([\gamma,\zeta])\leq\ep$. Refine our $\Ga$ to include these partitions, let $\Ga^*$ denote the refined partition. 
+
+            Let $m_1$ denote the total number of all such intervals' partitioned intervals. Let $[\al_{k},\be_{k}]$ denote the endpoints of each interval where $0\leq k\leq m_1-1$. After we refine our original $\Ga$ to include the finite partitions for all the ``$[\al,\be]$'', we can see $\ds\sum_{\substack{0\leq k\leq m_1-1 \\ V_f([\al_k,\be_k])>\ep}}|\beta_k-\al_k|=0$ since any partitioned interval $[\al_k,\be_k]$ has the property that $V_f([\al_k,\be_k])\leq\ep$.
+        }
+        \case $[\al',\be']\cap D_f(\frac{\ep}{3},[a,b])\neq\nil$, that is, $(\al',\be')\subseteq J_i\cup J_j\cup J_k$ for some $1\leq i\leq n, 1\leq j\leq n, 1\leq k\leq n$ by our construction of partitions.
+        \indenv{
+            Since there can only be $n$ such intervals. By assumption the total length of all such intervals is less than $\delta$. Namely, let $m_2$ denote the number of all such intervals of $\Ga$ (clearly $m_2\leq n$), then $\ds\sum_{1\leq k\leq m_2}|\be_k'-\al_k'|\leq m_2\cd\ds\sum_{k=1}^{n_1}|J_k'|<n\cd\frac{\de}{n}=\de$. 
+        }
+    \end{proofcases}
+
+    Since these 2 cases cover the entire interval, we conclude \[\ds\sum_{\substack{0\leq k\leq n-1 \\ V_f(I_k)>\ep}}|I_k|\leq0+\ds\sum_{\substack{0\leq k\leq m_2-1 \\ V_f(\al_k',\be_k'])>\ep}}|\be_k'-\al_k'|<\de.\] Since $\ep$ and $\de$ are arbitrary, and we have constructed such $\Ga$, this completes our proof.
+}
+
+\newp{$(3\Ra 2)$
+
+    For all $\ep>0$ and $\de>0$, by Criterion 3, there exists a partition $\Ga$ such that $$\sum_{\substack{0\leq k\leq n-1 \\ V_f(I_k)>\de}}\abs{I_k}<\frac{\ep}{8|M|+1},$$ where $f$ is bounded by $M$ (integrable implies boundedness).
+    
+    Fix $\de=\frac{\ep}{4(b-a)+1}$.
+    
+    Then, by the supremum and infimum definition we have \begin{align*}
+        \overline{I}(f)&\leq\sum_{k=0}^{n-1}M_{x_k,x_{k+1}}\Delta x_k\\
+        \sum_{k=0}^{n-1}m_{x_k,x_{k+1}}\Delta x_k &\leq \underline{I}(f)\\
+        \overline{I}(f)-\underline{I}(f)&\leq\sum_{k=0}^{n-1}M_{x_k,x_{k+1}}\Delta x_k-\sum_{k=0}^{n-1}m_{x_k,x_{k+1}}\Delta x_k\\
+        &\leq\sum_{k=0}^{n-1}(M_{x_k,x_{k+1}}-m_{x_k,x_{k+1}})\Delta x_k\\
+        &\leq\sum_{k=0}^{n-1}(V_f([x_k,x_{k+1}]))\Delta x_k,\\
+        \alt{now we seperate the intervals into $V_f(I_k)>\de$ and $V_f(I_k)\leq\de$ where $I_k=[x_k,x_{k+1}]$, then:}
+        &\leq\sum_{\substack{0\leq k\leq n-1 \\ V_f(I_k)>\de}}(V_f(I_k))\Delta x_k+\sum_{\substack{0\leq k\leq n-1 \\ V_f(I_k)\leq\de}}(V_f(I_k))\Delta x_k,\\
+        \alt{since $f$ is bounded by $M$, by our assumption then we have:}
+        &\leq2M\sum_{\substack{0\leq k\leq n-1 \\ V_f(I_k)>\de}}\Delta x_k+\sum_{\substack{0\leq k\leq n-1 \\ V_f(I_k)\leq\de}}(V_f(I_k))\Delta x_k\\
+        &\leq\frac{\ep}{4} + \sum_{\substack{0\leq k\leq n-1 \\ V_f(I_k)\leq\de}}(V_f(I_k))|I_k|,\\
+        &\leq\frac{\ep}{4}+ \frac{\ep}{4(b-a)+1}\sum_{\substack{0\leq k\leq n-1 \\ V_f(I_k)\leq\de}}|I_k| \\
+        &\leq \frac{\ep}{4} + \frac{\ep}{4}\\
+        &\leq\frac{\ep}{2}\\
+        &<\ep
+    \end{align*}
+    Since $\ep>0$ is arbitrary, we conclude $\overline{I}(f)-\underline{I}(f)=0$, therefore $\overline{I}(f)=\underline{I}(f)$ as needed.
+}
+
+\newp{$(2\Ra1)$
+
+    By Proposition 2.3 we have for any two partitions $\Ga_1,\Ga_2\in\Omega[a,b]$, $\underline{S}(f,\Ga_1)\leq \overline{S}(f,\Ga_2).$ So, by definition for any marked partition $(\Ga,\eta)\in\Omega^*[a,b]$ we have \[\underline{S}(f,\Ga_1)\leq\sum_{i=0}^{n-1}f(\eta_i)\Delta x_i\leq \overline{S}(f,\Ga_2).\] By letting $\norm{\Gamma}\to0$, we have \[\underline{I}(f)\leq\sum_{i=0}^{n-1}f(\eta_i)\Delta x_i\leq\overline{I}(f).\] Since $\overline{I}(f)=\underline{I}(f)$, we can claim that $f\in\mathfrak{R}[a,b]$, moreover $\ds\int_a^bf(x)\D x=\overline{I}(f)=\underline{I}(f)$:
+
+    When $\norm{\Gamma}<\de$, this is equivalent to $\norm{\Ga}\to0$, and by squeeze theorem we have that $0-\ds\frac\ep2\leq\ds\sum_{i=0}^{n-1}f(\eta_i)\Delta x_i-\ds\int_a^bf(x)\D x\leq0+\frac\ep2$, which gives $\abs{\ds\sum_{i=0}^{n-1}f(\eta_i)\Delta x_i-\ds\int_a^bf(x)\D x}\leq\frac\ep2<\ep$, since $(\Gamma,\eta)$ is arbitrary, this gives the definition of Riemann integrability, as needed.
+}
+
+\newp{$(1\Ra5)$
+
+    We will prove the contrapositive. Assume the discontinuous points of $f$ do not form a null set $N$, namely $$\exists\ep_1>0,\forall \{J_i\}_{i\in\N}\T{ we have }\bra{N\not\subseteq\bigcup_{i\in\N}J_i}\lor\bra{\sum_{i=1}^\infty|J_i|\geq\ep_1}.$$
+
+    Fix such $\ep_1>0$. Let $\de>0$ be arbitrary, let $(\Ga,\eta)$ be arbitrary such that $\norm{\Ga}\leq\de$, let $M$ denotes the number of partitioned intervals.
+
+    Let $\{I_k\}_{k\in M}$ be the partitioned intervals of $\Ga$. Let $a = \min\{V_f(I_k)\}_{k\in M}\geq0$, here $a\neq0$ because of the non-empty discontinuous set $N$. then, consider $\ep := a(\ep_1)>0$. 
+
+    By specialization, and ignore $a,b$ if they are discontinuous, we may consturct an open cover $\{J_i\}_{i\in\N}$ of the discontinuous set $N\setminus\{a,b\}$ such that $\sum_{i=1}^\infty|J_i|\geq\ep_1$ and does not cover $a,b$, since $N$ do not form a null set, so is $N\setminus\{a,b\}$.
+    
+    Since $\sum_{i=0}^{M-1}|I_i|\geq \sum_{i=1}^\infty |J_i|$ (becasue of the forall quantifier, we may assume the union of the cover $\{J_i\}_{i\in\N}$ is contained within $[a,b]$), we can see that
+
+    \begin{align*}
+        \sum_{i=0}^{M-1}V_f(\ep, I_i)|I_i|&\geq a\sum_{i=0}^{M-1}|I_i|\\
+        &\geq a\sum_{i=1}^\infty|J_i|\\
+        &\geq a\ep_1\geq\ep
+    \end{align*}    
+
+    So, by the negation of the Riemann integrability in terms of Aggregated Oscillation, we have shown that $$\exists \ep > 0, \forall \de>0, \exists(\Ga,\eta)\in\Omega^*_{[a,b]},\norm{\Ga}\leq\de\land \sum_{i=0}^{n-1}V_f(I_i)|I_i|\geq \ep,$$ hence the contrapositive is true, which implies $(1\Ra5)$ as needed.
+}
+
+
+\newpage
+\input{Homework 5-2.tex}
+
+\tcbcnt{lemma}{0}
+\newpage
+\input{Homework 5-1.tex}
+
+
+\end{document}  
+

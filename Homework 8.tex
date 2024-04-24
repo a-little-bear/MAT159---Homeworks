@@ -1,0 +1,248 @@
+\documentclass[11pt, cyan, night, 0.5in]{alittlebear}
+
+
+\def\course{MAT159: Analysis II}
+\def\headername{Homework 8}
+\def\name{Joseph Siu}
+\def\logo{clsfiles/qunwang}
+
+
+\begin{document}
+
+\coverpage[clsfiles/stars]
+
+\newn{
+    I, Joseph Siu, affirm that this assignment represents entirely my own efforts. I confirm that:
+    \begin{itemize}
+        \item I have not copied any portion of this work.
+        \item I have not allowed someone else in this course to copy this work.
+        \item This is the final version of my assignment and not a draft.
+        \item I understand the consequences of violating the University's academic integrity policies as outlined in the \textit{Code of Behavior on Academic Matters}.
+    \end{itemize}
+}
+
+In this week's lecture, we have discussed the general methodology for the test of convergence given a positive series. In particular, we have shown how to use Kummer's test to construct a sequence of criterion that is more and more sensitive in the detection of the convergence/divergence of the series.
+
+\section*{Exercise 1}
+
+Consider the series \[\sum_{n=1}^\infty\frac{x^n}{\ds\prod_{k=1}^{n}(x+k)}.\]
+
+\newq{1}{
+    Use the D'Alembert Test to study the convergence/divergence of the series.
+}
+
+\newp{
+
+    Define $a_n := \frac{x^n}{\ds\prod_{k=1}^{n}(x+k)}$.
+
+    We compare the ratio of term $a_{n+1}$ and $a_n$:
+
+    \begin{align*}
+        \frac{a_{n+1}}{a_n}&=\frac{x^{n+1}}{\ds\prod_{k=1}^{n+1}(x+k)}\cd\frac{\ds\prod_{k=1}^n(x+k)}{x^n}\\
+        &= \frac{x}{x+n+1},\\
+        \alt{now we take the limit of both sides and get}
+        \lim_{n\to\infty}\frac{a_{n+1}}{a_n}&=\lim_{n\to\infty}\frac{x}{x+n+1},\\
+        \alt{since $x$ is fixed, we get}
+        &=0.
+    \end{align*}
+
+    Therefore, by the D'Alembert Test, the series converges for all $x>0$.
+}
+
+Consider the series \[\sum_{n=1}^\infty \frac{n!}{\ds\prod_{k=1}^n (x+k)}.\]
+
+\newq{2}{
+    Show that the D'Alembert Test has no consequence on this series. Use the Raabe Test to study the series. Discuss the convergence and divergence for \tbf{all} $x>0$.
+}
+
+\newp{
+
+    Let $a_n := \frac{n!}{\ds\prod_{k=1}^n(x+k)}$.
+
+    We first show $\ds\lim_{n\to\infty} \frac{a_{n+1}}{a_n}=1$:
+
+    \begin{align*}
+        \frac{a_{n+1}}{a_n} &= \frac{(n+1)!}{\ds\prod_{k=1}^{n+1}(x+k)}\cd\frac{\ds\prod_{k=1}^n(x+k)}{n!}\\
+        &= \frac{n+1}{x+n+1}\\
+        \alt{taking the limit of both sides, we get}
+        \lim_{n\to\infty}\frac{a_{n+1}}{a_n} &= \lim_{n\to\infty}\frac{n+1}{x+n+1}\\
+        \alt{since $x$ is fixed, we get}
+        &=1.
+    \end{align*}
+
+    Hence, since the D'Alembert Test only works when the limit is not 1, we cannot use the D'Alembert Test to determine the convergence of the series.
+
+    Now, we use the Raabe Test to study the series:
+
+    Define $K_n := n \bra{\frac{a_n}{a_{n+1}} - 1}$, then \begin{align*}
+        K_n &= n \bra{\frac{a_n}{a_{n+1}} - 1}\\
+        &= n \bra{\frac{x+n+1}{n+1}-1}\\
+        &= n \bra{\frac{x + n + 1 - n - 1}{n+1}}\\
+        &= n \bra{\frac{x}{n+1}}\\
+        &= \frac{nx}{n+1}.
+        \alt{Since $x$ is fixed, take the limit and we get}
+        \lim_{n\to\infty} K_n &= \lim_{n\to\infty} \frac{nx}{n+1}\\
+        &= x.
+    \end{align*}
+
+    Therefore, by Raabe's Test, for $x\in(0, 1)$, the sequence $\ds\sum_{n=1}^\infty a_n$ diverges. For $x=1$, the test also has no consequence on this series. For $x>1$, the sequence converges.
+
+    Now we substitute $x=1$ into the original series to conclude additional how the series behave when $x=1$.
+
+    \begin{align*}
+        \sum_{n=1}^\infty\frac{n!}{\prod_{k=1}^n(x+k)}&=\sum_{n=1}^\infty\frac{n!}{\prod_{k=1}^n(1+k)}\\
+        \alt{since $\prod_{k=1}^n(1+k)=\prod_{k=0}^n(1+k)$,}
+        &=\sum_{n=1}^\infty\frac{n!}{\prod_{k=0}^n(1+k)}\\
+        &=\sum_{n=1}^\infty\frac{n!}{(n+1)!}\\
+        &=\sum_{n=1}^\infty\frac{1}{n+1}\\
+        &=\sum_{n=2}^\infty\frac{1}{n}\\
+        &=\sum_{n=1}^\infty\frac{1}{n} - 1\\
+    \end{align*}
+
+    Since the harmonic series $\sum_{n=1}^\infty\frac{1}{n}$ diverges to infinity, we have $\sum_{n=1}^\infty\frac{n!}{\prod_{k=1}^n(x+k)}$ diverges when $x=1$.
+}
+
+Now consider the following series \[\sum_{n=1}^\infty \frac{n! x^n}{\ds\prod_{k=1}^n (kx+ b_k)}, \quad x>0, \quad \forall k\in\N, a_k >0 \quad \ds\lim_{k\to\infty} b_k = b > 0.\]
+
+\newq{3}{
+    Use the Raabe Test to study the convergence/divergence of the series for all $x>0, $ if $\forall k\in\N, b_k=b$.
+}
+
+\newp{
+    Let $a_n := \frac{n! x^n}{\prod_{k=1}^n (kx+b_k)}$, then by question's assumption $a_n>0$ for all $n\in\N$.
+
+    Now, let $K_n := n \bra{\frac{a_n}{a_{n+1}}-1}$, then \begin{align*}
+        K_n &= n \bra{\frac{a_n}{a_{n+1}}-1}\\
+        &= n\bra{\frac{n!x^n}{\ds\prod_{k=1}^n(kx+b_k)}\cd\frac{\ds\prod_{k=1}^{n+1}(kx+b_k)}{(n+1)!x^{n+1}} - 1},\\
+        \alt{by assumption $b_k=b$ for all $k\in\N$, so}
+        &= n\bra{\frac{n!x^n}{\ds\prod_{k=1}^n(kx+b)}\cd\frac{\ds\prod_{k=1}^{n+1}(kx+b)}{(n+1)!x^{n+1}} - 1}\\
+        &= n\bra{\frac{x^{n-n-1}((n+1)x + b)}{(n+1)} - 1}\\
+        &= n \bra{\frac{x(n+1) + b}{x(n+1)} - 1}\\
+        &= n \bra{1 + \frac{b}{x(n+1)} - 1}\\
+        &= \frac{n b}{x(n+1)}\\
+        &= \frac{bn}{xn + x},\\
+        \alt{take the limit of both sides and we have}
+        \lim_{n\to\infty}K_n &= \lim_{n\to\infty} \frac{bn}{xn+x}\\
+        &= \frac{b}{x}.
+    \end{align*}
+
+    So, when $x\in(0, b)$, we have $\frac{b}{x}>1$, so $\ds\sum_{n=1}^\infty a_n$ converges. When $x=b$, the test has no consequence on this series. When $x\in(b,\infty)$, we have $\frac{b}{x}<1$, thus the series diverges.
+
+    Now we consider the case when $x=b$:
+
+    \begin{align*}
+        \sum_{n=1}^\infty \frac{n! b^n}{\ds\prod_{k=1}^n (kb+b_k)} &= \sum_{n=1}^\infty \frac{n! b^n}{\ds\prod_{k=1}^n (kb+b)}\\
+        &= \sum_{n=1}^\infty \frac{n! b^n}{\ds\prod_{k=1}^n (b(k+1))}\\
+        &= \sum_{n=1}^\infty \frac{n! b^n}{b^n \ds\prod_{k=1}^n (k+1)}\\
+        &= \sum_{n=1}^\infty \frac{n!}{\ds\prod_{k=1}^n (k+1)}\\
+        &= \sum_{n=1}^\infty \frac{1}{n+1}\\
+        &= \sum_{n=2}^\infty \frac{1}{n}\\
+        &= \sum_{n=1}^\infty \frac{1}{n} - 1.
+    \end{align*}
+
+    Since the harmonic series $\sum_{n=1}^\infty \frac{1}{n}$ diverges to infinity, we have $\sum_{n=1}^\infty \frac{n! b^n}{\ds\prod_{k=1}^n (kb+b_k)}$ diverges when $x=b$.
+}
+
+\newq{4}{
+    Unfortunately, for general $b_k$, when $x=b$, the Raabe test for the above series does not work. To solve this, using the Kummer's test, by choosing a positive sequence $c_n$ with $\ds\sum_{n=1}^\infty \frac{1}{c_n}=\infty$, develop the following test, known as the Bertrand's test:
+
+    \newt[The bertrand Test]{1}{
+        Given a positive series $\ds\sum_{n=1}^\infty a_n$, define the following term: \[\cal{B}_n=\ln n \sqrbra{n\bra{\frac{a_n}{a_{n+1}}-1}-1}.\] Let $\cal{B}=\ds\lim_{n\to\infty} \cal{B}_n$. Then \begin{itemize}
+            \item If $\cal{B}>1$, then $\ds\sum_{n=1}^\infty a_n < \infty$.
+            \item If $\cal{B}<1$, then $\ds\sum_{n=1}^\infty a_n = \infty$.
+        \end{itemize}
+    }
+}
+
+\newp{
+    Construct $c_n := n\ln n$, by lecture $\sum_{n=1}^\infty \frac{1}{c_n}$ diverges to infinity. Define $K_n := c_n\bra{\frac{a_n}{a_{n+1}}} - c_{n+1}$, that is, $K_n = n\ln n\bra{\frac{a_n}{a_{n+1}}} - (n+1)\ln(n+1)$.
+
+    Expand $\cal{B}_n$ and we have \[\cal{B}_n = n\ln n \frac{a_n}{a_{n+1}} - (n+1)\ln n\]
+
+    Since $\ln n < \ln(n+1)$, this shows $\cal{B}_n - K_n = (n+1)(\ln (n+1) - \ln n)$, take the limit of both sides and we have \begin{align*}
+        \lim_{n\to\infty}(\cal{B}_n-K_n)&=\lim_{n\to\infty} (n+1)(\ln (n+1) - \ln n)\\
+        B-K&=\lim_{n\to\infty}\frac{\ln (n+1) - \ln (n)}{\frac{1}{n+1}}\\
+        \alt{infinity over infinity, apply L'Hopital's Rule we have }
+        &=\lim_{n\to\infty}\frac{\frac{1}{n+1}-\frac{1}{n}}{\frac{1}{-(n+1)^2}}\\
+        &=\lim_{n\to\infty}-\frac{(n- n - 1)(n+1)^2}{n(n+1)}\\
+        &=\lim_{n\to\infty}\frac{n+1}{n}\\
+        &=1.
+        \alt{So, we get}
+        B-K &= 1,\\
+        B &= K + 1.
+    \end{align*}
+
+    By Kummer's Test, $K>0\implies \sum_{n=1}^\infty a_n <\infty$ which is equivalent to $\cal{B}>1\implies \sum_{n=1}^\infty a_n <\infty$. And $k<0\implies \sum_{n=1}^\infty a_n =\infty$ which is equivalent to $\cal{B}<1\implies \sum_{n=1}^\infty a_n =\infty$. This completes our proof of the Bertrand's Test.
+
+}
+
+\newq{5}{
+    Apply the Bertrand test for the series of the above form, with \begin{enumerate}
+        \item $b_k=\bra{1+\frac{2}{\ln (k+1)}} b.$
+        \item $b_k=\bra{1+\frac{1}{2\ln (k+1)}} b.$
+    \end{enumerate}
+
+    In particular, conclude the convergence/divergence of the series when $x=b$.
+}
+
+\newp{[Proof for the first one]
+    First we can see \begin{align*}
+        \frac{a_n}{a_{n+1}}&=\frac{n!x^n}{(n+1)!x^{n+1}}\cd\frac{\prod_{k=1}^{n+1}(kx+b_{n+1})}{\prod_{k=1}^n(kx+b_k)}\\
+        &=\frac{(n+1)x+b_k}{(n+1)x},\\
+        \alt{take the limit of $\cal{B}_n$ and substitute the above equation we have}
+        \lim_{n\to\infty}\cal{B}_n&=\lim_{n\to\infty} \ln n \sqrbra{n\bra{\frac{a_n}{a_{n+1}}-1}-1}\\
+        &= \lim_{n\to\infty} \ln n \sqrbra{n\bra{\frac{(n+1)x+b_{n+1}}{(n+1)x}-1}-1}\\
+        &=\lim_{n\to\infty} \ln n \sqrbra{n\bra{1 + \frac{b_{n+1}}{(n+1)x}-1}-1},\\
+        &=\lim_{n\to\infty} \ln n \sqrbra{n\bra{1 + \frac{b_{n+1}}{(n+1)x}-1}-1}\\
+        &=\lim_{n\to\infty} \ln n \sqrbra{n\bra{\frac{1}{n+1}\frac{b_{n+1}}{x}}-1}\\
+        &=\lim_{n\to\infty} \ln n \sqrbra{n\bra{\frac{1}{n+1}\frac{\bra{1+\frac{2}{\ln(n+2)}}b}{x}}-1}\\
+        &=\lim_{n\to\infty} \ln n \sqrbra{\bra{1-\frac{1}{n+1}}\bra{1+\frac{2}{\ln(n+2)}}\frac{b}{x}-1}\\
+        &=\lim_{n\to\infty} \ln n \sqrbra{1\frac{b}{x}-\frac1{n+1}\frac{b}{x}+\frac2{\ln(n+2)}\frac{b}{x}-\frac2{(n+1)\ln(n+2)}\frac{b}{x}-1}
+    \end{align*}
+
+    So, when $x<b$, $\lim_{n\to\infty}\cal{B}_n=\infty$, when $x=b$, $\lim_{n\to\infty}\cal{B}_n=2$, and when $x>b$, $\lim_{n\to\infty}\cal{B}_n=-\infty$.
+}
+
+\newp{[Proof for the second one] 
+    First we can see \begin{align*}
+        \frac{a_n}{a_{n+1}}&=\frac{n!x^n}{(n+1)!x^{n+1}}\cd\frac{\prod_{k=1}^{n+1}(kx+b_{n+1})}{\prod_{k=1}^n(kx+b_k)}\\
+        &=\frac{(n+1)x+b_k}{(n+1)x},\\
+        \alt{take the limit of $\cal{B}_n$ and substitute the above equation we have}
+        \lim_{n\to\infty}\cal{B}_n&=\lim_{n\to\infty} \ln n \sqrbra{n\bra{\frac{a_n}{a_{n+1}}-1}-1}\\
+        &= \lim_{n\to\infty} \ln n \sqrbra{n\bra{\frac{(n+1)x+b_{n+1}}{(n+1)x}-1}-1}\\
+        &=\lim_{n\to\infty} \ln n \sqrbra{n\bra{1 + \frac{b_{n+1}}{(n+1)x}-1}-1},\\
+        &=\lim_{n\to\infty} \ln n \sqrbra{n\bra{1 + \frac{b_{n+1}}{(n+1)x}-1}-1}\\
+        &=\lim_{n\to\infty} \ln n \sqrbra{n\bra{\frac{1}{n+1}\frac{b_{n+1}}{x}}-1}\\
+        &=\lim_{n\to\infty} \ln n \sqrbra{n\bra{\frac{1}{n+1}\frac{\bra{1+\frac{1}{2\ln(n+2)}}b}{x}}-1}\\
+        &=\lim_{n\to\infty} \ln n \sqrbra{\bra{1-\frac{1}{n+1}}\bra{1+\frac{1}{2\ln(n+2)}}\frac{b}{x}-1}\\
+        &=\lim_{n\to\infty} \ln
+        n \sqrbra{1\frac{b}{x}-\frac1{n+1}\frac{b}{x}+\frac1{2\ln(n+2)}\frac{b}{x}-\frac1{(n+1)2\ln(n+2)}\frac{b}{x}-1}
+    \end{align*}
+
+    So, when $x<b$, $\lim_{n\to\infty}\cal{B}_n=\infty$, when $x=b$, $\lim_{n\to\infty}\cal{B}_n=\frac12$, and when $x>b$, $\lim_{n\to\infty}\cal{B}_n=-\infty$.
+}
+
+\newq{6}{
+    Now let $b_k=\bra{1+\frac{1}{\ln (k+1)}} b.$ The Bertrand test does not work any more when $x=b$. Using similar spirit.
+    % https://utoronto-my.sharepoint.com/:b:/r/personal/qun_wang_utoronto_ca/Documents/MAT159H5S%202024/Vladimir_I_Arnol%2527%2527d_1998_Russ._Math._Surv._53_229.pdf?csf=1&web=1&e=YAIKxb
+    \begin{itemize}
+        \item Develop your own test (name it after you if you want - after all we have \href{https://shorturl.at/cgEY9}{The Arnorld Principle}) with the help of the Kummer test.)
+        \item Using that test, determine the convergence/divergence of \[\sum_{n=1}^\infty \frac{n! x^n}{\ds\prod_{k=1}^n (kx+b_k)}, \quad x>0, \quad \forall k\in\N, b_k=\bra{1+\frac{1}{\ln(n+1)}}b,\] when $x=b$.
+    \end{itemize}
+}
+
+\newp{
+    Let $c_n := n \ln(n) \ln(\ln(n))$, then obviously \crossout{by lecture} $\sum_{n=1}^\infty \frac1{c_n}=\infty$.
+
+    Define $K_n := c_n\bra{\frac{a_n}{a_{n+1}}} - c_{n+1}$.That is, \[K_n = n \ln(n) \ln(\ln(n)) \bra{\frac{a_n}{a_{n+1}}} - (n+1) \ln(n+1) \ln(\ln(n+1)).\]
+
+    \url{https://en.wikipedia.org/wiki/Ratio_test}
+
+    By using the Extended Bertrand's test [insert proof here], let \[\frak{B}_n:= n\ln(n)\ln(\ln(n))\bra{\frac{a_n}{a_{n+1}}-1}-(\ln(n)\ln(\ln(n))\ln(\ln(\ln(n)))+\ln(\ln(n))\ln(\ln(\ln(n))))+\ln(\ln(\ln(n))),\]
+
+    \fig{img/2024-03-15-23-10-36.png}
+
+    Then clearly $\lim_{n\to\infty}\frak{B}_n=0$. So, by the Extended Bertrand's test, we have $\sum_{n=1}^\infty a_n$ diverges when $x=b$ (limit less than 1).
+}
+
+\end{document}

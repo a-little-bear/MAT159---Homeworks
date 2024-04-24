@@ -1,0 +1,13 @@
+\newq{2}{
+    Using Lebesgue Criterion to study the Riemann integrability for the five examples in assignment 4.
+    \qbreak
+    \newm{
+        \begin{enumerate}
+            \item Since $D(x)$ is continuous nowhere (as proven in MAT157 Homework), then the sum of any open cover covering $[0,1]$ must be greater than $\ep=\frac12$. By Lebesgue Criterion this implies that $D(x)$ is not Riemann integrable.
+            \item Since $T(x)$ is only discontinuous when $x\in\Q$, and $\Q$ is a countable set, thus is also a null set. Hence, by definition of null set and continuous almost everywhere, we conclude $T(x)$ is Riemann integrable by Lebesgue Criterion.
+            \item Similarly, we can also see that $H(x)$ is only discontinuous when $x=\frac1n$ for some $n\in\N$ or $x=0$ (by definition of floor function). Since $\{\frac1n\}_{n\in\N}$ is a countable set, and $\{0\}$ is finite, the union of these sets is countable thus a null set. Hence, $H(x)$ is contnuous almost everywhere and is Riemann integrable by Lebesgue Criterion.
+            \item $G(x)$ is also discontinuous whenever $x=\frac1n$ for some $n\in\N$ or $x=0$ (by observering the values that $\sin\bra{\frac{\pi}{x}}$ changes its sign), same as $H(x)$, we may conclude that $G(x)$ is Riemann integrable by Lebesgue Criterion.
+            \item $\ln(\frac1x)=-\ln(x)$ is also continuous everywhere except at $x=0$. So, by MAT157 since $\sin x$ is continuous everywhere, we know $\sin\bra{\ln\bra{\frac1x}}$ is continuous everywhere on $(0,1]$, thus it can be discontinuous at most at $x=0$ which is a null set. Hence, $\sin\bra{\ln\bra{\frac1x}}$ is Riemann integrable by Lebesgue Criterion.
+        \end{enumerate}
+    }
+}

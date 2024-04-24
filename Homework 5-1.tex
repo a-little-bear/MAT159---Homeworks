@@ -1,0 +1,159 @@
+\newq{3}{
+    Let $f,g:[a,b]\to[a,b]$. Fill in the blanks below regarding the integrability of $g\circ f$ and justify your answers, by giving either a proof or a counter-example.
+    $$\begin{array}{c|c|c}&f\in\mathcal{C}[a,b]&f\in\mathfrak{R}[a,b]\\\hline g\in\mathcal{C}[a,b]&\T{Yes}&\T{Yes}\\\hline g\in\mathfrak{R}[a,b]&\T{No}&\T{No}\\\hline\end{array}$$
+
+    \begin{center}
+        Table 1: Integrability of $g\circ f$ under different assumptions.
+    \end{center}
+    \qbreak
+    \newp{\hfill
+
+        \begin{enumerate}
+            \item $f\in \mathcal{C}[a,b]$:
+            \begin{enumerate}
+                \item $g\in \mathcal{C}[a,b]$: Since the composition of continuous functions is continuous, so $g\circ f$ is continuous everywhere. Thus, by Lebesgue Criterion, $g\circ f$ is Riemann integrable.
+
+                \item $g\in \mathfrak{R}[a,b]$: See below.
+
+            \end{enumerate}
+            \item $f\in \mathfrak{R}[a,b]$:
+            \begin{enumerate}
+                \item $g\in \mathcal{C}[a,b]$: Let $x\in[a,b]$ be such that $V_f(x)=0$, then $g\circ f$ is also continuous at $x$. Since such $x$ are almost everywhere, we conclude $g\circ f$ is continuous almost everywhere and thus Riemann integrable.
+                \item $g\in \mathfrak{R}[a,b]$: Consider the example: $$f(x)=\begin{cases}\frac1q,&x=\frac{p}q\in\Q,q>0,\gcd(p,q)=1\\ 0 ,& \T{otherwise}\end{cases}, g(x)=\begin{cases}0,&x\leq 0\\ 1,&x>0\end{cases}.$$
+
+                Then, we can see that both $f,g\in\mathfrak{R}[a,b]$, but $(g\circ f)(x)=\begin{cases}1, &x\in\Q\\ 0, & x\notin \Q\end{cases},$ which is not integrable (the Dirichlet function, as shown in the previous homework). 
+
+            \end{enumerate}
+
+        \end{enumerate}
+    }
+
+    \newm{
+        For $1.b.$, we show $g\circ f$ is false by constructing a counter-example:
+
+        Let $[a,b]=[0,1]$. We want to show that for some $g\in\mathfrak{R}[0,1]$, $f\in\cal{C}[0,1]$, $g\circ f$ is not Riemann integrable. To this end, we first define \[g:[0,1]\to[0,1], g(y)=\begin{cases}
+            1, & y\neq0\\
+            0, & y=0
+        \end{cases}.\]
+
+        Then, we want to construct a function $f$ that is both continuous on $[0,1]$ and has uncountably disconnected many points $x\in[0,1]$ such that $f(x)=0$, or $f(x)=1$ seperately. (so that $g\circ f$ is discontinuous uncountably many points thus does not satisfy Lebesgue Criterion for Riemann Integrability). So, for simplicity we will construct the case when $f(x)=0$ based on the fat cantor set (the Smith–Volterra–Cantor set) $FC$. 
+
+        Consider the recursively defined set $FC$ as follows:
+
+        $FC_0=[0,1]$.
+
+        1. We take out $(\frac38,\frac58), \ie \frac14$ from the middle of $FC_0$: $FC_1=[0,\frac38]\cup[\frac58,1]$ (the length of $(\frac38,\frac58)$ is same as $[\frac38,\frac58]$ due to $\{\frac38,\frac58\}$ is a null set / measure zero).
+
+        2. For each interval in $FC_1$, we take out the middle $\frac1{16}$ of each interval: $FC_2=[0,\frac5{32}]\cup[\frac7{32},\frac38]\cup[\frac58,\frac{25}{32}]\cup[\frac{27}{32},1]$.
+
+        $\vdots$
+
+        $n$. For each interval in $FC_{n-1}$, we take out the middle $\frac1{4^{n}}$ of each interval (totally $2^{n-1}$ such intervals), the remaining set is $FC_{n}$.
+
+        In this way if we let $FC=\bigcap_{n=0}^\infty FC_n$, then $FC$ is the fat cantor set.
+
+        We can verify the following properties of $FC$:
+
+        
+        \newl{2}{
+            The `length' of $FC$ on [0,1] is $\frac12$.
+
+            \newp{
+                We consider the length of the intervals removed at each step of the construction. At the $n$-th step, the length of $2^{n-1}$ intervals removed is $\frac{2^{n-1}}{4^n}=\frac1{2^{n+1}}$, thus the total length of the intervals removed is $\sum_{n=1}^\infty\frac1{2^{n+1}}=\frac12$, which implies the length of $FC$ is $\frac12$.
+            }
+        }
+
+        \newl{3}{
+            $FC$ is totally disconnected and is closed.
+        
+            \newp{
+                Let $x,y\in FC$ be arbitrary such that $x\neq y$, w.l.o.g. we let $x<y$. Moreover all points in $FC$ are endpoints of the intervals in the construction thus so are $x,y$.
+        
+                To obtain a contradiction, assume $x$ and $y$ are connected, that is, $[x,y]\subseteq FC$. However, by our construction of $[x,y]\subseteq FC$, such $[x,y]$ always has to take out a middle interval from $[x,y]$ by some positive length interval to get a new set $FC'$ such that $FC'\subsetneq FC$, which contradicts the fact that $FC$ is the intersection of all $FC_n$. Thus, $FC$ is totally disconnected.
+        
+                Moreover, since $FC$ is constructed by taking out open intervals from $[0,1]$, this implies $FC$ is closed.
+            }
+        }
+
+
+        Now, we construct $f(x)$ as follows: 
+        \[f(x)=\begin{cases}
+            0, & x\in FC\\
+            -(x-x_1)(x-x_2), & x\notin FC \T{ where } x\in(x_1,x_2)\subseteq[0,1]\setminus FC \st x_1,x_2\in FC
+        \end{cases}.\]
+
+        \newcl{1}{
+            $f$ is defined for all $x\in[0,1]$.
+
+            \newp{
+                It suffices to show that whenever $x\notin FC$, there always exists an open interval $(x_1,x_2)$ such that $x_1,x_2\in FC$ and $(x_1,x_2)\subseteq[0,1]\setminus FC$.
+
+                By our construction of $FC$, if $x\notin FC$, this implies there exists an open interval $(x_1,x_2)$ such that this entire open interval is `removed' from $FC$, thus $(x_1,x_2)\subseteq[0,1]\setminus FC$, showing all the middle points are also removed from $FC$. 
+                
+                Moreover, since by our construction, we can see the boundary / end points of $FC$ are all in $FC$ (we are always keeping the endpoints from the previous generation), thus we have $x_1,x_2\in FC$.
+
+                Since both conditions must be satisfied when $x\notin FC$, we conclude that $f(x)$ is defined for all $x\in[0,1]$.
+                
+                
+            }
+        }
+
+        \newcl{2}{
+            $f$ is continuous on $[0,1]$.
+
+            \newp{
+                We consider the cases when $x\in FC$ and $x\notin FC$ separately.
+
+                1. When $x\in FC$, since by our Lemma 2 $FC$ is totally disconnected and is closed, this implies there exists $x_1,x_3\in FC$ such that $x_1<x<x_3$, and $(x_1,x)\subseteq[0,1]\setminus FC$, $(x,x_3)\subseteq[0,1]\setminus FC$, $x_1,x,x_3\in FC$. Then, we can see the left limit of $f(x)$ is $\lim_{x'\to x^-}f(x')=-(x'-x_1)(x'-x)=0$ and the right limit of $f(x)$ is $\lim_{x'\to x^+}f(x')=-(x'-x)(x'-x_3)=0$, thus since both the limit of $f(x)$ is 0 and $f(x)=0$, we conclude $f(x)$ is continuous at $x$.
+
+                2. When $x\notin FC$, we have $f(x)=-(x-x_1)(x-x_2)$ for some $x_1,x_2\in FC$ such that $x\in(x_1,x_2)\subseteq[0,1]\setminus FC$. Then, since $(x_1,x_2)$ is open, we can always find an open neighborhood of $x$ such that $f(x')=-(x'-x_1)(x'-x_2)$ for all $x'\in I_\delta (x)$, since polynomial is continuous everywhere by MAT157, we conclude $f(x)$ is continuous at $x$ locally.
+
+                Since $x\in[0,1]$ is arbitrary, we conclude that $f$ is continuous on $[0,1]$.
+            }
+        }
+
+        \newcl{3}{
+            $f([0,1])\subseteq[0,1]$ (so that $f$ is a function $f:[0,1]\to[0,1]$).
+
+            \newp{
+                If $x\in FC$, then $f(x)=0\in[0,1]$.
+
+                If $x\notin FC$, then there exist $x_1,x_2\in FC$ such that $x\in(x_1,x_2)\subseteq[0,1]\setminus FC$. Now, we can see \begin{align*}
+                    f(x)&=-(x-x_1)(x-x_2),\\
+                    \alt{since this parabola achieves its maximum at the midpoint of the interval, so we have:}\\
+                    &\leq-\bra{\frac{x_1+x_2}2-x_1}\bra{\frac{x_1+x_2}2-x_2}\\
+                    &=-\bra{\frac{x_2-x_1}{2}}\bra{\frac{x_1-x_2}{2}}\\
+                    &=\frac14\bra{x_2-x_1}^2\\
+                    &\leq1.
+                \end{align*}
+
+                Also $x_1<x, x<x_2$ imply $f(x)=-(x-x_1)(x-x_2)\geq0$, thus $f(x)\in[0,1]$.
+
+                Since $x\in[0,1]$ is arbitrary, we conclude $f([0,1])\subseteq[0,1]$.
+            }
+        }
+
+        \newcl{4}{
+            $f(x)=0$ if and only if $x\in FC$.
+
+            \newp{
+                The backward direction holds by our definition of $f$.
+
+                For the forward direction, we will prove the contrapositive. Assume $x\notin FC$, then by our construction of $f$ we have $f(x)=-(x-x_1)(x-x_2)$ for some $x_1,x_2\in FC$ such that $x\in(x_1,x_2)\subseteq[0,1]\setminus FC$. Then, $x\neq x_1, x\neq x_2$ imply $f(x)=-(x-x_1)(x-x_2)\neq0$, thus $f(x)\neq0$ which shows the contrapositive of the forward direction holds.
+
+                Hence we conclude $f(x)=0$ if and only if $x\in FC$.
+            }
+        }
+
+
+        Now, consider $g\circ f$, by Claim 4 we have $$(g\circ f)(x)=\begin{cases}0, &x\in FC\\ 1, & x\notin FC\end{cases}.$$
+
+        Since by Lemma 1 $FC$ has `length' $\frac12$, to show it does not satisfy Lebesgue Criterion it suffices to show the discontinuous points of $g\circ f$ do not form a null set. Namely, $$\exists\ep>0,\forall \{(a_i,b_i)\}_{i\in\N}\T{ we have }\bra{FC\not\subseteq\bigcup_{i\in\N}(a_i,b_i)}\lor\bra{\sum_{i=1}^\infty(b_i-a_i)\geq\ep},$$ which is equivalent to $$\exists\ep>0,\forall \{(a_i,b_i)\}_{i\in\N}\T{ we have }\bra{FC\subseteq\bigcup_{i\in\N}(a_i,b_i)}\implies\bra{\sum_{i=1}^\infty(b_i-a_i)\geq\ep}.$$
+
+        Since $FC$ is totally disconnected, we can see the set $FC$ contains the discontinuous points of $g\circ f$ (all points in $FC$ are also discontinuous points of $g\circ f$), thus it is enough to show $FC$ does not form a null set.
+
+        So, fix $\ep=\frac18>0$. Let $\{(a_i,b_i)\}_{i\in\N}$ be an arbitrary open cover of $FC$. Since $FC$ has a total length of $\frac12$, and we know the total length of the cover is at least the length of $FC$, \ie $\frac12$, thus we have $\sum_{i=1}^\infty(b_i-a_i)\geq\frac12\geq\frac18=\ep$.
+
+        Since our open cover is arbitrary, and we have constructed such $\ep>0$, we conclude that $g\circ f$ does not satisfy Lebesgue Criterion, and thus is not Riemann integrable. Moreover, since $f$ is a continuous function from $[0,1]$ to $[0,1]$ as shown in Claim 2 and Claim 3, and $g:[0,1]\to[0,1]$ is Riemann integrable, we thus found a counter-example to show that $g\circ f$ is not Riemann integrable when $f\in\cal{C}[a,b]$ and $g\in\mathfrak{R}[a,b]$.
+    }
+}

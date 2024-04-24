@@ -128,22 +128,22 @@
                 \item[Case 1: $\beta<-1$] We apply \eqref{first}, that is, \begin{align*}
                     \int\sin^\alpha x\cos^\beta x\D x&= J_{\frac{\beta-1}{2},\frac{\alpha-1}{2}}\\
                     &=-\frac{2(1-z)^{\frac{\beta-1}{2}+1}z^{\frac{\alpha-1}{2}+1}}{\beta+1}+\frac{\beta+\alpha+2}{\beta+1}J_{\frac{(\beta+2)-1}{2},\frac{\alpha-1}{2}}\\
-                    &=-\frac{2(1-z)^{\frac{\beta-1}{2}+1}z^{\frac{\alpha-1}{2}+1}}{\beta+1}+\frac{\beta+\alpha+2}{\beta+1}\int\sin^\alpha x\cos^{\beta+2} x\D x.\\
+                    &=-\frac{2(1-z)^{\frac{\beta-1}{2}+1}z^{\frac{\alpha-1}{2}+1}}{\beta+1}+\frac{\beta+\alpha+2}{\beta+1}\int\sin^\alpha x\cos^{\beta+2} x\D x.
                 \end{align*}
-                We repeat this until $\beta\in\{-1,0,1\}$. Since $\beta<-1\implies\beta+2<1$, and $\beta<\beta+2$, thus this process always terminate and is valid.
+                We stop when $\beta\in\{-1,0,1\}$. Because $\beta<-1\implies \beta\neq-1$ thus this formula is always valid. Since $\beta<-1\implies\beta+2<1$, and $\beta<\beta+2$, thus there can only be finitely many times we need to apply this formula, which means this process always terminate and is valid: let $\{\beta_n\}_{n\in\N}$ be a sequence where $\beta_n$ is the value of $\beta$ after $n$ times we apply this formula. By monotone convergent theorem, we can claim that this sequence will either converge to $-1$ or converge to $0$ (and remains constant once it achieves the value $-1$ or $0$). Therefore, similar argument holds for the next few cases.
                 \item[Case 2: $\alpha<-1$]  We apply \eqref{second}, that is, \begin{align*}
                     \int\sin^\alpha x\cos^\beta x\D x &= J_{\frac{\beta-1}{2},\frac{\alpha-1}{2}}\\
                     &=\frac{2(1-z)^{\frac{\beta-1}{2}+1}z^{\frac{\alpha-1}{2}+1}}{\alpha+1}+\frac{\beta+\alpha+2}{\alpha+1}J_{\frac{\beta-1}{2},\frac{(\alpha+2)-1}{2}}\\
-                    &=\frac{2(1-z)^{\frac{\beta-1}{2}+1}z^{\frac{\alpha-1}{2}+1}}{\alpha+1}+\frac{\beta+\alpha+2}{\alpha+1}\int\sin^{\alpha+2} x\cos^{\beta} x\D x.\\
+                    &=\frac{2(1-z)^{\frac{\beta-1}{2}+1}z^{\frac{\alpha-1}{2}+1}}{\alpha+1}+\frac{\beta+\alpha+2}{\alpha+1}\int\sin^{\alpha+2} x\cos^{\beta} x\D x.
                 \end{align*}
-                Again, we repeat this until $\alpha\in\{-1,0,1\}$. Since $\alpha<-1\implies\alpha+2<1$, and $\alpha<\alpha+2$, thus this process always terminate and is valid.
-                \item[Case 3: $\beta>1$] Becasue of our Case 2, we may assume $\alpha\geq-1$. Thus, in this case we have $\alpha+\beta>0$, apply \eqref{third} and we have \begin{align*}
+                We stop when $\alpha\in\{-1,0,1\}$. Because $\alpha<-1\implies \alpha\neq-1$ thus this formula is always valid. Since $\alpha<-1\implies\alpha+2<1$, and $\alpha<\alpha+2$, thus there can only be finitely many times we need to apply this formula, which means this process always terminate and is valid.
+                \item[Case 3: $\beta>1$] Becasue of our Case 2, we may assume $\alpha\geq-1$. Thus, in this case we have $\alpha+\beta>0$, apply \eqref{third} (this is always valid because of our restriction) and we have \begin{align*}
                     \int\sin^\alpha x\cos^\beta x\D x &= J_{\frac{\beta-1}{2},\frac{\alpha-1}{2}}\\
                     &=\frac{2(1-z)^{\frac{\beta-1}{2}}z^{\frac{\alpha-1}{2}+1}}{\beta+\alpha}+\frac{\beta-1}{\beta+\alpha}J_{\frac{(\beta-2)-1}{2},\frac{\alpha-1}{2}}\\
                     &=\frac{2(1-z)^{\frac{\beta-1}{2}}z^{\frac{\alpha-1}{2}+1}}{\beta+\alpha}+\frac{\beta-1}{\beta+\alpha}\int\sin^\alpha x\cos^{\beta-2} x\D x.\\
                 \end{align*}
                 Again, we repeat this until $\beta\in\{-1,0,1\}$. Since $\beta>1\implies\beta-2>-1$, and $\beta>\beta-2$, thus this process always terminate and is valid.
-                \item[Case 4: $\alpha>1$] Becasue of our Case 1, we may assume $\beta\geq-1$. Thus, in this case we have $\alpha+\beta>0$, apply \eqref{fourth} and we have \begin{align*}
+                \item[Case 4: $\alpha>1$] Becasue of our Case 1, we may assume $\beta\geq-1$. Thus, in this case we have $\alpha+\beta>0$, apply \eqref{fourth} (this is always valid because of our restriction) and we have \begin{align*}
                     \int\sin^\alpha x\cos^\beta x\D x &= J_{\frac{\beta-1}{2},\frac{\alpha-1}{2}}\\
                     &=-\frac{2(1-z)^{\frac{\beta-1}{2}+1}z^{\frac{\alpha-1}{2}}}{\beta+\alpha}+\frac{\alpha-1}{\beta+\alpha}J_{\frac{\beta-1}{2},\frac{(\alpha-2)-1}{2}}\\
                     &=-\frac{2(1-z)^{\frac{\beta-1}{2}+1}z^{\frac{\alpha-1}{2}}}{\beta+\alpha}+\frac{\alpha-1}{\beta+\alpha}\int\sin^{\alpha-2} x\cos^{\beta} x\D x.\\
@@ -207,8 +207,9 @@
         \begin{mathnote}
             Let $x=a\sinh t$, then $\D x=a\cosh t\D t$ and $t=\operatorname{arcsinh}\bra{\frac{x}{a}}$, substitute into the integral we have \begin{align*}
                 \int \frac{1}{\sqrt{a^2+x^2}}\D x &= \int \frac{1}{\sqrt{a^2+a^2\sinh^2 t}}\cd a\cosh t\D t\\
-                &=\int \frac{a}{|a|}\frac{\cosh t}{\sqrt{1+\sinh t}} \D t\\
-                &=\int \frac{\cosh t}{\sqrt{\cosh^2 t}} \D t\\
+                &=\int \frac{a}{|a|}\frac{\cosh t}{\sqrt{1+\sinh^2 t}} \D t\\
+                &=\int \frac{\cosh t}{\sqrt{\cosh^2 t}} \D t,\\
+                \alt{since $t\in\R$, this gives $\cosh t>0$, thus }
                 &=\int \frac{\cosh t}{\cosh t} \D t\\
                 &=\int 1\D t\\
                 &=t+C\\ 

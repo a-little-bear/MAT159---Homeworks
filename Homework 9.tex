@@ -1,0 +1,216 @@
+\documentclass[11pt, cyan, night, 0.5in]{alittlebear}
+
+
+\def\course{MAT159: Analysis II}
+\def\headername{Homework 9}
+\def\name{Joseph Siu}
+\def\logo{clsfiles/qunwang}
+
+
+\begin{document}
+
+\coverpage[clsfiles/stars]
+
+\newn{
+    I, Joseph Siu, affirm that this assignment represents entirely my own efforts. I confirm that:
+    \begin{itemize}
+        \item I have not copied any portion of this work.
+        \item I have not allowed someone else in this course to copy this work.
+        \item This is the final version of my assignment and not a draft.
+        \item I understand the consequences of violating the University's academic integrity policies as outlined in the \textit{Code of Behavior on Academic Matters}.
+    \end{itemize}
+}
+
+\section{Exercise 1}
+
+In this week's lecture, we have discussed the Riemann theorem, which claims that 
+
+\newt{1}{
+    If a convergent series $\sum_{n=1}^\infty a_n$ is \tbf{not} absolutely convergent, then $\forall c\in\R, \exists$ a permutation $\sigma:\N\to\N$ s.t. \[\sum_{n=1}^\infty a_{\sigma(n)}=c.\]
+}
+
+In this exercise, we study an example to see how this can be achieved by explicitely indicating the permutation.
+
+Consider the series \[\sum_{n=1}^\infty \frac{(-1)^{n+1}}{n}.\]
+
+\newq{1}{
+    Using the Leibniz theorem, prove that the series is convergent. Moreover, show that the series is not absolutely convergent.
+}
+
+\newp{
+    Since $c_n:=\frac1n$ is a decreasing sequence, and $\lim_{n\to\infty}c_n=0$, by the Leibniz theorem, the series is convergent. 
+
+    However, \(\sum_{n=1}^\infty \abs{\frac{(-1)^{n+1}}{n}}=\sum_{n=1}^\infty\frac1n\) diverges as it is the harmonic series. Hence, the series is not absolutely convergent.
+}
+
+\newq{2}{
+    Prove that \[\lim_{m\to\infty}\bra{\sum_{n=1}^m\frac1n - \ln m}\] exists. We call this number \tbf{Euler constant}, denoted by $E$.
+}
+
+\newl{1}{
+    \[\forall n\in\N. \quad\frac1{n+1}<\ln\bra{1+\frac1n}<\frac1n.\]
+
+    \qbreak
+
+    \newp{[Proof of Lemma \ref{lemma:l1}]
+        Since \[\ln\bra{1+\frac1n}=\int_1^{1+\frac1n}\frac1t\D t<\int_1^{1+\frac1n}\D t=t\bigg|_1^{1+\frac1n}=1+\frac1n-1=\frac1n,\]
+
+        and \[\ln\bra{1+\frac1n}=\int_1^{1+\frac1n}\frac1t\D t>\int_1^{1+\frac1n}\frac1{1+\frac{1}{n}}\D t=\frac{n}{n+1}\int_1^{1+\frac1n}\D t=\frac{n}{n+1}\frac1n=\frac1{n+1},\]
+
+        we have \[\frac1{n+1}<\ln\bra{1+\frac1n}<\frac1n.\]
+    }
+}
+
+\newp{[Proof of Question \ref{question:q2}]
+
+    \begin{align*}
+        \sum_{n=1}^m\frac1n-\ln m &= \sum_{n=1}^m\frac1n - \sum_{n=1}^{m-1}(\ln(n+1) - \ln(n))\\
+        &=\sum_{n=1}^m\frac1n - \sum_{n=1}^{m-1}\bra{\ln\bra{\frac{n+1}{n}}}\\
+        &=\sum_{n=1}^m\frac1n - \sum_{n=1}^{m-1}\bra{\ln\bra{1+\frac1n}}\\
+        &=\sum_{n=1}^{m-1}\bra{\frac1n - \ln\bra{1+\frac1n}} + \frac1m.\\
+        \alt{By Lemma \ref{lemma:l1} we have}
+        \sum_{n=1}^{m-1}\bra{\frac1n -\frac1n} + \frac1m &\le \sum_{n=1}^{m-1}\bra{\frac1n - \ln\bra{1+\frac1n}} + \frac1m \le \sum_{n=1}^{m-1}\bra{\frac1n - \frac1{n+1}} + \frac1m\\
+        0\le\frac1m&\le \sum_{n=1}^{m-1}\bra{\frac1n - \ln\bra{1+\frac1n}} + \frac1m \le 1 - \frac1m + \frac1m = 1\\
+        \alt{Now, as long as we show that $\sum_{n=1}^m\frac1n-\ln m=\sum_{n=1}^{m-1}\bra{\frac1n - \ln\bra{1+\frac1n}} + \frac1m$ is monotone, by Monotone Convergent Theorem we know the series must converge. So, by Lemma \ref{lemma:l1},}
+        \ln\bra{1+\frac1m}&>\frac1{m+1}\\
+        \frac1m &> \frac1m - \ln\bra{1+\frac1m} + \frac1{m+1}\\
+        \sum_{n=1}^{m-1}\bra{\frac1n-\ln\bra{1+\frac1n}}+\frac1m &> \sum_{n=1}^m\bra{\frac1n-\ln\bra{1+\frac1n}}+\frac1{m+1}
+    \end{align*}
+
+    Therefore, we have shown the sequence is monotonely decreasing and is bounded below by 0 and above by 1. By Monotone Convergent Theorem, the limit exists.
+}
+
+Now consider for $p,q\in\N$ the following rearrangement $\sigma_{p,q}(n)$ of the series, of the original $\sum_{n=1}^\infty \frac{(-1)^{n+1}}{n}$, defined as the following:
+\begin{enumerate}
+    \item Put the first $p$ positive terms
+    \item Put the first $q$ negative terms
+    \item Put the next $p$ positive terms
+    \item Put the next $q$ negative terms
+\end{enumerate}
+
+For example, if $p=q=1$, we get the original series. If $p=2,q=1$, then the series becomes \[1+\frac13 - \frac12 + \frac15 + \frac17 - \frac14\ldots\ldots\]
+
+\newq{3}{
+    Prove that for any rearrangement $\sigma_{p,q}(n)$, the re-arranged series converges to $\ln\bra{2\sqrt{\displaystyle\frac{p}{q}}}$.
+}
+
+\newp{
+    Let $p,q$ be arbitrary. First, $\si_{p,q}(n)$ can be written as $\ds\sum_{n=1}^{m(p+q)}a_n$ where $a_n$ is the $n$-th term of the original series. By our construction, we have \begin{align*}
+        \sum_{n=1}^{m(p+q)}a_n &= \sum_{j=1}^m\sqrbra{\sum_{i=p(j-1)+1}^{pj}\frac{1}{2i-1} - \sum_{i=q(j-1)+1}^{qj}\frac{1}{2i}}\\
+        \alt{For the summation of $\frac1{2i}$, we can see when we combine the double summation, we get $\frac12\sum_{i=1}^{mq}\frac1i$. Therefore, take out the summation and we have}
+        &= \sum_{j=1}^m\sqrbra{\sum_{i=p(j-1)+1}^{pj}\frac{1}{2i-1}} - \frac12\sum_{i=1}^{mq}\frac1i\\
+        \alt{Now, the first double summation is $1+\frac13+\frac15+\ldots+\frac1{2mp-1}$. By telescoping series, we can see it is equal to $\sum_{i=1}^{2mp}\frac1i-\frac12\sum_{i=1}^{mp}\frac1i$. Therefore, we have}
+        \sum_{n=1}^{m(p+q)}a_n &= \sum_{i=1}^{2mp}\frac1i-\frac12\sum_{i=1}^{mp}\frac1i - \frac12\sum_{i=1}^{mq}\frac1i\\
+        \alt{By Exercise 1 Question \ref{question:q2}, using the Euler constant, we have}
+        \lim_{m\to\infty}\sqrbra{\sum_{n=1}^{m(p+q)}a_n - \ln(2mp) + \frac12\ln(mp)+ \frac12\ln(mq)} &= E  - \frac12 E  - \frac12 E\\
+        0&=\lim_{m\to\infty}\sqrbra{\sum_{n=1}^{m(p+q)}a_n-\ln(2mp) + \frac12\ln(mp) + \frac12\ln(mq)}\\
+        &=\lim_{m\to\infty}\sqrbra{\sum_{n=1}^{m(p+q)}a_n-\ln(2) - \ln(mp) + \frac12\ln(mp) + \frac12\ln(mq)}\\
+        &=\lim_{m\to\infty}\sqrbra{\sum_{n=1}^{m(p+q)}a_n-\ln(2) - \frac12\ln(mp) + \frac12\ln(mq)}\\
+        &=\lim_{m\to\infty}\sqrbra{\sum_{n=1}^{m(p+q)}a_n-\ln(2) - \frac12\ln(\frac{mp}{mq})}\\
+        &=\lim_{m\to\infty}\sqrbra{\sum_{n=1}^{m(p+q)}a_n-\ln(2) - \frac12\ln(\frac{p}q)}\\
+        &=\lim_{m\to\infty}\sqrbra{\sum_{n=1}^{m(p+q)}a_n-\ln(2) - \ln(\sqrt{\frac{p}q})}\\
+        &=\lim_{m\to\infty}\sqrbra{\sum_{n=1}^{m(p+q)}a_n-\ln(2\sqrt{\frac{p}q})}\\
+        \alt{Therefore, we conclude}
+        \lim_{m\to\infty}\sum_{n=1}^{m(p+q)}a_n&=\ln(2\sqrt{\frac{p}q}).
+    \end{align*}
+
+    This is precisely what we need to show.
+}
+
+\np
+
+\section{Exercise 2}
+
+For the following two series, discuss if each of them is 
+\begin{itemize}
+    \item convergent pointwisely
+    \item absolute convergent pointwisely
+    \item convergent uniformly
+    \item absolute convergent uniformly
+\end{itemize}
+
+\newq{1e2}{
+    \[\sum_{n=1}^\infty \frac{(-1)^{n-1}}{x^2+n}.\]
+}
+
+\newp{
+    We first show the series is neither absolute convergent pointwisely nor absolute convergent uniformly. Since absolute convergent uniformly implies absolute convergent pointwisely, it suffices to show the series is not absolutely convergent pointwisely.
+
+    To this end, since $x^2\ge0$ and $n>0$, consider \begin{align*}
+        \sum_{n=1}^\infty\abs{\frac{(-1)^{n-1}}{x^2+n}} &=\sum_{n=1}^\infty\frac{1}{x^2+n}\\
+        \alt{Since $n^2+nx^2+n\le n^2+nx^2+n+x^2$ implies $n(x^2+n+1)\le (n+1)(x^2+n)$ implies $\frac{n}{n+1}\le\frac{x^2+n}{x^2+n+1}$, then by lecture since the harmonic series $\sum_{n=1}^\infty \frac{1}{n}$ diverges, $\sum_{n=1}^\infty \frac{1}{x^2+n}$ must also diverges.}
+    \end{align*}
+
+    Hence, we have shown that the series is not absolutely convergent pointwisely, thus also not absolutely convergent uniformly.
+
+    Now, we show the sequence is convergent uniformly and thus also is convergent pointwisely. To this end, by Taylor / Maclaurin, we know that $\ln(1+x)=\sum_{n=1}^\infty\frac{(-1)^{n+1}}{n}x$, by letting $x=1$ we have $\sum_{n=1}^\infty\frac{(-1)^{n+1}}{n}=\ln(2)$.
+
+    Since $0<\sum_{n=1}^\infty \frac{(-1)^{n+1}}{x^2+n}\le \sum_{n=1}^\infty \frac{(-1)^{n+1}}{n}=\ln(2)$ for all $x\in\R$, by Monotone Convergent Theorem, the sequence of the partial sum of $\sum_{n=1}^\infty \frac{(-1)^{n+1}}{x^2+n}$ must eventually converge.
+
+    Now, we analyze the sum of the $n$ and $n+1$ terms for odd $n$ to show $\sum_{n=1}^\infty\frac{(-1)^{n-1}}{x^2+n}\le\sum_{n=1}^\infty\frac{(-1)^{n-1}}{n}$. To this end, for arbitrary odd $n$, we have \begin{align*}
+         \frac1{x^2+n}-\frac1{x^2+n+1}&=\frac{1}{(x^2+n)(x^2+n+1)}.
+     \end{align*}
+
+    We can see that the differences is always positive and largest when $x=0$. Therefore, this means that the sum is maximized when $x=0$. Therefore, the $N_0$ for the case when $x=0$ will also work for all $x\in\R$. Namely, since $\sum_{n=1}^\infty\frac{(-1)^{n-1}}{n}$ converges to $\ln(2)$, for fixed $\ep>0$, choose $N_0$ for $x=0$, then we can claim that such $N_0$ will work for all $x\in\R$ as $\sum_{n=1}^\infty\frac{(-1)^{n-1}}{x^2+n}\le\sum_{n=1}^\infty\frac{(-1)^{n-1}}{n}$. Hence, this gives the series is convergent uniformly and thus also convergent pointwisely. However as we have shown it is neither absolutely convergent pointwisely nor absolutely convergent uniformly.
+}
+
+\newq{2e2}{
+    \[\sum_{n=1}^\infty \frac{(-1)^{n-1}x^2}{(x^2+1)^n}.\]
+}
+
+\newp{
+    Consider \begin{align*}
+        \sum_{n=1}^\infty\abs{\frac{(-1)^{n-1}x^2}{(x^2+1)^n}}&=\sum_{n=1}^\infty \frac{x^2}{(x^2+1)^n}
+        \alt{Let $a_n:=\frac{x^2}{(x^2+1)^n}$. We compare the ratio of $a_n$ and $a_{n+1}$ when $n\to\infty$:}
+        \lim_{n\to\infty}\frac{a_{n+1}}{a_n}&=\lim_{n\to\infty}\frac{x^2}{(x^2+1)^{n+1}}\cd\frac{(x^2+1)^n}{x^2}\\
+        &=\frac{1}{x^2+1}\\
+        \alt{When $x\neq0$, we have $x^2>0$, thus $\frac1{x^2+1}<1$, which shows}
+        \sum_{n=1}^\infty \frac{x^2}{(x^2+1)^n}<\infty.
+        \alt{When $x=0$, plug in $0$ into $x$ and we can see the series is a constantly 0, which is also trivially convergent.}
+    \end{align*}
+
+    Now, we claim that the series converge to 1 if $x\neq0$ and converge to 0 if $x=0$. Indeed, first if $x=0$ then the constant series is trivially converging to 0. If $x\neq0$, then $x^2+1>1$, and this is a geometric series with initial term $x^2$ and ratio $\frac{1}{x^2+1}$. In this case, by geometric formula, it converges to \begin{align*}
+        &\frac{x^2}{1-\frac{1}{x^2+1}} - x^2 \quad\T{ since the index is starting from 1}\\
+        &=\frac{x^2(x^2+1)}{x^1+1-1} - x^2\\
+        &= 1.
+    \end{align*}
+
+    So, since the function we are approaching is not continuous, by lecture the series is not absolute uniform convergent.
+
+    Now, we have shown it is not absolutely convergent uniformly, but absolutely convergent pointwisely. We will now show it is both converging pointwisely and uniformly.
+
+    Consider \[\sum_{n=1}^\infty \frac{(-1)^{n-1}x^2}{\bra{x^2+1}^n}\]
+
+    Since $b_n:=\frac{x^2}{\bra{x^2+1}^n}$ is a nonincreasing sequence of positive reals such that $a_n\to0$, by Leibniz theorem, the alternating series of $b_n$ is convergent, that is, $\sum_{n=1}^\infty \frac{(-1)^{n-1}x^2}{\bra{x^2+1}^n}$ converges pointwisely.
+
+    \fig{img/2024-03-22-22-08-08.png}
+
+    Now, since the $f$ we are approaching is continuous, by lecture the series is convergent uniformly : (
+
+
+    % Now, we have shown the series converges absolutely, however, we still have to analyze whether it is absolutely convergent uniformly or pointwisely. To this end, we analyze the maximum value of the series for a given $n$ for all $x\in\R$.
+
+    % \begin{align*}
+    %     \alt{Let $f_n(x)=\frac{x^2}{(x^2+1)^n}$, take the derivative and set it to 0, we have}
+    %     f_n'(x)&=\frac{2x(x^2+1)^n-x^2\cd n(x^2+1)^{n-1}2x}{(x^2+1)^{2n}}\\
+    %     0&=\frac{2x(x^2+1)^n-x^2\cd n(x^2+1)^{n-1}2x}{(x^2+1)^{2n}}\\
+    %     &=\frac{2x(x^2+1)-x^2\cd n 2x}{(x^2+1)^{n+1}}\\
+    %     &\implies 2x(x^2+1-nx^2)=0\\
+    %     &\implies x=0 \T{ or } (1-n)x^2+1=0\\
+    %     &\implies x=0 \T{ or } x^2=\frac{1}{n-1}\\
+    % \end{align*}
+
+    % Since we plugged in and saw that $x=0$ gives the constant series 0, we can see that the maximum value of the series is when $x=\pm\sqrt{\frac{1}{n-1}}$. Moreover we can see $f_n(x)$ is an even function, thus they have the same value.
+
+    % Now substitute $x^2=\frac{1}{n-1}$ into $f_n(x)$ and we can see that \begin{align*}
+    %     f_n\bra{\pm\sqrt{\frac{1}{n-1}}}&=\frac{\frac{1}{n-1}}{\bra{\frac{1}{n-1}+1}^n}\\
+    %     &=\frac{\frac{1}{n-1}}{\bra{\frac{n}{n-1}}^n}\\
+    %     &=\frac{(n-1)^{n-1}}{n^n}\\
+    %     &=\frac{1}{n}\bra{\frac{n-1}{n}}^{n-1}\\
+    %     &=\frac{1}{n}\bra{1-\frac1n}^{n-1}\\
+    % \end{align*}
+
+    % So as $n\to\infty$ we can see the maximum value of $f_n(x)$ is monotonically decreasing to 0. Hence, consider the set $S=\{\frac1{n-1}\mid n\in\N\}$, for given $\ep>0$, choose $N_0$ based on $x\in S$, then such $N_0$ will work for all $n> N_0$, for all $x\in\R$. This shows the series is absolutely convergent uniformly, and thus also absolutely convergent pointwisely. Moreover, since absolute convergent implies convergent, this will also show the series is convergent uniformly thus also convergent pointwisely.
+}
+
+\end{document}
